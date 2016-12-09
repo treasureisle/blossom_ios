@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  blossom
+
+  Created by Seong Phil on 2016. 11. 10..
+  Copyright © 2016년 treasureisle. All rights reserved.
+*/
+
+"APP_TITLE" = "Blossom";
+"SELL" = "판매";
+"BUY" = "구해줘";
+"REVIEW" = "후기";
+"STORE" = "스토어";
+"MONEYMARK" = "₩";
+"LOGIN_REQUIRED" = "로그인이 필요한 기능입니다.";
+"SIGNIN" = "회원가입";
+"LOGIN" = "로그인";
+"CANCLE" = "취소";
+"EMAIL" = "이메일";
+"PASSWORD" = "비밀번호";
+"PASSWORD_CONFIRM" = "비밀번호 확인";
+"NICKNAME" = "닉네임";
