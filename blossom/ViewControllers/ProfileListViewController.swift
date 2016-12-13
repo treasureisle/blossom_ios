@@ -1,8 +1,8 @@
 //
-//  SellViewController.swift
+//  ProfileListViewController.swift
 //  blossom
 //
-//  Created by Seong Phil on 2016. 10. 28..
+//  Created by Seong Phil on 2016. 12. 12..
 //  Copyright © 2016년 treasureisle. All rights reserved.
 //
 
@@ -10,16 +10,17 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-class SellViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ProfileListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var lastPageFetched = false
     var posts = [Post]()
     var postRow = 20
     var postPage = 1
     var postId = 0
+    var userId: Int?
     
-    class func instantiateFromStoryboard() -> SellViewController {
-        let storyboard = UIStoryboard(name: StoryboardName.mainViewController, bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! SellViewController
+    class func instantiateFromStoryboard() -> ProfileListViewController {
+        let storyboard = UIStoryboard(name: StoryboardName.profileViewController, bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! ProfileListViewController
     }
     
     // MARK: - Lifecycle
@@ -35,7 +36,7 @@ class SellViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     func fetchPosts(){
         if !lastPageFetched {
-            _ = BlossomRequest.request(method: .get, endPoint: "\(Api.posts)?page=\(postPage)") { (response, statusCode, json) -> () in
+            _ = BlossomRequest.request(method: .get, endPoint: "\(Api.userPosts)/\(userId!)?page=\(postPage)") { (response, statusCode, json) -> () in
                 if statusCode == 200{
                     let posts = json["posts"].arrayValue
                     
@@ -56,7 +57,7 @@ class SellViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
 }
 
-extension SellViewController {
+extension ProfileListViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -103,3 +104,4 @@ extension SellViewController {
         }
     }
 }
+

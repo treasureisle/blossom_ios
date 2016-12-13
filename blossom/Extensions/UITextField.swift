@@ -17,7 +17,7 @@ extension UITextField {
     }
     
     func setAccentBorder(){
-        self.layer.borderColor = UIColor(htmlColor: GluviColor.accentColor).cgColor
+        self.layer.borderColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0).cgColor
         self.layer.borderWidth = 2.0
         self.layer.cornerRadius = 0.0
     }

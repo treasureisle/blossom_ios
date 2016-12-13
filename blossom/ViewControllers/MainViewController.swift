@@ -21,6 +21,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var uploadMenuDim: UIButton!
     
     var postType: Int = 0
+    var me: Session?
     
     @IBAction func retryTouched(sender: UIButton) {
         sender.isEnabled = false
@@ -78,7 +79,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func uploadTouched(sender: UIButton) {
-        if Session.load() != nil{
+        if self.me != nil{
             self.uploadMenuDim.isHidden = false
             self.uploadMenuDim.isEnabled = true
             self.viewUploadMenu.isHidden = false
@@ -109,12 +110,30 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func profileTouched(sender: UIButton) {
-        
+        if self.me != nil{
+            performSegue(withIdentifier: SegueIdentity.mainToProfile, sender: self)
+        } else {
+            let alert = LoginAlertController()
+            alert.setSigninAction(action: SigninAction(handler: {
+                action in
+                if self.presentedViewController == nil {
+                    self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                } else {
+                    self.dismiss(animated: false) {
+                        () -> Void in
+                        self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                    }
+                }
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     // MARK: lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        me = Session.load()
         log.info("API Url: \(apiUrl)")
         
         let pagingMenuController = self.childViewControllers.first as! PagingMenuController
@@ -168,6 +187,9 @@ class MainViewController: UIViewController {
         if segue.identifier == SegueIdentity.jumpToUpload {
             let uploadViewController = segue.destination as! UploadViewController
             uploadViewController.postType = self.postType
+        } else if segue.identifier == SegueIdentity.mainToProfile {
+            let profileViewController = segue.destination as! ProfileViewController
+            profileViewController.userId = self.me?.id
         }
     }
     

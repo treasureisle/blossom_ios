@@ -182,6 +182,7 @@
                         <outlet property="viewUploadMenu" destination="tc2-Aq-q65" id="Pdk-JO-Atm"/>
                         <segue destination="Zjo-f8-Jzx" kind="presentation" identifier="jumpToSignin" id="Ffk-re-QlC"/>
                         <segue destination="xiO-8C-sca" kind="presentation" identifier="jumpToUpload" id="jcR-qy-gWM"/>
+                        <segue destination="f6s-f2-5ZM" kind="presentation" identifier="mainToProfile" id="gEN-y9-LVm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -196,13 +197,21 @@
             </objects>
             <point key="canvasLocation" x="-376" y="569"/>
         </scene>
+        <!--ProfileViewController-->
+        <scene sceneID="Pq9-K1-F5y">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileViewController" id="f6s-f2-5ZM" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ULl-Qh-LJB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="786" y="569"/>
+        </scene>
         <!--UploadViewController-->
         <scene sceneID="wut-Lj-VQw">
             <objects>
                 <viewControllerPlaceholder storyboardName="Upload" referencedIdentifier="UploadViewController" id="xiO-8C-sca" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u3e-Gh-ERR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="346" y="569"/>
+            <point key="canvasLocation" x="330" y="569"/>
         </scene>
         <!--Paging Menu Controller-->
         <scene sceneID="nSR-57-Cgi">

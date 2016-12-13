@@ -50,13 +50,21 @@
 		FE67108F1DEBFB2B0043DEF3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE67108E1DEBFB2B0043DEF3 /* DetailViewController.swift */; };
 		FE754B501DF9B2CE00158642 /* DownPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FE754B4D1DF9B2CE00158642 /* DownPicker.m */; };
 		FE754B511DF9B2CE00158642 /* UIDownPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FE754B4F1DF9B2CE00158642 /* UIDownPicker.m */; };
+		FE754B541DFA82DD00158642 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE754B521DFA82DD00158642 /* Profile.storyboard */; };
+		FE754B571DFA832200158642 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE754B551DFA832200158642 /* SignIn.storyboard */; };
+		FE754B591DFA836F00158642 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE754B581DFA836F00158642 /* ProfileViewController.swift */; };
+		FE754B5C1DFAC98900158642 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE754B5A1DFAC98900158642 /* ProfileViewController.storyboard */; };
+		FE754B5E1DFE4E2100158642 /* ProfileLikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE754B5D1DFE4E2100158642 /* ProfileLikeViewController.swift */; };
+		FE754B601DFE4E3400158642 /* ProfileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE754B5F1DFE4E3400158642 /* ProfileListViewController.swift */; };
+		FE754B621DFE4E5100158642 /* ProfileStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE754B611DFE4E5100158642 /* ProfileStoreViewController.swift */; };
+		FE754B641DFE853600158642 /* ProfileControllerOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE754B631DFE853600158642 /* ProfileControllerOption.swift */; };
+		FE754B661DFED58000158642 /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE754B651DFED58000158642 /* Follow.swift */; };
 		FE7E1C091DD454BF00B38E3C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE7E1C081DD454BF00B38E3C /* Localizable.strings */; };
 		FE7E1C0B1DD45CC000B38E3C /* UICollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E1C0A1DD45CC000B38E3C /* UICollectionViewCell.swift */; };
 		FE7E1C0E1DD46F2F00B38E3C /* BlossomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E1C0D1DD46F2F00B38E3C /* BlossomAlertController.swift */; };
 		FE7E1C101DD4700500B38E3C /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E1C0F1DD4700500B38E3C /* KeyboardObserver.swift */; };
 		FE7E1C121DDB815000B38E3C /* LoginAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E1C111DDB815000B38E3C /* LoginAlertController.swift */; };
 		FE7E1C141DDCC4A000B38E3C /* ErrorMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E1C131DDCC4A000B38E3C /* ErrorMsg.swift */; };
-		FE7E1C181DDD4C7D00B38E3C /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE7E1C171DDD4C7D00B38E3C /* SignIn.storyboard */; };
 		FE7E1C1A1DDD4CFC00B38E3C /* SingInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E1C191DDD4CFC00B38E3C /* SingInViewController.swift */; };
 		FE7E1C1D1DDF677500B38E3C /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E1C1C1DDF677500B38E3C /* UIImageView.swift */; };
 		FE7E1C1F1DE5228700B38E3C /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E1C1E1DE5228700B38E3C /* UIViewController.swift */; };
@@ -136,13 +144,21 @@
 		FE754B4D1DF9B2CE00158642 /* DownPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownPicker.m; sourceTree = "<group>"; };
 		FE754B4E1DF9B2CE00158642 /* UIDownPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDownPicker.h; sourceTree = "<group>"; };
 		FE754B4F1DF9B2CE00158642 /* UIDownPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDownPicker.m; sourceTree = "<group>"; };
+		FE754B531DFA82DD00158642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = blossom/Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
+		FE754B561DFA832200158642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SignIn.storyboard; sourceTree = "<group>"; };
+		FE754B581DFA836F00158642 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = blossom/ViewControllers/ProfileViewController.swift; sourceTree = "<group>"; };
+		FE754B5B1DFAC98900158642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ProfileViewController.storyboard; sourceTree = "<group>"; };
+		FE754B5D1DFE4E2100158642 /* ProfileLikeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileLikeViewController.swift; path = blossom/ViewControllers/ProfileLikeViewController.swift; sourceTree = "<group>"; };
+		FE754B5F1DFE4E3400158642 /* ProfileListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileListViewController.swift; path = blossom/ViewControllers/ProfileListViewController.swift; sourceTree = "<group>"; };
+		FE754B611DFE4E5100158642 /* ProfileStoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileStoreViewController.swift; path = blossom/ViewControllers/ProfileStoreViewController.swift; sourceTree = "<group>"; };
+		FE754B631DFE853600158642 /* ProfileControllerOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileControllerOption.swift; path = blossom/ViewControllers/ProfileControllerOption.swift; sourceTree = "<group>"; };
+		FE754B651DFED58000158642 /* Follow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Follow.swift; path = Models/Follow.swift; sourceTree = "<group>"; };
 		FE7E1C081DD454BF00B38E3C /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		FE7E1C0A1DD45CC000B38E3C /* UICollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UICollectionViewCell.swift; path = Extensions/UICollectionViewCell.swift; sourceTree = "<group>"; };
 		FE7E1C0D1DD46F2F00B38E3C /* BlossomAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlossomAlertController.swift; path = Views/BlossomAlertController.swift; sourceTree = "<group>"; };
 		FE7E1C0F1DD4700500B38E3C /* KeyboardObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		FE7E1C111DDB815000B38E3C /* LoginAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAlertController.swift; sourceTree = "<group>"; };
 		FE7E1C131DDCC4A000B38E3C /* ErrorMsg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMsg.swift; sourceTree = "<group>"; };
-		FE7E1C171DDD4C7D00B38E3C /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		FE7E1C191DDD4CFC00B38E3C /* SingInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingInViewController.swift; path = blossom/ViewControllers/SingInViewController.swift; sourceTree = "<group>"; };
 		FE7E1C1C1DDF677500B38E3C /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageView.swift; path = Extensions/UIImageView.swift; sourceTree = "<group>"; };
 		FE7E1C1E1DE5228700B38E3C /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewController.swift; path = Extensions/UIViewController.swift; sourceTree = "<group>"; };
@@ -234,8 +250,10 @@
 				FE5AFB7B1DC08628001A5D2E /* Main.storyboard */,
 				FE3DC9D01DC7102E00E140FF /* MainViewController.storyboard */,
 				FE231E301DAFA4E200E79CF0 /* LaunchScreen.storyboard */,
-				FE7E1C171DDD4C7D00B38E3C /* SignIn.storyboard */,
+				FE754B551DFA832200158642 /* SignIn.storyboard */,
 				FE67108B1DEBF3010043DEF3 /* Detail.storyboard */,
+				FE754B521DFA82DD00158642 /* Profile.storyboard */,
+				FE754B5A1DFAC98900158642 /* ProfileViewController.storyboard */,
 				FE231E331DAFA4E200E79CF0 /* Info.plist */,
 				FE231E581DB0A72600E79CF0 /* SwiftEventBus.swift */,
 				FE231E5A1DB0A75C00E79CF0 /* GlobalFuncs.swift */,
@@ -277,6 +295,11 @@
 				FE7E1C191DDD4CFC00B38E3C /* SingInViewController.swift */,
 				FE58CC501DE5F36100F30547 /* UploadViewController.swift */,
 				FE67108E1DEBFB2B0043DEF3 /* DetailViewController.swift */,
+				FE754B581DFA836F00158642 /* ProfileViewController.swift */,
+				FE754B631DFE853600158642 /* ProfileControllerOption.swift */,
+				FE754B5D1DFE4E2100158642 /* ProfileLikeViewController.swift */,
+				FE754B5F1DFE4E3400158642 /* ProfileListViewController.swift */,
+				FE754B611DFE4E5100158642 /* ProfileStoreViewController.swift */,
 			);
 			name = ViewControllers;
 			path = ..;
@@ -312,6 +335,7 @@
 				FE7E1C131DDCC4A000B38E3C /* ErrorMsg.swift */,
 				FECBB03A1DF57805004A91E0 /* ColorSize.swift */,
 				FECBB03C1DF57812004A91E0 /* Hashtag.swift */,
+				FE754B651DFED58000158642 /* Follow.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -456,10 +480,12 @@
 				FE7E1C091DD454BF00B38E3C /* Localizable.strings in Resources */,
 				FE3DC9D21DC7102E00E140FF /* MainViewController.storyboard in Resources */,
 				FE5AFB7D1DC08628001A5D2E /* Main.storyboard in Resources */,
+				FE754B5C1DFAC98900158642 /* ProfileViewController.storyboard in Resources */,
 				FE67108D1DEBF3010043DEF3 /* Detail.storyboard in Resources */,
 				FE231E321DAFA4E200E79CF0 /* LaunchScreen.storyboard in Resources */,
 				FE7E1C221DE566AF00B38E3C /* Upload.storyboard in Resources */,
-				FE7E1C181DDD4C7D00B38E3C /* SignIn.storyboard in Resources */,
+				FE754B571DFA832200158642 /* SignIn.storyboard in Resources */,
+				FE754B541DFA82DD00158642 /* Profile.storyboard in Resources */,
 				FE231E2F1DAFA4E200E79CF0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,6 +536,7 @@
 			files = (
 				FE2A21A61DC2F6C4000B73AA /* SellViewController.swift in Sources */,
 				FE67108F1DEBFB2B0043DEF3 /* DetailViewController.swift in Sources */,
+				FE754B601DFE4E3400158642 /* ProfileListViewController.swift in Sources */,
 				FE58CC511DE5F36100F30547 /* UploadViewController.swift in Sources */,
 				FE754B501DF9B2CE00158642 /* DownPicker.m in Sources */,
 				FE20F3DD1DD0E17900A7BC20 /* Post.swift in Sources */,
@@ -519,6 +546,7 @@
 				FE4DDEA81DB5A40100A4D11D /* UIView.swift in Sources */,
 				FE231E2A1DAFA4E200E79CF0 /* ViewController.swift in Sources */,
 				FE7E1C1A1DDD4CFC00B38E3C /* SingInViewController.swift in Sources */,
+				FE754B621DFE4E5100158642 /* ProfileStoreViewController.swift in Sources */,
 				FE20F3DB1DD0DBE000A7BC20 /* MainStoreCell.swift in Sources */,
 				FECBB03B1DF57805004A91E0 /* ColorSize.swift in Sources */,
 				FE7E1C141DDCC4A000B38E3C /* ErrorMsg.swift in Sources */,
@@ -533,17 +561,21 @@
 				FE4DDEA41DB5A21400A4D11D /* String.swift in Sources */,
 				FE20F3D91DD0DBC800A7BC20 /* MainReviewCell.swift in Sources */,
 				FE7E1C0E1DD46F2F00B38E3C /* BlossomAlertController.swift in Sources */,
+				FE754B641DFE853600158642 /* ProfileControllerOption.swift in Sources */,
 				FE2A21A41DC2F4C3000B73AA /* MainControllerOption.swift in Sources */,
 				FE231E281DAFA4E200E79CF0 /* AppDelegate.swift in Sources */,
+				FE754B661DFED58000158642 /* Follow.swift in Sources */,
 				FE20F3D71DD0DBA000A7BC20 /* MainBuyCell.swift in Sources */,
 				FE231E5F1DB0A8E000E79CF0 /* BlossomRequest.swift in Sources */,
 				FE7E1C101DD4700500B38E3C /* KeyboardObserver.swift in Sources */,
 				FE4DDEA21DB5A1F300A4D11D /* UIColor.swift in Sources */,
+				FE754B5E1DFE4E2100158642 /* ProfileLikeViewController.swift in Sources */,
 				FE2A21A81DC2F6E1000B73AA /* BuyViewController.swift in Sources */,
 				FE7E1C121DDB815000B38E3C /* LoginAlertController.swift in Sources */,
 				FE20F3E11DD0E38200A7BC20 /* User.swift in Sources */,
 				FE231E591DB0A72600E79CF0 /* SwiftEventBus.swift in Sources */,
 				FE7E1C0B1DD45CC000B38E3C /* UICollectionViewCell.swift in Sources */,
+				FE754B591DFA836F00158642 /* ProfileViewController.swift in Sources */,
 				FE231E5B1DB0A75C00E79CF0 /* GlobalFuncs.swift in Sources */,
 				FE4DDEAA1DB5A89700A4D11D /* Constants.swift in Sources */,
 			);
@@ -611,6 +643,31 @@
 				FE67108C1DEBF3010043DEF3 /* Base */,
 			);
 			name = Detail.storyboard;
+			sourceTree = "<group>";
+		};
+		FE754B521DFA82DD00158642 /* Profile.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE754B531DFA82DD00158642 /* Base */,
+			);
+			name = Profile.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		FE754B551DFA832200158642 /* SignIn.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE754B561DFA832200158642 /* Base */,
+			);
+			name = SignIn.storyboard;
+			sourceTree = "<group>";
+		};
+		FE754B5A1DFAC98900158642 /* ProfileViewController.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE754B5B1DFAC98900158642 /* Base */,
+			);
+			name = ProfileViewController.storyboard;
 			sourceTree = "<group>";
 		};
 		FE7E1C201DE566AF00B38E3C /* Upload.storyboard */ = {
