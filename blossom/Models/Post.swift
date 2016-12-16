@@ -20,6 +20,7 @@ class Post{
     var imgUrl5: String
     var title: String
     var brand: String
+    var productName: String
     var originPrice: Int
     var purchasePrice: Int
     var fee: Int
@@ -28,6 +29,7 @@ class Post{
     var text: String
     var replys: Int
     var likes: Int
+    var isLiked: Bool
     
     init(o:JSON){
         if let id = o["id"].int {
@@ -74,6 +76,8 @@ class Post{
         
         self.brand = o["brand"].string!
         
+        self.productName = o["product_name"].string!
+        
         if let originPrice = o["origin_price"].int {
             self.originPrice = originPrice
         }else{
@@ -112,6 +116,12 @@ class Post{
             self.likes = likes
         }else{
             fatalError("\(o["likes"].error)")
+        }
+        
+        if let isLiked = o["is_liked"].bool {
+            self.isLiked = isLiked
+        }else{
+            fatalError("\(o["is_liked"].error)")
         }
     }
 }

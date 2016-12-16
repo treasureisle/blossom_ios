@@ -60,12 +60,17 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="320"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KVQ-3R-iPx">
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KVQ-3R-iPx">
                                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="320"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             </imageView>
                                                         </subviews>
                                                     </view>
+                                                    <constraints>
+                                                        <constraint firstItem="KVQ-3R-iPx" firstAttribute="width" secondItem="jWC-YA-f1e" secondAttribute="width" id="Rgj-jY-hPd"/>
+                                                        <constraint firstItem="KVQ-3R-iPx" firstAttribute="top" secondItem="jWC-YA-f1e" secondAttribute="top" id="dXm-YJ-OGY"/>
+                                                        <constraint firstItem="KVQ-3R-iPx" firstAttribute="height" secondItem="jWC-YA-f1e" secondAttribute="height" id="oNS-Oa-Asd"/>
+                                                        <constraint firstItem="KVQ-3R-iPx" firstAttribute="leading" secondItem="jWC-YA-f1e" secondAttribute="leading" id="q8a-O9-jYE"/>
+                                                    </constraints>
                                                     <connections>
                                                         <outlet property="imageView" destination="KVQ-3R-iPx" id="LhA-CQ-sGX"/>
                                                     </connections>
@@ -215,12 +220,17 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="320"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YeR-75-jhp">
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YeR-75-jhp">
                                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="320"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             </imageView>
                                                         </subviews>
                                                     </view>
+                                                    <constraints>
+                                                        <constraint firstItem="YeR-75-jhp" firstAttribute="height" secondItem="kmq-no-JPi" secondAttribute="height" id="3XH-5n-hlh"/>
+                                                        <constraint firstItem="YeR-75-jhp" firstAttribute="width" secondItem="kmq-no-JPi" secondAttribute="width" id="C89-Zl-Fkq"/>
+                                                        <constraint firstItem="YeR-75-jhp" firstAttribute="top" secondItem="kmq-no-JPi" secondAttribute="top" id="VfR-MD-baf"/>
+                                                        <constraint firstItem="YeR-75-jhp" firstAttribute="leading" secondItem="kmq-no-JPi" secondAttribute="leading" id="yVz-TP-y8z"/>
+                                                    </constraints>
                                                     <connections>
                                                         <outlet property="imageView" destination="YeR-75-jhp" id="Z0g-mq-i6E"/>
                                                     </connections>

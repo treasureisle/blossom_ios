@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import AlamofireImage
+import Alamofire
 
-class FeedCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
+class FeedCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var productDescriptionLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
     @IBOutlet weak var profileThumbnailImageView: UIImageView!
@@ -18,6 +20,11 @@ class FeedCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionVi
     @IBOutlet weak var replyLabel: UILabel!
     
     var post: Post?
+    var img1: Image?
+    var img2: Image?
+    var img3: Image?
+    var img4: Image?
+    var img5: Image?
     
     func initCell(post: Post){
         self.post = post
@@ -37,8 +44,51 @@ class FeedCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionVi
         self.profileThumbnailImageView.af_setImage(withURL: URL(string: self.post!.user.profileThumbUrl)!)
         self.likeLabel.text = String(self.post!.likes)
         self.replyLabel.text = String(self.post!.replys)
-        self.imageCollectionView.dataSource = self
-        self.imageCollectionView.delegate = self
+        
+        Alamofire.request((self.post?.imgUrl1)!).responseImage {
+            response in
+            self.img1 = response.result.value
+            if (self.post?.imgUrl2.isEmpty)! {
+                self.imageCollectionView.dataSource = self
+                self.imageCollectionView.delegate = self
+            } else {
+                Alamofire.request((self.post?.imgUrl2)!).responseImage {
+                    response in
+                    self.img2 = response.result.value
+                    if (self.post?.imgUrl3.isEmpty)! {
+                        self.imageCollectionView.dataSource = self
+                        self.imageCollectionView.delegate = self
+                    } else {
+                        Alamofire.request((self.post?.imgUrl3)!).responseImage {
+                            response in
+                            self.img3 = response.result.value
+                            if (self.post?.imgUrl4.isEmpty)! {
+                                self.imageCollectionView.dataSource = self
+                                self.imageCollectionView.delegate = self
+                            } else {
+                                Alamofire.request((self.post?.imgUrl4)!).responseImage {
+                                    response in
+                                    self.img4 = response.result.value
+                                    if (self.post?.imgUrl5.isEmpty)! {
+                                        self.imageCollectionView.dataSource = self
+                                        self.imageCollectionView.delegate = self
+                                    } else {
+                                        Alamofire.request((self.post?.imgUrl1)!).responseImage {
+                                            response in
+                                            self.img5 = response.result.value
+                                            self.imageCollectionView.dataSource = self
+                                            self.imageCollectionView.delegate = self
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        
     }
     
     @IBAction func purchaseTouched() {
@@ -76,12 +126,15 @@ class FeedCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionVi
         print("postId: \(self.post!.id)")
         print("indexPath: \(indexPath.row)")
         
-        if indexPath.row == 0 { cell.imageView.af_setImage(withURL: URL(string: self.post!.imgUrl1)!) }
-        if indexPath.row == 1 { cell.imageView.af_setImage(withURL: URL(string: self.post!.imgUrl2)!) }
-        if indexPath.row == 2 { cell.imageView.af_setImage(withURL: URL(string: self.post!.imgUrl3)!) }
-        if indexPath.row == 3 { cell.imageView.af_setImage(withURL: URL(string: self.post!.imgUrl4)!) }
-        if indexPath.row == 4 { cell.imageView.af_setImage(withURL: URL(string: self.post!.imgUrl5)!) }
+        var imageUrl: String!
         
+        if indexPath.row == 0 { imageUrl = self.post!.imgUrl1 }
+        else if indexPath.row == 1 { imageUrl = self.post!.imgUrl2 }
+        else if indexPath.row == 2 { imageUrl = self.post!.imgUrl3 }
+        else if indexPath.row == 3 { imageUrl = self.post!.imgUrl4 }
+        else if indexPath.row == 4 { imageUrl = self.post!.imgUrl5 }
+        
+        cell.imageView.af_setImage(withURL: URL(string: imageUrl)!)
         return cell
     }
     
@@ -95,6 +148,27 @@ class FeedCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionVi
         self.imageCollectionView.delegate = nil
         self.imageCollectionView.dataSource = nil
         self.profileThumbnailImageView.image = nil
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        var image: Image?
+        
+        if indexPath.row == 0 { image = self.img1 }
+        else if indexPath.row == 1 { image = self.img2 }
+        else if indexPath.row == 2 { image = self.img3 }
+        else if indexPath.row == 3 { image = self.img4 }
+        else { image = self.img5 }
+        
+        var size: CGSize?
+
+        if image!.size.width > image!.size.height {
+            size = CGSize(width: (320 / 3 * 4), height: 320)
+        } else {
+            size = CGSize(width: 240.0, height: 320.0)
+        }
+
+        return size!
     }
 }
 
