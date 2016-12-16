@@ -21,12 +21,15 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var buttonPurchaseList: UIButton?
     @IBOutlet weak var buttonSetting: UIButton?
     
+    var me: Session?
     var userId: Int?
     var followings: [Follow] = []
     var followers: [Follow] = []
+    var isFollowing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.me = Session.load()
         
         self.imageProfile?.makeCircularImageView()
         
@@ -38,6 +41,14 @@ class ProfileViewController: UIViewController {
         pagingMenuController.setup(ProfilePagingMenuOptions1())
     }
     
+    @IBAction func cancleTouched(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func followTouched(){
+        self.follow()
+    }
+    
     func fetchProfile() {
         _ = BlossomRequest.request(method: .get, endPoint: "\(Api.users)/\(self.userId!)") { (response, statusCode, json) -> () in
             if statusCode == 200{
@@ -46,22 +57,46 @@ class ProfileViewController: UIViewController {
                 
                 self.imageProfile?.af_setImage(withURL: URL(string: user.profileThumbUrl)!)
                 
-                if let me = Session.load() {
-                    if me.id == user.id {
+                if self.me != nil {
+                    if self.me!.id == user.id {
                         self.buttonFollow?.isHidden = true
                         self.buttonFollow?.isEnabled = false
                         self.buttonPurchaseList?.isHidden = false
                         self.buttonPurchaseList?.isEnabled = true
                         self.buttonSetting?.isHidden = false
                         self.buttonSetting?.isEnabled = true
+                    } else {
+                        self.buttonFollow?.isHidden = false
+                        self.buttonFollow?.isEnabled = true
+                        self.buttonPurchaseList?.isHidden = true
+                        self.buttonPurchaseList?.isEnabled = false
+                        self.buttonSetting?.isHidden = true
+                        self.buttonSetting?.isEnabled = false
+                        _ = BlossomRequest.request(method: .get, endPoint: "\(Api.isFollowing)/\(self.userId!)") { (response, statusCode, json) -> () in
+                            if statusCode == 200{
+                                self.isFollowing = true
+                                self.buttonFollow?.setTitle("Unfollow", for: .normal)
+                            } else {
+                                self.isFollowing = false
+                                self.buttonFollow?.setTitle("Follow", for: .normal)
+                            }
+                        }
                     }
                 }
                 
                 self.labelName?.text = user.username
-                _ = BlossomRequest.request(method: .get, endPoint: "\(Api.follow)/\(self.userId)") { (response, statusCode, json) -> () in
+                _ = BlossomRequest.request(method: .get, endPoint: "\(Api.follow)/\(self.userId!)") { (response, statusCode, json) -> () in
                     if statusCode == 200{
                         let followers = json["follow"]["followers"].arrayValue
                         let followings = json["follow"]["followings"].arrayValue
+                        
+                        if self.followers.isEmpty == false {
+                            self.followers.removeAll(keepingCapacity: false)
+                        }
+                        
+                        if self.followings.isEmpty == false {
+                            self.followings.removeAll(keepingCapacity: false)
+                        }
                         
                         for follower in followers {
                             self.followers.append(Follow(o: follower))
@@ -70,12 +105,32 @@ class ProfileViewController: UIViewController {
                         for following in followings {
                             self.followings.append(Follow(o: following))
                         }
+                        
+                        self.labelFollower?.text = "follower:\(String(self.followers.count))"
+                        self.labelFollowing?.text = "following:\(String(self.followings.count))"
                     }
                 }
                 
-                self.labelFollower?.text = String(self.followers.count)
-                self.labelFollowing?.text = String(self.followings.count)
-                
+            }
+        }
+    }
+    
+    func follow(){
+        if isFollowing {
+            _ = BlossomRequest.request(method: .delete, endPoint: "\(Api.follow)/\(self.userId!)") { (response, statusCode, json) -> () in
+                if statusCode == 200{
+                    self.isFollowing = false
+                    self.buttonFollow?.setTitle("Follow", for: .normal)
+                    self.fetchProfile()
+                }
+            }
+        } else {
+            _ = BlossomRequest.request(method: .post, endPoint: "\(Api.follow)/\(self.userId!)") { (response, statusCode, json) -> () in
+                if statusCode == 200{
+                    self.isFollowing = true
+                    self.buttonFollow?.setTitle("Unfollow", for: .normal)
+                    self.fetchProfile()
+                }
             }
         }
     }

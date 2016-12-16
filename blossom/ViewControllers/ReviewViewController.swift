@@ -15,6 +15,7 @@ class ReviewViewController: UICollectionViewController, UICollectionViewDelegate
     var posts = [Post]()
     var postRow = 20
     var postPage = 1
+    var postId = 0
     
     class func instantiateFromStoryboard() -> ReviewViewController {
         let storyboard = UIStoryboard(name: StoryboardName.mainViewController, bundle: nil)
@@ -64,7 +65,7 @@ extension ReviewViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.mainReviewCell, for: indexPath) as! MainReviewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.mainCell, for: indexPath) as! MainCell
         
         let post = posts[indexPath.row]
         
@@ -73,5 +74,19 @@ extension ReviewViewController {
         cell.productPriceLabel.text = String(post.purchasePrice + post.fee)
         
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let post = posts[indexPath.row]
+        print("postId: \(post.id)")
+        self.postId = post.id
+        performSegue(withIdentifier: SegueIdentity.mainReviewToDetail, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentity.mainReviewToDetail {
+            let detailViewController = segue.destination as! DetailViewController
+            detailViewController.postId = self.postId
+        }
     }
 }

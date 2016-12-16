@@ -7,12 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FE20F3D51DD0DAA400A7BC20 /* MainSellCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE20F3D41DD0DAA400A7BC20 /* MainSellCell.swift */; };
-		FE20F3D71DD0DBA000A7BC20 /* MainBuyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE20F3D61DD0DBA000A7BC20 /* MainBuyCell.swift */; };
-		FE20F3D91DD0DBC800A7BC20 /* MainReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE20F3D81DD0DBC800A7BC20 /* MainReviewCell.swift */; };
-		FE20F3DB1DD0DBE000A7BC20 /* MainStoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE20F3DA1DD0DBE000A7BC20 /* MainStoreCell.swift */; };
+		FE20F3D51DD0DAA400A7BC20 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE20F3D41DD0DAA400A7BC20 /* MainCell.swift */; };
 		FE20F3DD1DD0E17900A7BC20 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE20F3DC1DD0E17900A7BC20 /* Post.swift */; };
-		FE20F3DF1DD0E35900A7BC20 /* PostDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE20F3DE1DD0E35900A7BC20 /* PostDetail.swift */; };
 		FE20F3E11DD0E38200A7BC20 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE20F3E01DD0E38200A7BC20 /* User.swift */; };
 		FE231E281DAFA4E200E79CF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE231E271DAFA4E200E79CF0 /* AppDelegate.swift */; };
 		FE231E2A1DAFA4E200E79CF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE231E291DAFA4E200E79CF0 /* ViewController.swift */; };
@@ -71,6 +67,14 @@
 		FE7E1C221DE566AF00B38E3C /* Upload.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE7E1C201DE566AF00B38E3C /* Upload.storyboard */; };
 		FECBB03B1DF57805004A91E0 /* ColorSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECBB03A1DF57805004A91E0 /* ColorSize.swift */; };
 		FECBB03D1DF57812004A91E0 /* Hashtag.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECBB03C1DF57812004A91E0 /* Hashtag.swift */; };
+		FEF1F7AD1E02355400113D37 /* FeedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEF1F7AB1E02355400113D37 /* FeedViewController.storyboard */; };
+		FEF1F7AF1E02418200113D37 /* FeedControllerOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1F7AE1E02418200113D37 /* FeedControllerOption.swift */; };
+		FEF1F7B11E0241A400113D37 /* FeedSellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1F7B01E0241A400113D37 /* FeedSellViewController.swift */; };
+		FEF1F7B31E0241C100113D37 /* FeedCommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1F7B21E0241C100113D37 /* FeedCommonViewController.swift */; };
+		FEF1F7B61E02978F00113D37 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEF1F7B41E02978F00113D37 /* Feed.storyboard */; };
+		FEF1F7B81E02983500113D37 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1F7B71E02983500113D37 /* FeedViewController.swift */; };
+		FEF1F7BA1E02A83000113D37 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1F7B91E02A83000113D37 /* FeedCell.swift */; };
+		FEF1F7BC1E02C1C300113D37 /* ImagePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1F7BB1E02C1C300113D37 /* ImagePreviewCell.swift */; };
 		FEFDBF381DC1A8B70040A918 /* PagingMenuController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEFDBF371DC1A8B70040A918 /* PagingMenuController.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,12 +96,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FE20F3D41DD0DAA400A7BC20 /* MainSellCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainSellCell.swift; path = Cells/MainSellCell.swift; sourceTree = "<group>"; };
-		FE20F3D61DD0DBA000A7BC20 /* MainBuyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainBuyCell.swift; path = Cells/MainBuyCell.swift; sourceTree = "<group>"; };
-		FE20F3D81DD0DBC800A7BC20 /* MainReviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainReviewCell.swift; path = Cells/MainReviewCell.swift; sourceTree = "<group>"; };
-		FE20F3DA1DD0DBE000A7BC20 /* MainStoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainStoreCell.swift; path = Cells/MainStoreCell.swift; sourceTree = "<group>"; };
+		FE20F3D41DD0DAA400A7BC20 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainCell.swift; path = Cells/MainCell.swift; sourceTree = "<group>"; };
 		FE20F3DC1DD0E17900A7BC20 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = Models/Post.swift; sourceTree = "<group>"; };
-		FE20F3DE1DD0E35900A7BC20 /* PostDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostDetail.swift; path = Models/PostDetail.swift; sourceTree = "<group>"; };
 		FE20F3E01DD0E38200A7BC20 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		FE231E241DAFA4E200E79CF0 /* blossom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = blossom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE231E271DAFA4E200E79CF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -165,6 +165,14 @@
 		FE7E1C211DE566AF00B38E3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = blossom/Base.lproj/Upload.storyboard; sourceTree = "<group>"; };
 		FECBB03A1DF57805004A91E0 /* ColorSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorSize.swift; path = Models/ColorSize.swift; sourceTree = "<group>"; };
 		FECBB03C1DF57812004A91E0 /* Hashtag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Hashtag.swift; path = Models/Hashtag.swift; sourceTree = "<group>"; };
+		FEF1F7AC1E02355400113D37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/FeedViewController.storyboard; sourceTree = "<group>"; };
+		FEF1F7AE1E02418200113D37 /* FeedControllerOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedControllerOption.swift; path = blossom/ViewControllers/FeedControllerOption.swift; sourceTree = "<group>"; };
+		FEF1F7B01E0241A400113D37 /* FeedSellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedSellViewController.swift; path = blossom/ViewControllers/FeedSellViewController.swift; sourceTree = "<group>"; };
+		FEF1F7B21E0241C100113D37 /* FeedCommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedCommonViewController.swift; path = blossom/ViewControllers/FeedCommonViewController.swift; sourceTree = "<group>"; };
+		FEF1F7B51E02978F00113D37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Feed.storyboard; sourceTree = "<group>"; };
+		FEF1F7B71E02983500113D37 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedViewController.swift; path = blossom/ViewControllers/FeedViewController.swift; sourceTree = "<group>"; };
+		FEF1F7B91E02A83000113D37 /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedCell.swift; path = Cells/FeedCell.swift; sourceTree = "<group>"; };
+		FEF1F7BB1E02C1C300113D37 /* ImagePreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagePreviewCell.swift; path = Cells/ImagePreviewCell.swift; sourceTree = "<group>"; };
 		FEFDBF371DC1A8B70040A918 /* PagingMenuController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PagingMenuController.framework; path = Carthage/Build/iOS/PagingMenuController.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -205,10 +213,9 @@
 		FE20F3D31DD0DA7400A7BC20 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				FE20F3D41DD0DAA400A7BC20 /* MainSellCell.swift */,
-				FE20F3D61DD0DBA000A7BC20 /* MainBuyCell.swift */,
-				FE20F3D81DD0DBC800A7BC20 /* MainReviewCell.swift */,
-				FE20F3DA1DD0DBE000A7BC20 /* MainStoreCell.swift */,
+				FE20F3D41DD0DAA400A7BC20 /* MainCell.swift */,
+				FEF1F7B91E02A83000113D37 /* FeedCell.swift */,
+				FEF1F7BB1E02C1C300113D37 /* ImagePreviewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -254,6 +261,8 @@
 				FE67108B1DEBF3010043DEF3 /* Detail.storyboard */,
 				FE754B521DFA82DD00158642 /* Profile.storyboard */,
 				FE754B5A1DFAC98900158642 /* ProfileViewController.storyboard */,
+				FEF1F7B41E02978F00113D37 /* Feed.storyboard */,
+				FEF1F7AB1E02355400113D37 /* FeedViewController.storyboard */,
 				FE231E331DAFA4E200E79CF0 /* Info.plist */,
 				FE231E581DB0A72600E79CF0 /* SwiftEventBus.swift */,
 				FE231E5A1DB0A75C00E79CF0 /* GlobalFuncs.swift */,
@@ -300,6 +309,10 @@
 				FE754B5D1DFE4E2100158642 /* ProfileLikeViewController.swift */,
 				FE754B5F1DFE4E3400158642 /* ProfileListViewController.swift */,
 				FE754B611DFE4E5100158642 /* ProfileStoreViewController.swift */,
+				FEF1F7B71E02983500113D37 /* FeedViewController.swift */,
+				FEF1F7AE1E02418200113D37 /* FeedControllerOption.swift */,
+				FEF1F7B01E0241A400113D37 /* FeedSellViewController.swift */,
+				FEF1F7B21E0241C100113D37 /* FeedCommonViewController.swift */,
 			);
 			name = ViewControllers;
 			path = ..;
@@ -330,7 +343,6 @@
 			children = (
 				FE4DDE9E1DB5A18B00A4D11D /* Session.swift */,
 				FE20F3DC1DD0E17900A7BC20 /* Post.swift */,
-				FE20F3DE1DD0E35900A7BC20 /* PostDetail.swift */,
 				FE20F3E01DD0E38200A7BC20 /* User.swift */,
 				FE7E1C131DDCC4A000B38E3C /* ErrorMsg.swift */,
 				FECBB03A1DF57805004A91E0 /* ColorSize.swift */,
@@ -479,7 +491,9 @@
 			files = (
 				FE7E1C091DD454BF00B38E3C /* Localizable.strings in Resources */,
 				FE3DC9D21DC7102E00E140FF /* MainViewController.storyboard in Resources */,
+				FEF1F7B61E02978F00113D37 /* Feed.storyboard in Resources */,
 				FE5AFB7D1DC08628001A5D2E /* Main.storyboard in Resources */,
+				FEF1F7AD1E02355400113D37 /* FeedViewController.storyboard in Resources */,
 				FE754B5C1DFAC98900158642 /* ProfileViewController.storyboard in Resources */,
 				FE67108D1DEBF3010043DEF3 /* Detail.storyboard in Resources */,
 				FE231E321DAFA4E200E79CF0 /* LaunchScreen.storyboard in Resources */,
@@ -547,25 +561,27 @@
 				FE231E2A1DAFA4E200E79CF0 /* ViewController.swift in Sources */,
 				FE7E1C1A1DDD4CFC00B38E3C /* SingInViewController.swift in Sources */,
 				FE754B621DFE4E5100158642 /* ProfileStoreViewController.swift in Sources */,
-				FE20F3DB1DD0DBE000A7BC20 /* MainStoreCell.swift in Sources */,
 				FECBB03B1DF57805004A91E0 /* ColorSize.swift in Sources */,
+				FEF1F7BC1E02C1C300113D37 /* ImagePreviewCell.swift in Sources */,
 				FE7E1C141DDCC4A000B38E3C /* ErrorMsg.swift in Sources */,
+				FEF1F7B11E0241A400113D37 /* FeedSellViewController.swift in Sources */,
+				FEF1F7B31E0241C100113D37 /* FeedCommonViewController.swift in Sources */,
 				FE2A21AD1DC2F745000B73AA /* StoreViewController.swift in Sources */,
 				FE231E571DB0A15C00E79CF0 /* MainViewController.swift in Sources */,
+				FEF1F7BA1E02A83000113D37 /* FeedCell.swift in Sources */,
 				FE2A21AB1DC2F72C000B73AA /* ReviewViewController.swift in Sources */,
-				FE20F3D51DD0DAA400A7BC20 /* MainSellCell.swift in Sources */,
-				FE20F3DF1DD0E35900A7BC20 /* PostDetail.swift in Sources */,
+				FE20F3D51DD0DAA400A7BC20 /* MainCell.swift in Sources */,
+				FEF1F7B81E02983500113D37 /* FeedViewController.swift in Sources */,
 				FE7E1C1F1DE5228700B38E3C /* UIViewController.swift in Sources */,
 				FE7E1C1D1DDF677500B38E3C /* UIImageView.swift in Sources */,
 				FE754B511DF9B2CE00158642 /* UIDownPicker.m in Sources */,
 				FE4DDEA41DB5A21400A4D11D /* String.swift in Sources */,
-				FE20F3D91DD0DBC800A7BC20 /* MainReviewCell.swift in Sources */,
 				FE7E1C0E1DD46F2F00B38E3C /* BlossomAlertController.swift in Sources */,
 				FE754B641DFE853600158642 /* ProfileControllerOption.swift in Sources */,
 				FE2A21A41DC2F4C3000B73AA /* MainControllerOption.swift in Sources */,
 				FE231E281DAFA4E200E79CF0 /* AppDelegate.swift in Sources */,
+				FEF1F7AF1E02418200113D37 /* FeedControllerOption.swift in Sources */,
 				FE754B661DFED58000158642 /* Follow.swift in Sources */,
-				FE20F3D71DD0DBA000A7BC20 /* MainBuyCell.swift in Sources */,
 				FE231E5F1DB0A8E000E79CF0 /* BlossomRequest.swift in Sources */,
 				FE7E1C101DD4700500B38E3C /* KeyboardObserver.swift in Sources */,
 				FE4DDEA21DB5A1F300A4D11D /* UIColor.swift in Sources */,
@@ -677,6 +693,22 @@
 			);
 			name = Upload.storyboard;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		FEF1F7AB1E02355400113D37 /* FeedViewController.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FEF1F7AC1E02355400113D37 /* Base */,
+			);
+			name = FeedViewController.storyboard;
+			sourceTree = "<group>";
+		};
+		FEF1F7B41E02978F00113D37 /* Feed.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FEF1F7B51E02978F00113D37 /* Base */,
+			);
+			name = Feed.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

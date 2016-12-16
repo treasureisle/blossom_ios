@@ -68,7 +68,7 @@ extension ProfileListViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.mainSellCell, for: indexPath) as! MainSellCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.mainCell, for: indexPath) as! MainCell
         
         let post = posts[indexPath.row]
         
@@ -91,14 +91,11 @@ extension ProfileListViewController {
         let post = posts[indexPath.row]
         print("postId: \(post.id)")
         self.postId = post.id
-        performSegue(withIdentifier: SegueIdentity.mainSellToDetail, sender: self)
-    }
-    func upload(){
-        
+        performSegue(withIdentifier: SegueIdentity.profileListToDetail, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == SegueIdentity.mainSellToDetail {
+        if segue.identifier == SegueIdentity.profileListToDetail {
             let detailViewController = segue.destination as! DetailViewController
             detailViewController.postId = self.postId
         }

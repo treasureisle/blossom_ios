@@ -20,3 +20,6 @@
 "PASSWORD" = "비밀번호";
 "PASSWORD_CONFIRM" = "비밀번호 확인";
 "NICKNAME" = "닉네임";
+"LIST" = "리스트";
+"LIKE" = "라이크";
+"COMMON" = "일반";

@@ -15,6 +15,7 @@ class BuyViewController: UICollectionViewController, UICollectionViewDelegateFlo
     var posts = [Post]()
     var postRow = 20
     var postPage = 1
+    var postId = 0
     
     class func instantiateFromStoryboard() -> BuyViewController {
         let storyboard = UIStoryboard(name: StoryboardName.mainViewController, bundle: nil)
@@ -64,7 +65,7 @@ extension BuyViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.mainBuyCell, for: indexPath) as! MainBuyCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.mainCell, for: indexPath) as! MainCell
         
         let post = posts[indexPath.row]
         
@@ -83,4 +84,17 @@ extension BuyViewController {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let post = posts[indexPath.row]
+        print("postId: \(post.id)")
+        self.postId = post.id
+        performSegue(withIdentifier: SegueIdentity.mainBuyToDetail, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentity.mainBuyToDetail {
+            let detailViewController = segue.destination as! DetailViewController
+            detailViewController.postId = self.postId
+        }
+    }
 }

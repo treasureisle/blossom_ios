@@ -24,7 +24,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MainSellCell" id="2Nd-8j-4zG" customClass="MainSellCell" customModule="blossom" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MainCell" id="2Nd-8j-4zG" customClass="MainCell" customModule="blossom" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="122" height="193"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -87,7 +87,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MainBuyCell" id="V2j-1f-AQx" customClass="MainBuyCell" customModule="blossom" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MainCell" id="V2j-1f-AQx" customClass="MainCell" customModule="blossom" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="122" height="193"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -127,6 +127,9 @@
                             <outlet property="delegate" destination="8wd-pB-AVM" id="FF9-PX-7Ot"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <segue destination="oq9-tv-SLN" kind="presentation" identifier="mainBuyToDetail" id="4bN-2D-R3R"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j5h-6i-L4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -155,7 +158,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MainReviewCell" id="kZV-YQ-StN" customClass="MainReviewCell" customModule="blossom" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MainCell" id="kZV-YQ-StN" customClass="MainCell" customModule="blossom" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="122" height="193"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -195,6 +198,9 @@
                             <outlet property="delegate" destination="5Ev-Kk-MCG" id="Pyq-xZ-PJf"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <segue destination="oq9-tv-SLN" kind="presentation" id="Pbw-8T-kuL"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PjB-Om-iMo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -215,7 +221,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MainStoreCell" id="XE0-dB-QQ2" customClass="MainStoreCell" customModule="blossom" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MainCell" id="XE0-dB-QQ2" customClass="MainCell" customModule="blossom" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="122" height="193"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -255,10 +261,16 @@
                             <outlet property="delegate" destination="4rm-1z-LS8" id="Ofx-YQ-Ebw"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <segue destination="oq9-tv-SLN" kind="presentation" identifier="mainStoreToDetail" id="toK-ZC-tMM"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Uh-D7-vNJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1690" y="-182"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="4bN-2D-R3R"/>
+    </inferredMetricsTieBreakers>
 </document>

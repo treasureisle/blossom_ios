@@ -67,7 +67,7 @@ extension SellViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.mainSellCell, for: indexPath) as! MainSellCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.mainCell, for: indexPath) as! MainCell
         
         let post = posts[indexPath.row]
         
@@ -91,9 +91,6 @@ extension SellViewController {
         print("postId: \(post.id)")
         self.postId = post.id
         performSegue(withIdentifier: SegueIdentity.mainSellToDetail, sender: self)
-    }
-    func upload(){
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

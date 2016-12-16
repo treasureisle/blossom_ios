@@ -25,6 +25,9 @@
                                 <rect key="frame" x="0.0" y="20" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="cancleTouched" destination="cBA-cF-nc6" eventType="touchUpInside" id="rYw-xN-V2e"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lsy-Mh-yua">
                                 <rect key="frame" x="329" y="20" width="46" height="30"/>
@@ -70,6 +73,9 @@
                                 <rect key="frame" x="164" y="290" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="followTouched" destination="cBA-cF-nc6" eventType="touchUpInside" id="clM-fu-UDt"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4js-WF-lby">
                                 <rect key="frame" x="244" y="249" width="42" height="21"/>
@@ -100,6 +106,10 @@
         <scene sceneID="I1d-CV-y9k">
             <objects>
                 <viewController id="Uk2-DV-AUH" customClass="PagingMenuController" customModule="PagingMenuController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="F7e-sh-Bpv"/>
+                        <viewControllerLayoutGuide type="bottom" id="sO9-XR-OL8"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="J7e-iG-DK4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="339"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

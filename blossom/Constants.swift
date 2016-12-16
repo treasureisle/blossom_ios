@@ -39,13 +39,14 @@ struct Api {
     static let followingStores = apiUrl + "/following_stores"
     static let like = apiUrl + "/like"
     static let userPosts = apiUrl + "/user_posts"
+    static let isFollowing = apiUrl + "/is_following"
+    static let feeds = apiUrl + "/feeds"
 }
 
 struct CellIdentity {
-    static let mainSellCell = "MainSellCell"
-    static let mainBuyCell = "MainBuyCell"
-    static let mainReviewCell = "MainReviewCell"
-    static let mainStoreCell = "MainStoreCell"
+    static let mainCell = "MainCell"
+    static let feedCell = "FeedCell"
+    static let imagePreviewCell = "ImagePreviewCell"
 }
 
 struct Font {
@@ -57,7 +58,18 @@ struct SegueIdentity {
     static let jumpToSignin = "jumpToSignin"
     static let jumpToUpload = "jumpToUpload"
     static let mainSellToDetail = "mainSellToDetail"
+    static let mainBuyToDetail = "mainBuyToDetail"
+    static let mainReviewToDetail = "mainReviewToDetail"
+    static let mainStoreToDetail = "mainStoreToDetail"
     static let mainToProfile = "mainToProfile"
+    static let mainToFeed = "mainToFeed"
+    static let detailToProfile = "detailToProfile"
+    static let profileLikeToDetail = "profileLikeToDetail"
+    static let profileListToDetail = "profileListToDetail"
+    static let profileStoreToDetail = "profileStoreToDetail"
+    static let feedToUpload = "feedToUpload"
+    static let feedToProfile = "feedToProfile"
+    static let feedToMain = "feedToMain"
     
     // MARK: Embed
     static let embedVideoViewController = "EmbedVideoViewController"
@@ -69,6 +81,7 @@ struct SegueIdentity {
 struct StoryboardName {
     static let mainViewController = "MainViewController"
     static let profileViewController = "ProfileViewController"
+    static let feedViewController = "FeedViewController"
 }
 
 struct StoryboardId {
@@ -97,11 +110,6 @@ struct EventName {
 struct ImageName {
     static let btnCancel = "btn_cancel"
     static let unhappy = "unhappy"
-}
-
-struct VideoError {
-    static let success = 0
-
 }
 
 struct Exceptions {

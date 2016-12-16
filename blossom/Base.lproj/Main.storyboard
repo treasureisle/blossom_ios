@@ -13,7 +13,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="blossom" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="blossom" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -183,11 +183,20 @@
                         <segue destination="Zjo-f8-Jzx" kind="presentation" identifier="jumpToSignin" id="Ffk-re-QlC"/>
                         <segue destination="xiO-8C-sca" kind="presentation" identifier="jumpToUpload" id="jcR-qy-gWM"/>
                         <segue destination="f6s-f2-5ZM" kind="presentation" identifier="mainToProfile" id="gEN-y9-LVm"/>
+                        <segue destination="1ll-ec-93O" kind="showDetail" identifier="mainToFeed" id="bc3-B8-oGa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-12" y="122.78860569715144"/>
+        </scene>
+        <!--FeedViewController-->
+        <scene sceneID="lOP-oy-eFx">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Feed" referencedIdentifier="FeedViewController" id="1ll-ec-93O" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wza-mY-a1c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-790" y="569"/>
         </scene>
         <!--SignInViewController-->
         <scene sceneID="S0W-6h-P0t">

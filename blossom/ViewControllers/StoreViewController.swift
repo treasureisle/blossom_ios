@@ -15,6 +15,7 @@ class StoreViewController: UICollectionViewController, UICollectionViewDelegateF
     var posts = [Post]()
     var postRow = 20
     var postPage = 1
+    var postId = 0
     
     class func instantiateFromStoryboard() -> StoreViewController {
         let storyboard = UIStoryboard(name: StoryboardName.mainViewController, bundle: nil)
@@ -64,7 +65,7 @@ extension StoreViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.mainStoreCell, for: indexPath) as! MainStoreCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.mainCell, for: indexPath) as! MainCell
         
         let post = posts[indexPath.row]
         
@@ -73,5 +74,19 @@ extension StoreViewController {
         cell.productPriceLabel.text = String(post.purchasePrice + post.fee)
         
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let post = posts[indexPath.row]
+        print("postId: \(post.id)")
+        self.postId = post.id
+        performSegue(withIdentifier: SegueIdentity.mainStoreToDetail, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentity.mainStoreToDetail {
+            let detailViewController = segue.destination as! DetailViewController
+            detailViewController.postId = self.postId
+        }
     }
 }

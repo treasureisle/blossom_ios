@@ -1,8 +1,8 @@
 //
-//  ProfileLikeViewController.swift
+//  FeedCommonViewController.swift
 //  blossom
 //
-//  Created by Seong Phil on 2016. 12. 12..
+//  Created by Seong Phil on 2016. 12. 15..
 //  Copyright © 2016년 treasureisle. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-class ProfileLikeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class FeedCommonViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var lastPageFetched = false
     var posts = [Post]()
     var postRow = 20
@@ -18,9 +18,9 @@ class ProfileLikeViewController: UICollectionViewController, UICollectionViewDel
     var postId = 0
     var userId: Int?
     
-    class func instantiateFromStoryboard() -> ProfileLikeViewController {
-        let storyboard = UIStoryboard(name: StoryboardName.profileViewController, bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! ProfileLikeViewController
+    class func instantiateFromStoryboard() -> FeedCommonViewController {
+        let storyboard = UIStoryboard(name: StoryboardName.feedViewController, bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! FeedCommonViewController
     }
     
     // MARK: - Lifecycle
@@ -36,7 +36,7 @@ class ProfileLikeViewController: UICollectionViewController, UICollectionViewDel
     
     func fetchPosts(){
         if !lastPageFetched {
-            _ = BlossomRequest.request(method: .get, endPoint: "\(Api.likedPosts)/\(userId!)?page=\(postPage)") { (response, statusCode, json) -> () in
+            _ = BlossomRequest.request(method: .get, endPoint: "\(Api.feeds)?post_type=common&page=\(postPage)") { (response, statusCode, json) -> () in
                 if statusCode == 200{
                     let posts = json["posts"].arrayValue
                     
@@ -57,7 +57,7 @@ class ProfileLikeViewController: UICollectionViewController, UICollectionViewDel
     }
 }
 
-extension ProfileLikeViewController {
+extension FeedCommonViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -68,21 +68,11 @@ extension ProfileLikeViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.mainCell, for: indexPath) as! MainCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.feedCell, for: indexPath) as! FeedCell
         
         let post = posts[indexPath.row]
         
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        
-        let costInt = post.purchasePrice + post.fee
-        
-        if let cost = formatter.string(for: costInt) {
-            cell.productImageView.af_setImage(withURL: URL(string:post.imgUrl1)!)
-            cell.productDescriptionLabel.text = post.title
-            cell.productPriceLabel.text = "\(NSLocalizedString("MONEYMARK", comment: "MONEYMARK"))\(cost)"
-            cell.roundingUIView(aView: cell, cornerRadiusParam: 5.0)
-        }
+        cell.initCell(post: post)
         
         return cell
     }
@@ -91,7 +81,7 @@ extension ProfileLikeViewController {
         let post = posts[indexPath.row]
         print("postId: \(post.id)")
         self.postId = post.id
-        performSegue(withIdentifier: SegueIdentity.profileLikeToDetail, sender: self)
+        //performSegue(withIdentifier: SegueIdentity.profileLikeToDetail, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -101,3 +91,4 @@ extension ProfileLikeViewController {
         }
     }
 }
+
