@@ -13,13 +13,56 @@ import Mixpanel
 class FeedViewController: UIViewController {
     
     @IBOutlet weak var viewUploadMenu: UIView!
+    @IBOutlet weak var viewSearchMenu: UIView!
     @IBOutlet weak var uploadSellButton: UIButton!
     @IBOutlet weak var uploadBuyButton: UIButton!
     @IBOutlet weak var uploadReviewButton: UIButton!
     @IBOutlet weak var uploadMenuDim: UIButton!
+    @IBOutlet weak var searchTitleButton: UIButton!
+    @IBOutlet weak var searchHashtagButton: UIButton!
+    @IBOutlet weak var searchUsernameButton: UIButton!
     
     var postType: Int = 0
     var me: Session?
+    
+    @IBAction func searchTouched() {
+        self.viewSearchMenu.isHidden = false
+        self.uploadMenuDim.isHidden = false
+        self.uploadMenuDim.isEnabled = true
+        self.searchTitleButton.isEnabled = true
+        self.searchHashtagButton.isEnabled = true
+        self.searchUsernameButton.isEnabled = true
+    }
+    
+    @IBAction func searchTitleTouched() {
+        self.performSegue(withIdentifier: SegueIdentity.feedToSearchPosts, sender: 0)
+        self.viewSearchMenu.isHidden = true
+        self.uploadMenuDim.isHidden = true
+        self.uploadMenuDim.isEnabled = false
+        self.searchTitleButton.isEnabled = false
+        self.searchHashtagButton.isEnabled = false
+        self.searchUsernameButton.isEnabled = false
+    }
+    
+    @IBAction func searchHashtagTouched() {
+        self.performSegue(withIdentifier: SegueIdentity.feedToSearchPosts, sender: 1)
+        self.viewSearchMenu.isHidden = true
+        self.uploadMenuDim.isHidden = true
+        self.uploadMenuDim.isEnabled = false
+        self.searchTitleButton.isEnabled = false
+        self.searchHashtagButton.isEnabled = false
+        self.searchUsernameButton.isEnabled = false
+    }
+    
+    @IBAction func searchUsernameTouched() {
+        self.performSegue(withIdentifier: SegueIdentity.feedToSearchUsers, sender: self)
+        self.viewSearchMenu.isHidden = true
+        self.uploadMenuDim.isHidden = true
+        self.uploadMenuDim.isEnabled = false
+        self.searchTitleButton.isEnabled = false
+        self.searchHashtagButton.isEnabled = false
+        self.searchUsernameButton.isEnabled = false
+    }
     
     @IBAction func homeTouched(sender: UIButton) {
         performSegue(withIdentifier: SegueIdentity.feedToMain, sender: self)
@@ -122,6 +165,10 @@ class FeedViewController: UIViewController {
         } else if segue.identifier == SegueIdentity.feedToProfile {
             let profileViewController = segue.destination as! ProfileViewController
             profileViewController.userId = self.me?.id
+        } else if segue.identifier == SegueIdentity.feedToSearchPosts {
+            let searchPostsViewController = segue.destination as! SearchPostsViewController
+            let searchType = sender as! Int
+            searchPostsViewController.searchType = searchType
         }
     }
     

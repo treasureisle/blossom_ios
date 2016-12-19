@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -63,6 +63,9 @@
                                         <rect key="frame" x="321" y="4" width="54" height="54"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="search"/>
+                                        <connections>
+                                            <action selector="searchTouched" destination="vcn-B6-n0a" eventType="touchUpInside" id="Vcc-ES-j8E"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -185,6 +188,46 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ChH-Ka-TqV">
+                                <rect key="frame" x="238" y="69" width="121" height="101"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XG5-pH-JWA">
+                                        <rect key="frame" x="0.0" y="0.0" width="121" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="제목검색">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="searchTitleTouched" destination="vcn-B6-n0a" eventType="touchUpInside" id="BtK-AE-Q3q"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdB-A4-bvH">
+                                        <rect key="frame" x="0.0" y="68" width="121" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="사용자검색">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="searchUsernameTouched" destination="vcn-B6-n0a" eventType="touchUpInside" id="RVB-Ha-Uw8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="skY-tM-sXn">
+                                        <rect key="frame" x="0.0" y="34" width="121" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="해시태그검색">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="searchHashtagTouched" destination="vcn-B6-n0a" eventType="touchUpInside" id="U1w-eD-Uci"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -199,19 +242,41 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchHashtagButton" destination="skY-tM-sXn" id="xXG-Xp-JO7"/>
+                        <outlet property="searchTitleButton" destination="XG5-pH-JWA" id="CGN-Gm-oIJ"/>
+                        <outlet property="searchUsernameButton" destination="qdB-A4-bvH" id="Fvf-eS-Fxs"/>
                         <outlet property="uploadBuyButton" destination="6uG-vc-Bi1" id="ghX-PV-FrR"/>
                         <outlet property="uploadMenuDim" destination="CRb-24-6g3" id="Dvk-z6-aKs"/>
                         <outlet property="uploadReviewButton" destination="a8b-eg-upi" id="Fzu-7G-cDL"/>
                         <outlet property="uploadSellButton" destination="ex3-bG-mPF" id="hXv-TZ-Zmb"/>
-                        <outlet property="viewUploadMenu" destination="H5d-c1-7Ox" id="TTQ-Ab-1oc"/>
+                        <outlet property="viewSearchMenu" destination="ChH-Ka-TqV" id="TKg-C9-GCy"/>
+                        <outlet property="viewUploadMenu" destination="riw-LQ-Wph" id="0mm-5r-aVo"/>
                         <segue destination="jKx-hb-YXb" kind="presentation" identifier="feedToMain" id="t1g-6w-bez"/>
                         <segue destination="Ub1-GG-4xD" kind="presentation" identifier="feedToUpload" id="P8T-pp-c2h"/>
                         <segue destination="n4N-4b-hdf" kind="presentation" identifier="feedToProfile" id="LS8-RN-EM6"/>
+                        <segue destination="sna-qg-56o" kind="showDetail" identifier="feedToSearchPosts" id="O2h-Ww-0CL"/>
+                        <segue destination="j8g-hM-Z94" kind="presentation" identifier="feedToSearchUsers" id="FVP-po-U9o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VfP-hS-NSb" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-12" y="122.78860569715144"/>
+        </scene>
+        <!--SearchPostsViewController-->
+        <scene sceneID="8NH-hX-vnK">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SearchPosts" referencedIdentifier="SearchPostsViewController" id="sna-qg-56o" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nMU-6K-MNO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="657" y="-281"/>
+        </scene>
+        <!--SearchUsersViewController-->
+        <scene sceneID="fk2-g3-BAS">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SearchUsers" referencedIdentifier="SearchUsersViewController" id="j8g-hM-Z94" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cPE-uI-Std" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="656" y="-220"/>
         </scene>
         <!--Paging Menu Controller-->
         <scene sceneID="Xff-tO-oqb">

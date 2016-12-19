@@ -41,12 +41,15 @@ struct Api {
     static let userPosts = apiUrl + "/user_posts"
     static let isFollowing = apiUrl + "/is_following"
     static let feeds = apiUrl + "/feeds"
+    static let searchUser = apiUrl + "/search_user"
+    static let searchPost = apiUrl + "/search_post"
 }
 
 struct CellIdentity {
     static let mainCell = "MainCell"
     static let feedCell = "FeedCell"
     static let imagePreviewCell = "ImagePreviewCell"
+    static let searchUsersCell = "SearchUsersCell"
 }
 
 struct Font {
@@ -63,6 +66,8 @@ struct SegueIdentity {
     static let mainStoreToDetail = "mainStoreToDetail"
     static let mainToProfile = "mainToProfile"
     static let mainToFeed = "mainToFeed"
+    static let mainToSearchUsers = "mainToSearchUsers"
+    static let mainToSearchPosts = "mainToSearchPosts"
     static let detailToProfile = "detailToProfile"
     static let profileLikeToDetail = "profileLikeToDetail"
     static let profileListToDetail = "profileListToDetail"
@@ -70,6 +75,20 @@ struct SegueIdentity {
     static let feedToUpload = "feedToUpload"
     static let feedToProfile = "feedToProfile"
     static let feedToMain = "feedToMain"
+    static let feedToSearchUsers = "feedToSearchUsers"
+    static let feedToSearchPosts = "feedToSearchPosts"
+    static let searchUsersToProfile = "searchUsersToProfile"
+    static let searchUsersToMain = "searchUsersToMain"
+    static let searchUsersToFeed = "searchUsersToFeed"
+    static let searchUsersToUpload = "searchUsersToProfile"
+    static let searchUsersToSignIn = "searchUsersToSignIn"
+    static let searchPostsToProfile = "searchPostsToProfile"
+    static let searchPostsToMain = "searchPostsToMain"
+    static let searchPostsToFeed = "searchPostsToFeed"
+    static let searchPostsToUpload = "searchPostsToUpload"
+    static let searchPostsToSignIn = "searchPostsToSignIn"
+    static let searchPostsToDetail = "searchPostsToDetail"
+    
     
     // MARK: Embed
     static let embedVideoViewController = "EmbedVideoViewController"
