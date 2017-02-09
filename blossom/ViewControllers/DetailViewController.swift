@@ -30,11 +30,13 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
     @IBOutlet weak var likeImage: UIImageView!
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var replyLabel: UILabel!
+    @IBOutlet weak var putCartButton: UIButton!
     
+    var me: Session?
     var colorSizes: [ColorSize] = []
     var hashtags: [Hashtag] = []
     var colorSizeNames: [String] = []
-    var colorSizeAmounts: [Int] = []
+    var colorSizeAmounts: [String] = []
     var postId: Int = 0
     var post: Post? = nil
     var colorSizeNamesDownPicker: DownPicker!
@@ -55,7 +57,11 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     @IBAction func cartTouched() {
-        
+        if self.purchaseView.isHidden {
+            self.purchaseView.isHidden = false
+        } else {
+            self.purchaseView.isHidden = true
+        }
     }
     
     @IBAction func likeTouched() {
@@ -63,17 +69,75 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     @IBAction func replyTouched() {
-        
+        performSegue(withIdentifier: SegueIdentity.detailToReply, sender: self)
     }
     
     @IBAction func shareTouched() {
         
     }
     
+    @IBAction func putCart() {
+        if self.me != nil{
+            var selectedColorSize: ColorSize?
+            
+            for colorSize in self.colorSizes {
+                if colorSize.name == self.colorSizeNamesDownPicker.text! {
+                    selectedColorSize = colorSize
+                }
+            }
+            _ = BlossomRequest.upload(.post, urlString: "\(Api.basket)/\(self.postId)", multipartFormData: { multipartFormData in
+                multipartFormData.append(("\(selectedColorSize!.id)".data(using: String.Encoding.utf8))!, withName: "color_size_id")
+                multipartFormData.append((self.colorSizeAmountDownPicker.text!.data(using: String.Encoding.utf8))!, withName: "amount")
+            }, completionHandler:  {
+                response, statusCode, json in
+                
+                if statusCode == 200{
+                    let alert = BlossomAlertController(message: "장바구니에 담았습니다. 장바구니로 이동하시겠습니까?")
+                    alert.addAction(action: BlossomAlertAction(title: "머무르기", style: .Positive, handler: nil))
+                    alert.addAction(action: BlossomAlertAction(title: "이동", style: .Negative, handler: {
+                        action in
+                        if self.presentedViewController == nil {
+                            self.performSegue(withIdentifier: SegueIdentity.detailToCart, sender: self)
+                        } else {
+                            self.dismiss(animated: false) {
+                                () -> Void in
+                                self.performSegue(withIdentifier: SegueIdentity.detailToCart, sender: self)
+                            }
+                        }
+                        
+                    }))
+                    
+                    self.present(alert, animated: true, completion: nil)
+                    
+                }else{
+                    self.view.makeSomethingWrongToast()
+                }
+            })
+        } else {
+            let alert = LoginAlertController()
+            alert.setSigninAction(action: SigninAction(handler: {
+                action in
+                if self.presentedViewController == nil {
+                    self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                } else {
+                    self.dismiss(animated: false) {
+                        () -> Void in
+                        self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                    }
+                }
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.me = Session.load()
         self.writerProfileImageView?.makeCircularImageView()
+        self.putCartButton.isEnabled = false
         
         _ = BlossomRequest.request(method: .get, endPoint: "\(Api.post)/\(self.postId)") { (response, statusCode, json) -> () in
             if statusCode == 200{
@@ -91,6 +155,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
                 self.detailTextView?.text = postDetail.text
                 self.likeLabel?.text = String(postDetail.likes)
                 self.replyLabel?.text = String(postDetail.replys)
+                self.purchaseTitleLabel?.text = postDetail.productName
                 
                 Alamofire.request((self.post?.imgUrl1)!).responseImage {
                     response in
@@ -147,11 +212,14 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
                     let tempColorSize = ColorSize(o: colorSize)
                     self.colorSizes.append(tempColorSize)
                     self.colorSizeNames.append(tempColorSize.name)
-                    self.colorSizeAmounts.append(tempColorSize.available)
+                    self.colorSizeAmounts.append(String(tempColorSize.available))
                     colorSizeLabelText = "\(colorSizeLabelText)\n\(tempColorSize.name)  \(tempColorSize.available)"
                 }
                 self.colorSizeLabel.text = colorSizeLabelText
                 self.colorSizeLabel.sizeToFit()
+                
+                self.colorSizeNamesDownPicker = DownPicker(textField: self.colorSizeNamesTextField, withData: self.colorSizeNames)
+                self.colorSizeNamesDownPicker.addTarget(self, action: #selector(self.colorSizeNameSelected(dp:)), for: .valueChanged)
             }
         }
         
@@ -179,8 +247,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.writerProfileDetail.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(self.profileTouched(_:))))
         self.writerProfileDetail.isUserInteractionEnabled = true
         
-        self.colorSizeNamesDownPicker = DownPicker(textField: self.colorSizeNamesTextField, withData: colorSizeNames)
-        self.colorSizeAmountDownPicker = DownPicker(textField: self.colorSizeAmountTextField, withData: colorSizeAmounts)
+        self.colorSizeAmountTextField.isUserInteractionEnabled = false
         
     }
     
@@ -192,7 +259,35 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
         if segue.identifier == SegueIdentity.detailToProfile {
             let profileViewController = segue.destination as! ProfileViewController
             profileViewController.userId = self.post?.user.id
+        } else if segue.identifier == SegueIdentity.detailToReply {
+            let replyViewController = segue.destination as! ReplyViewController
+            replyViewController.postId = self.postId
+        } 
+    }
+    
+    func colorSizeNameSelected(dp: Any?) {
+        self.colorSizeAmountTextField.isUserInteractionEnabled = true
+        let selectedValue = self.colorSizeNamesDownPicker.text
+    // do what you want
+        self.colorSizeAmounts.removeAll()
+        
+        for colorSize in self.colorSizes {
+            if colorSize.name == selectedValue {
+                print("selectied: \(colorSize.name)")
+                for i in (0..<colorSize.available){
+                    self.colorSizeAmounts.append(String(i))
+                }
+                break
+            }
         }
+        
+        self.colorSizeAmountDownPicker = DownPicker(textField: self.colorSizeAmountTextField, withData: self.colorSizeAmounts)
+        
+        self.colorSizeAmountDownPicker.addTarget(self, action: #selector(self.amountSelected(dp:)), for: .valueChanged)
+    }
+    
+    func amountSelected(dp: Any?) {
+        self.putCartButton.isEnabled = true
     }
     
     func profileTouched(_ sender: UITapGestureRecognizer){
@@ -218,9 +313,6 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.imagePreviewCell, for: indexPath) as! ImagePreviewCell
-        
-        print("postId: \(self.post!.id)")
-        print("indexPath: \(indexPath.row)")
         
         if indexPath.row == 0 { cell.imageView.af_setImage(withURL: URL(string: self.post!.imgUrl1)!) }
         if indexPath.row == 1 { cell.imageView.af_setImage(withURL: URL(string: self.post!.imgUrl2)!) }

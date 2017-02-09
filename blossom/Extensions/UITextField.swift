@@ -56,7 +56,7 @@ extension UITextField {
         return true
     }
     
-    func isValidComment(_ container: UIViewController) -> Bool{
+    func isValidReply(_ container: UIViewController) -> Bool{
         let comment = self.text!
         
         if comment.characters.count < 1{

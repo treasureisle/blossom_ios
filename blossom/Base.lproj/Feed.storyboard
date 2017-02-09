@@ -34,6 +34,14 @@
             </objects>
             <point key="canvasLocation" x="320" y="569"/>
         </scene>
+        <!--ReplyViewController-->
+        <scene sceneID="8uc-3U-8Dd">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Reply" referencedIdentifier="ReplyViewController" id="ppP-4Y-7I8" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zr6-M3-hNG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="758" y="569"/>
+        </scene>
         <!--Feed View Controller-->
         <scene sceneID="m83-bF-eqj">
             <objects>
@@ -256,11 +264,12 @@
                         <segue destination="n4N-4b-hdf" kind="presentation" identifier="feedToProfile" id="LS8-RN-EM6"/>
                         <segue destination="sna-qg-56o" kind="showDetail" identifier="feedToSearchPosts" id="O2h-Ww-0CL"/>
                         <segue destination="j8g-hM-Z94" kind="presentation" identifier="feedToSearchUsers" id="FVP-po-U9o"/>
+                        <segue destination="ppP-4Y-7I8" kind="showDetail" identifier="feedToReply" id="0Cs-H2-QD3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VfP-hS-NSb" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12" y="122.78860569715144"/>
+            <point key="canvasLocation" x="-63" y="122"/>
         </scene>
         <!--SearchPostsViewController-->
         <scene sceneID="8NH-hX-vnK">

@@ -13,7 +13,7 @@ struct BuildSettings {
 }
 
 struct Config {
-
+    static let postalApiKey = "U01TX0FVVEgyMDE3MDEyMDE0MTkxMjE4NDcx"
 }
 
 struct PrefKey {
@@ -22,6 +22,8 @@ struct PrefKey {
     static let username = "username"
     static let sessionTypes = "session_types"
     static let profileId = "profile_id"
+    static let categories = "categories"
+    static let myCategoryId = "my_category_id"
 }
 
 let apiUrl = (Bundle.main.object(forInfoDictionaryKey: BuildSettings.apiUrl) as? String)!
@@ -43,6 +45,16 @@ struct Api {
     static let feeds = apiUrl + "/feeds"
     static let searchUser = apiUrl + "/search_user"
     static let searchPost = apiUrl + "/search_post"
+    static let reply = apiUrl + "/reply"
+    static let replyLike = apiUrl + "/reply_like"
+    static let basket = apiUrl + "/basket"
+    static let purchase = apiUrl + "/purchase"
+    static let messages = apiUrl + "/message"
+    static let userDetail = apiUrl + "/user_detail"
+    static let category = apiUrl + "/category"
+    static let hashtagScore = apiUrl + "/hashtag_score"
+    
+    static let postalSearch = "http://www.juso.go.kr/addrlink/addrLinkApiJsonp.do"
 }
 
 struct CellIdentity {
@@ -50,6 +62,10 @@ struct CellIdentity {
     static let feedCell = "FeedCell"
     static let imagePreviewCell = "ImagePreviewCell"
     static let searchUsersCell = "SearchUsersCell"
+    static let basketViewCell = "BasketViewCell"
+    static let purchaseViewCell = "PurchaseViewCell"
+    static let purchaseListViewCell = "PurchaseListViewCell"
+    static let messageViewCell = "MessageViewCell"
 }
 
 struct Font {
@@ -68,6 +84,7 @@ struct SegueIdentity {
     static let mainToFeed = "mainToFeed"
     static let mainToSearchUsers = "mainToSearchUsers"
     static let mainToSearchPosts = "mainToSearchPosts"
+    static let mainToCart = "mainToCart"
     static let detailToProfile = "detailToProfile"
     static let profileLikeToDetail = "profileLikeToDetail"
     static let profileListToDetail = "profileListToDetail"
@@ -88,7 +105,18 @@ struct SegueIdentity {
     static let searchPostsToUpload = "searchPostsToUpload"
     static let searchPostsToSignIn = "searchPostsToSignIn"
     static let searchPostsToDetail = "searchPostsToDetail"
+    static let replyToProfile = "replyToProfile"
+    static let detailToReply = "detailToReply"
+    static let feedToReply = "feedToReply"
+    static let feedToDetail = "feedToDetail"
+    static let cartToDetail = "cartToDetail"
+    static let cartToPurchase = "cartToPurchase"
+    static let purchaseToDetail = "purchaseToDetail"
+    static let purchaseToProfile = "purchaseToProfile"
+    static let detailToCart = "detailToCart"
+    static let messageToProfile = "messageToProfile"
     
+    static let test = "test"
     
     // MARK: Embed
     static let embedVideoViewController = "EmbedVideoViewController"
@@ -129,6 +157,10 @@ struct EventName {
 struct ImageName {
     static let btnCancel = "btn_cancel"
     static let unhappy = "unhappy"
+    static let imgHeartN = "img_heart_n"
+    static let imgHeart = "img_heart"
+    static let check_checked = "check_checked"
+    static let check_unchecked = "check_unchecked"
 }
 
 struct Exceptions {

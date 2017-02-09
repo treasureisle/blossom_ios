@@ -233,11 +233,21 @@
                         <segue destination="1ll-ec-93O" kind="showDetail" identifier="mainToFeed" id="bc3-B8-oGa"/>
                         <segue destination="saR-1l-oVS" kind="showDetail" identifier="mainToSearchPosts" id="USq-Xo-ykF"/>
                         <segue destination="C4f-t0-LD3" kind="showDetail" identifier="mainToSearchUsers" id="GfK-tu-b0M"/>
+                        <segue destination="la0-KF-fkl" kind="presentation" identifier="mainToCart" id="tF9-UV-vgW"/>
+                        <segue destination="DDw-xy-wMI" kind="presentation" identifier="test" id="aMk-vB-oOa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-12" y="122.78860569715144"/>
+        </scene>
+        <!--CartViewController-->
+        <scene sceneID="Op6-Ss-upw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Cart" referencedIdentifier="CartViewController" id="la0-KF-fkl" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gqp-bt-IEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-972" y="448"/>
         </scene>
         <!--FeedViewController-->
         <scene sceneID="lOP-oy-eFx">
@@ -270,6 +280,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u3e-Gh-ERR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="330" y="569"/>
+        </scene>
+        <!--AddressViewController-->
+        <scene sceneID="wux-HL-XRH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Address" referencedIdentifier="AddressViewController" id="DDw-xy-wMI" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HEb-rx-PeD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="61" y="671"/>
         </scene>
         <!--SearchPostsViewController-->
         <scene sceneID="37A-Z1-dlD">

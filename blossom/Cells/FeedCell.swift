@@ -90,22 +90,7 @@ class FeedCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionVi
         
         
     }
-    
-    @IBAction func purchaseTouched() {
-        
-    }
-    
-    @IBAction func likeTouched() {
-        
-    }
-    
-    @IBAction func replyTouched() {
-        
-    }
-    
-    @IBAction func shareTouched() {
-        
-    }
+
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

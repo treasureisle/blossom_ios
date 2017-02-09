@@ -70,7 +70,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func homeTouched(sender: UIButton) {
-        
+        self.performSegue(withIdentifier: SegueIdentity.test, sender: self)
     }
     
     @IBAction func feedTouched(sender: UIButton) {
@@ -168,7 +168,24 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func cartTouched(sender: UIButton) {
-        
+        if self.me != nil{
+            performSegue(withIdentifier: SegueIdentity.mainToCart, sender: self)
+        } else {
+            let alert = LoginAlertController()
+            alert.setSigninAction(action: SigninAction(handler: {
+                action in
+                if self.presentedViewController == nil {
+                    self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                } else {
+                    self.dismiss(animated: false) {
+                        () -> Void in
+                        self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                    }
+                }
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func profileTouched(sender: UIButton) {
@@ -226,18 +243,14 @@ class MainViewController: UIViewController {
                 response, statusCode, json in
                 if statusCode == 200{
                     log.debug("login success")
-//                    self.jumpToTopicListAfterFetchTopics(SegueIdentity.launchToTopicList)
                     Mixpanel.sharedInstance().identify(String(me.id))
-//                    Mixpanel.sharedInstance().track(MixpanelTrack.login)
                     
                 }else{
                     log.debug("login failed")
-//                    self.performSegueWithIdentifier(SegueIdentity.launchToGuide, sender: self)
                 }
             })
         }else{
             log.debug("login failed, no session")
-//            self.performSegueWithIdentifier(SegueIdentity.launchToGuide, sender: self)
         }
     }
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SearchUsersViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
+class SearchUsersViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate  {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var viewUploadMenu: UIView!
@@ -116,10 +116,8 @@ class SearchUsersViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                 }
             }))
-            
             self.present(alert, animated: true, completion: nil)
         }
-        
     }
     
     @IBAction func cartTouched(sender: UIButton) {
@@ -142,7 +140,6 @@ class SearchUsersViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                 }
             }))
-            
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -187,7 +184,6 @@ class SearchUsersViewController: UIViewController, UICollectionViewDelegate, UIC
                     self.page += 1
                 }
             })
-
         }
     }
     
@@ -222,7 +218,8 @@ extension SearchUsersViewController {
     
     @available(iOS 6.0, *)
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return users.count
+        print(self.users.count)
+        return self.users.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
