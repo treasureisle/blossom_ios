@@ -13,6 +13,7 @@ class Hashtag{
     var id: Int
     var name: String
     var number: Int
+    var hidden: Int
     
     init(o:JSON){
         if let id = o["id"].int {
@@ -31,6 +32,12 @@ class Hashtag{
             self.number = number
         }else{
             fatalError("\(o["number"].error)")
+        }
+        
+        if let hidden = o["hidden"].int {
+            self.hidden = hidden
+        }else{
+            fatalError("\(o["hidden"].error)")
         }
     }
 }

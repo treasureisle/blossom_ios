@@ -31,6 +31,10 @@ class PurchaseListViewController: UIViewController, UITableViewDelegate, UITable
         fetchPurchase()
     }
     
+    @IBAction func cancleTouched() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: UITableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return purchase.count
@@ -94,7 +98,7 @@ class PurchaseListViewController: UIViewController, UITableViewDelegate, UITable
         isLoading = true
         
         self.showIndicator()
-        _ = BlossomRequest.request(method: .get, endPoint: "\(Api.purchase)/\(me?.id)") {
+        _ = BlossomRequest.request(method: .get, endPoint: "\(Api.purchase)") {
             (response, statusCode, json) -> () in
             if statusCode == 200{
                 

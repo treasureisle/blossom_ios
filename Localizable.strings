@@ -23,6 +23,7 @@
 "LIST" = "리스트";
 "LIKE" = "라이크";
 "COMMON" = "일반";
+"TITLE" = "제목";
 "BRAND" = "브랜드";
 "PRODUCT_NAME" = "제품명";
 "PRICE" = "가격";

@@ -11,16 +11,18 @@ import UIKit
 
 class GreetingViewController: UIViewController {
     @IBOutlet weak var scGender: UISegmentedControl!
-    @IBOutlet weak var textFieldAge: UITextField!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var ageStepper: UIStepper!
+    
+    var age = 30
+    
+    @IBAction func ageChanged(_ sender: Any) {
+        age = Int(ageStepper.value)
+        ageLabel.text = String(age)
+    }
     
     @IBAction func saveTouched(){
-        var age = 20
         var categoryId = 0
-        if textFieldAge.text!.isEmpty {
-            return
-        } else {
-            age = Int(textFieldAge.text!)!
-        }
         
         switch scGender.selectedSegmentIndex {
         case 0: //male
@@ -60,10 +62,16 @@ class GreetingViewController: UIViewController {
         }
         
         Category.saveMyCategory(categoryId: categoryId)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.resetWindowToInitView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ageStepper.value = Double(age)
+        ageLabel.text = String(age)
+        
     }
     
     

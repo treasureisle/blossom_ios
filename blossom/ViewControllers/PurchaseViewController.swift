@@ -34,6 +34,34 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
         me = Session.load()
         tableView.dataSource = self
         tableView.delegate = self
+        
+        _ = BlossomRequest.request(method: .get, endPoint: "\(Api.userDetail)/\(me!.id)", completionHandler: {
+            (response, statusCode, json) -> () in
+            if statusCode == 200 {
+                let userDetail = UserDetail(o: json["user_detail"])
+                if userDetail.address1.isEmpty {
+                    if userDetail.recent_add1.isEmpty {
+                        self.savedAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+                        self.recentAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+                        self.newAddressButton.setTitleColor(UIColor.blue, for: .normal)
+                    } else {
+                        self.savedAddressButton.setTitleColor(UIColor.blue, for: .normal)
+                        self.recentAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+                        self.newAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+                        self.addressTextField.text = userDetail.recent_add1
+                        self.addressDetailTextField.text = userDetail.recent_add2
+                        self.recieverTextField.text = userDetail.recent_name
+                    }
+                } else {
+                    self.savedAddressButton.setTitleColor(UIColor.blue, for: .normal)
+                    self.recentAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+                    self.newAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+                    self.addressTextField.text = userDetail.address1
+                    self.addressDetailTextField.text = userDetail.address2
+                    self.recieverTextField.text = userDetail.name
+                }
+            }
+        })
     }
     
     // MARK: UITableViewDelegate
@@ -44,10 +72,8 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "purchaseViewCell", for: indexPath) as! PurchaseViewCell
         let order = getOrderWithIndexPath(indexPath: indexPath)
-        let detailGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PurchaseListViewController.imageTouched(sender:)))
-        let profileGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PurchaseListViewController.imageTouched(sender:)))
-        print("imgurl: \(order.post.imgUrl1)")
-        print("order colorsize name: \(order.colorSize.name)")
+        let detailGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PurchaseViewController.imageTouched(sender:)))
+        let profileGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PurchaseViewController.sellerTouched(sender:)))
         
         cell.thumbnailImageView.isUserInteractionEnabled = true
         cell.thumbnailImageView.addGestureRecognizer(detailGestureRecognizer)
@@ -63,13 +89,15 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     // MARK: override
-    func prepare(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentity.purchaseToDetail {
             let detailViewController = segue.destination as! DetailViewController
-            detailViewController.postId = (sender as? Int)!
+            let postId = sender as! Int
+            detailViewController.postId = postId
         } else if segue.identifier == SegueIdentity.purchaseToProfile {
             let profileViewController = segue.destination as! ProfileViewController
-            profileViewController.userId = (sender as? Int)!
+            let userId = sender as! Int
+            profileViewController.userId = userId
         }
     }
     
@@ -120,6 +148,7 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
         let tapLocation = sender.location(in: self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: tapLocation)
         let purchase = getOrderWithIndexPath(indexPath: indexPath!)
+        print("1.postId: \(purchase.post.id)")
         
         self.performSegue(withIdentifier: SegueIdentity.purchaseToDetail, sender: purchase.post.id)
     }
@@ -128,6 +157,7 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
         let tapLocation = sender.location(in: self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: tapLocation)
         let purchase = getOrderWithIndexPath(indexPath: indexPath!)
+        print("1.userId: \(purchase.post.user.id)")
         
         self.performSegue(withIdentifier: SegueIdentity.purchaseToProfile, sender: purchase.post.user.id)
     }

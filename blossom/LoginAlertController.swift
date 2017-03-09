@@ -13,6 +13,7 @@ import UIKit
 // MARK: LoginAlertAnimation
 class LoginAlertAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     let isPresenting: Bool
+    let handler: Void
     
     // MARK: init
     init(isPresenting: Bool){
@@ -341,7 +342,8 @@ class LoginAlertController: UIViewController, UIViewControllerTransitioningDeleg
                     // 저장하고 메인으로 넘어가기
                     let me = Session(o: json["session"])
                     me.save()
-                    
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.resetWindowToInitView()
                 }else{
                     let errorMsg = ErrorMsg(o: json)
                     if statusCode == 404{

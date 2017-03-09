@@ -40,7 +40,7 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var topNavigationBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textFieldBottomConstraint: NSLayoutConstraint!
     
     @IBAction func cancelTouched() {
         if let delegate = exitDelegate {
@@ -60,7 +60,9 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
         textField.delegate = self
         tableView.delegate = self
         
-        keyboardObserver = KeyboardObserver(tableViewHeightConstraint: tableViewHeightConstraint, tableView: tableView, rootView: self.view)
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(self.touches(_:))))
+        
+        keyboardObserver = KeyboardObserver(bottomConstraint: textFieldBottomConstraint, rootView: self.view)
         keyboardObserver!.startObserving()
         
         fetchRepies()
@@ -142,11 +144,9 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     // MARK: override
-    func prepare(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentity.replyToProfile {
-            let navigationController = segue.destination as! UINavigationController
-            let profileViewController = navigationController.topViewController as! ProfileViewController
-            
+            let profileViewController = segue.destination as! ProfileViewController
             profileViewController.userId = sender as? Int
         }
     }
@@ -169,6 +169,10 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     // MARK: custom
+    func touches(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
     func scrollToLast(){
         tableView.scrollRectToVisible(CGRect.init(x: 1, y: 1, width: tableView.contentSize.width - 1, height: tableView.contentSize.height - 1), animated: false)
     }
@@ -248,6 +252,8 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let tapLocation = sender.location(in: self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: tapLocation)
         let reply = getReplyWithIndexPath(indexPath: indexPath!)
+        print("reply: \(reply.text)")
+        print("userId: \(reply.user.id)")
         
         self.performSegue(withIdentifier: SegueIdentity.replyToProfile, sender: reply.user.id)
     }

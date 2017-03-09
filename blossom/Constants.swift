@@ -53,6 +53,8 @@ struct Api {
     static let userDetail = apiUrl + "/user_detail"
     static let category = apiUrl + "/category"
     static let hashtagScore = apiUrl + "/hashtag_score"
+    static let store = apiUrl + "/store"
+    static let storeDetail = apiUrl + "/store_detail"
     
     static let postalSearch = "http://www.juso.go.kr/addrlink/addrLinkApiJsonp.do"
 }
@@ -66,6 +68,7 @@ struct CellIdentity {
     static let purchaseViewCell = "PurchaseViewCell"
     static let purchaseListViewCell = "PurchaseListViewCell"
     static let messageViewCell = "MessageViewCell"
+    static let storeBannerCell = "StoreBannerCell"
 }
 
 struct Font {
@@ -76,6 +79,7 @@ struct SegueIdentity {
     // MARK: Jump
     static let jumpToSignin = "jumpToSignin"
     static let jumpToUpload = "jumpToUpload"
+    static let mainToGreeting = "mainToGreeting"
     static let mainSellToDetail = "mainSellToDetail"
     static let mainBuyToDetail = "mainBuyToDetail"
     static let mainReviewToDetail = "mainReviewToDetail"
@@ -89,11 +93,14 @@ struct SegueIdentity {
     static let profileLikeToDetail = "profileLikeToDetail"
     static let profileListToDetail = "profileListToDetail"
     static let profileStoreToDetail = "profileStoreToDetail"
+    static let profileToSetting = "profileToSetting"
+    static let profileToPurchaseList = "profileToPurchaseList"
     static let feedToUpload = "feedToUpload"
     static let feedToProfile = "feedToProfile"
     static let feedToMain = "feedToMain"
     static let feedToSearchUsers = "feedToSearchUsers"
     static let feedToSearchPosts = "feedToSearchPosts"
+    static let feedToCart = "feedToCart"
     static let searchUsersToProfile = "searchUsersToProfile"
     static let searchUsersToMain = "searchUsersToMain"
     static let searchUsersToFeed = "searchUsersToFeed"
@@ -107,14 +114,33 @@ struct SegueIdentity {
     static let searchPostsToDetail = "searchPostsToDetail"
     static let replyToProfile = "replyToProfile"
     static let detailToReply = "detailToReply"
-    static let feedToReply = "feedToReply"
-    static let feedToDetail = "feedToDetail"
+    static let feedSellToReply = "feedSellToReply"
+    static let feedSellToDetail = "feedSellToDetail"
+    static let feedSellToProfile = "feedSellToProfile"
+    static let feedCommonToReply = "feedSCommonToReply"
+    static let feedCommonToDetail = "feedCommonToDetail"
+    static let feedCommonToProfile = "feedCommonToProfile"
     static let cartToDetail = "cartToDetail"
     static let cartToPurchase = "cartToPurchase"
     static let purchaseToDetail = "purchaseToDetail"
     static let purchaseToProfile = "purchaseToProfile"
     static let detailToCart = "detailToCart"
     static let messageToProfile = "messageToProfile"
+    static let mainToSubStore = "mainToSubStore"
+    static let subStoreToMain = "subStoreToMain"
+    static let subStoreToFeed = "subStoreToFeed"
+    static let subStoreToDetail = "subStoreToDetail"
+    static let subStoreToUpload = "subStoreToUpload"
+    static let subStoreToSignIn = "subStoreToSignIn"
+    static let subStoreToProfile = "subStoreToProfile"
+    static let subStoreToCart = "subStoreToCart"
+    static let subStoreToSearchUsers = "subStoreToSearchUsers"
+    static let subStoreToSearchPosts = "subStoreToSearchPosts"
+    static let storeToDetail = "storeToDetail"
+    static let storeToSubStore = "storeToSubStore"
+    static let settingToAddress = "settingToAddress"
+    static let settingToWebview = "settingToWebview"
+    static let settingToMain = "settingToMain"
     
     static let test = "test"
     
@@ -167,8 +193,10 @@ struct Exceptions {
     static let variableRequired = "VariableRequired"
 }
 
-struct HelpUrl {
-    static let communityRuleUrl = URL(string: "http://treasureisle.co/rules")!
+struct WebUrl {
+    static let termOfUseUrl = URL(string: "http://treasureisle.co")!
+    static let communityRuleUrl = URL(string: "http://treasureisle.co")!
+    static let helpUrl = URL(string: "http://treasureisle.co")!
 }
 
 struct MixpanelToken {

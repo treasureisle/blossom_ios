@@ -49,7 +49,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "basketViewCell", for: indexPath) as! BasketViewCell
-        let basket = getBasketWithIndexPath(indexPath: indexPath)
+        let basket = self.basket[indexPath.row]
         let profileGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CartViewController.imageTouched(sender:)))
         
         cell.thumbnailImageView.isUserInteractionEnabled = true
@@ -84,8 +84,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 var colorSizeAvailable = [String]()
                 
-                for i in (1..<basket.colorSize.available){
-                    colorSizeAvailable.append(String(i))
+                for i in (0..<basket.colorSize.available){
+                    colorSizeAvailable.append(String(i+1))
                 }
                 
                 cell.colorSizeAmountDownPicker = DownPicker(textField: cell.colorSizeAmountTextField, withData: colorSizeAvailable)
@@ -130,9 +130,10 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             if self.isChecked[i] {
                 let cellIndexPath = IndexPath(row: i, section: 0)
                 let cell = tableView.cellForRow(at: cellIndexPath) as! BasketViewCell
-                print("2 colorsize: \(cell.selectedColorSize.name)")
+                let newOrder = Order(post: self.basket[i].post, colorSize: cell.selectedColorSize!, amount: cell.selectedAmount)
+                print("item: \(newOrder.post.title)")
                 
-                order.append(Order(post: self.basket[i].post, colorSize: cell.selectedColorSize!, amount: cell.selectedAmount))
+                order.append(newOrder)
             }
         }
         performSegue(withIdentifier: SegueIdentity.cartToPurchase, sender: order)
@@ -145,15 +146,15 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func deleteReply(indexPath: IndexPath) {
-        let reply = getBasketWithIndexPath(indexPath: indexPath)
+    func deleteBasket(indexPath: IndexPath) {
+        let basket = self.basket[indexPath.row]
         
         // 삭제확인
         let alert = BlossomAlertController(message: "Do you want to delete your reply?")
         alert.addAction(action: BlossomAlertAction(title: "Cancel", style: .Positive, handler: nil))
         alert.addAction(action: BlossomAlertAction(title: "Yes", style: .Negative, handler: {
             action in
-            _ = BlossomRequest.request(method:.delete, endPoint: "\(Api.reply)/\(reply.id)") { (response, statusCode, json) -> () in
+            _ = BlossomRequest.request(method:.delete, endPoint: "\(Api.basket)/\(basket.id)") { (response, statusCode, json) -> () in
                 if statusCode == 200{
                     self.refreshBasket()
                 } else {
@@ -169,7 +170,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     func imageTouched(sender: UITapGestureRecognizer) {
         let tapLocation = sender.location(in: self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: tapLocation)
-        let basket = getBasketWithIndexPath(indexPath: indexPath!)
+        let basket = self.basket[indexPath!.row]
         
         self.performSegue(withIdentifier: SegueIdentity.cartToDetail, sender: basket.post.id)
     }
@@ -200,10 +201,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             self.hideIndicator()
         }
-    }
-    
-    func getBasketWithIndexPath(indexPath: IndexPath) -> Basket{
-        return basket[basket.count - 1 - indexPath.row]
     }
 }
 

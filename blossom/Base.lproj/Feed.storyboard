@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -33,6 +33,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17V-eS-JaX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="320" y="569"/>
+        </scene>
+        <!--CartViewController-->
+        <scene sceneID="pLm-qy-W2J">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Cart" referencedIdentifier="CartViewController" id="4MR-sf-aSU" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o6T-Yl-a3a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="546" y="428"/>
         </scene>
         <!--ReplyViewController-->
         <scene sceneID="8uc-3U-8Dd">
@@ -167,7 +175,6 @@
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="retryTouchedWithSender:" destination="vcn-B6-n0a" eventType="touchUpInside" id="Hkw-zc-9w7"/>
                                             <action selector="sellUploadTouchedWithSender:" destination="vcn-B6-n0a" eventType="touchUpInside" id="lkZ-uj-OMD"/>
                                         </connections>
                                     </button>
@@ -265,6 +272,7 @@
                         <segue destination="sna-qg-56o" kind="showDetail" identifier="feedToSearchPosts" id="O2h-Ww-0CL"/>
                         <segue destination="j8g-hM-Z94" kind="presentation" identifier="feedToSearchUsers" id="FVP-po-U9o"/>
                         <segue destination="ppP-4Y-7I8" kind="showDetail" identifier="feedToReply" id="0Cs-H2-QD3"/>
+                        <segue destination="4MR-sf-aSU" kind="showDetail" identifier="feedToCart" id="VJD-V8-Oeh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VfP-hS-NSb" sceneMemberID="firstResponder"/>

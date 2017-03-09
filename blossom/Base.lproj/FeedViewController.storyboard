@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -81,25 +81,16 @@
                                             <rect key="frame" x="120" y="395" width="50" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="feed_like"/>
-                                            <connections>
-                                                <action selector="likeTouched" destination="lU4-J3-lmG" eventType="touchUpInside" id="fVc-7m-ncb"/>
-                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80p-ri-fl0">
                                             <rect key="frame" x="190" y="395" width="50" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button" image="feed_reply"/>
-                                            <connections>
-                                                <action selector="replyTouched" destination="lU4-J3-lmG" eventType="touchUpInside" id="Kbe-P8-qhR"/>
-                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f89-XE-6xF">
                                             <rect key="frame" x="250" y="395" width="50" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="feed_share"/>
-                                            <connections>
-                                                <action selector="shareTouched" destination="lU4-J3-lmG" eventType="touchUpInside" id="S65-lV-58A"/>
-                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cje-GW-IV7">
                                             <rect key="frame" x="32" y="430" width="76" height="30"/>
@@ -141,21 +132,22 @@
                                             <rect key="frame" x="60" y="395" width="50" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="feed_cart"/>
-                                            <connections>
-                                                <action selector="purchaseTouched" destination="lU4-J3-lmG" eventType="touchUpInside" id="n8a-aa-aIo"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <outlet property="cartButton" destination="hT7-in-dpw" id="hOG-H1-1Vw"/>
                                     <outlet property="imageCollectionView" destination="0pA-wn-l6O" id="KD5-Ap-xKG"/>
+                                    <outlet property="likeButton" destination="g42-dh-GvN" id="zAn-68-yOP"/>
                                     <outlet property="likeLabel" destination="Cje-GW-IV7" id="EF4-3L-hlr"/>
                                     <outlet property="productDescriptionLabel" destination="IQD-UQ-iT6" id="LWJ-og-P3W"/>
                                     <outlet property="productPriceLabel" destination="eyw-DD-IAX" id="Tbf-LG-32N"/>
                                     <outlet property="profileNicknameLabel" destination="QOQ-H9-1aH" id="sZh-2q-s9j"/>
                                     <outlet property="profileThumbnailImageView" destination="QuG-9y-flN" id="Qch-fD-ET8"/>
+                                    <outlet property="replyButton" destination="80p-ri-fl0" id="uT8-h7-Wnt"/>
                                     <outlet property="replyLabel" destination="vsS-nb-dfe" id="apW-3X-6Og"/>
+                                    <outlet property="shareButton" destination="f89-XE-6xF" id="lM9-i7-Q0X"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -164,6 +156,11 @@
                             <outlet property="delegate" destination="vSb-bS-QQO" id="haU-zi-ZW3"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <segue destination="2x2-Na-h8A" kind="presentation" identifier="feedSellToDetail" id="9rN-Oi-ve3"/>
+                        <segue destination="r1f-Co-xeg" kind="presentation" identifier="feedSellToReply" id="zLh-Ub-ank"/>
+                        <segue destination="sYE-9G-ohN" kind="presentation" identifier="feedSellToProfile" id="rYa-Lq-TE0"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KvX-ac-u4t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -241,25 +238,16 @@
                                             <rect key="frame" x="60" y="395" width="50" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button" image="feed_cart"/>
-                                            <connections>
-                                                <action selector="purchaseTouched" destination="d0m-vk-0Z8" eventType="touchUpInside" id="zEf-ew-GK5"/>
-                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gc4-Cf-MaP">
                                             <rect key="frame" x="120" y="395" width="50" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button" image="feed_like"/>
-                                            <connections>
-                                                <action selector="likeTouched" destination="d0m-vk-0Z8" eventType="touchUpInside" id="PxV-09-kry"/>
-                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sd4-P2-ZIN">
                                             <rect key="frame" x="190" y="395" width="50" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button" image="feed_reply"/>
-                                            <connections>
-                                                <action selector="replyTouched" destination="d0m-vk-0Z8" eventType="touchUpInside" id="gzy-3d-23T"/>
-                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBL-j4-ohI">
                                             <rect key="frame" x="32" y="430" width="76" height="30"/>
@@ -301,21 +289,22 @@
                                             <rect key="frame" x="250" y="395" width="50" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button" image="feed_share"/>
-                                            <connections>
-                                                <action selector="shareTouched" destination="d0m-vk-0Z8" eventType="touchUpInside" id="sR9-Xs-Yr7"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <outlet property="cartButton" destination="LdY-2x-0X9" id="eFu-mY-iiB"/>
                                     <outlet property="imageCollectionView" destination="BBK-TB-Cnh" id="DLl-Cl-4ZD"/>
+                                    <outlet property="likeButton" destination="gc4-Cf-MaP" id="kYj-1h-Po4"/>
                                     <outlet property="likeLabel" destination="sBL-j4-ohI" id="UNd-Hu-aHA"/>
                                     <outlet property="productDescriptionLabel" destination="7S1-Gl-gGU" id="KdI-f1-BlS"/>
                                     <outlet property="productPriceLabel" destination="wb0-tW-ADt" id="ai4-Ff-KZ3"/>
                                     <outlet property="profileNicknameLabel" destination="gJD-bh-uit" id="peg-Kz-zsm"/>
                                     <outlet property="profileThumbnailImageView" destination="2dJ-8Q-2mO" id="6BB-Af-7iO"/>
+                                    <outlet property="replyButton" destination="Sd4-P2-ZIN" id="UIw-AB-vSi"/>
                                     <outlet property="replyLabel" destination="Ssk-tD-2i6" id="APp-zB-lqY"/>
+                                    <outlet property="shareButton" destination="pW8-8F-u64" id="BGi-Rz-l03"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -324,6 +313,11 @@
                             <outlet property="delegate" destination="KbN-tj-HPX" id="vzl-Jw-qAB"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <segue destination="2x2-Na-h8A" kind="presentation" identifier="feedCommonToDetail" id="FPg-Rf-Sxd"/>
+                        <segue destination="r1f-Co-xeg" kind="presentation" identifier="feedCommonToReply" id="oPP-xY-H5t"/>
+                        <segue destination="sYE-9G-ohN" kind="presentation" identifier="feedCommonToProfile" id="Wce-w4-za6"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SS5-a0-Q6f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -345,6 +339,14 @@
             </objects>
             <point key="canvasLocation" x="670" y="516"/>
         </scene>
+        <!--ProfileViewController-->
+        <scene sceneID="EGM-as-BSN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileViewController" id="sYE-9G-ohN" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ao9-p5-NfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="471" y="588"/>
+        </scene>
     </scenes>
     <resources>
         <image name="feed_cart" width="112" height="72"/>
@@ -352,4 +354,9 @@
         <image name="feed_reply" width="112" height="72"/>
         <image name="feed_share" width="111" height="72"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="oPP-xY-H5t"/>
+        <segue reference="FPg-Rf-Sxd"/>
+        <segue reference="rYa-Lq-TE0"/>
+    </inferredMetricsTieBreakers>
 </document>

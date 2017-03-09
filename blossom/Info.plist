@@ -44,6 +44,21 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>cafe.naver.com</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+			<key>www.shobit.co.kr</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+			<key>www.treasureisle.co</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>www.juso.go.kr</key>
 			<dict>
 				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>

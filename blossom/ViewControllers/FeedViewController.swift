@@ -112,6 +112,10 @@ class FeedViewController: UIViewController {
         self.uploadSellButton.isEnabled = false
         self.uploadBuyButton.isEnabled = false
         self.uploadReviewButton.isEnabled = false
+        self.viewSearchMenu.isHidden = true
+        self.searchTitleButton.isEnabled = false
+        self.searchHashtagButton.isEnabled = false
+        self.searchUsernameButton.isEnabled = false
     }
     
     @IBAction func uploadTouched(sender: UIButton) {
@@ -126,7 +130,7 @@ class FeedViewController: UIViewController {
     }
     
     @IBAction func cartTouched(sender: UIButton) {
-        
+        performSegue(withIdentifier: SegueIdentity.feedToCart, sender: self)
     }
     
     @IBAction func profileTouched(sender: UIButton) {

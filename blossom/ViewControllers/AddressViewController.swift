@@ -36,10 +36,28 @@ class AddressViewController: UIViewController, UINavigationControllerDelegate, U
     var userId: Int = 0
     var me: Session?
     var activeTF: UITextField?
+    var userDetail: UserDetail?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         me = Session.load()
+        
+        _ = BlossomRequest.request(method: .get, endPoint: "\(Api.userDetail)/\(userId)") { (response, statusCode, json) -> () in
+            if statusCode == 200{
+                let user = UserDetail(o:json["user_detail"])
+                self.profileImageView.af_setImage(withURL: URL(string: user.profileThumbUrl)!)
+                self.nameTextField.text = user.name
+                if user.zipcode == 0 {
+                    self.zipCodeTextField.text = ""
+                } else {
+                    self.zipCodeTextField.text = String(user.zipcode)
+                }
+                self.addressTextField.text = user.address1
+                self.addressDetailTextField.text = user.address2
+                self.phoneTextField.text = user.phone
+            }
+        }
+
         
         imagePicker.delegate = self
         imagePicker.allowsEditing = true

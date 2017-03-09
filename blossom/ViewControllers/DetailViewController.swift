@@ -15,13 +15,14 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
     @IBOutlet weak var writerProfileImageView: UIImageView!
     @IBOutlet weak var writerProfileNameLabel: UILabel!
     @IBOutlet weak var writerProfileDetail: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var brandLabel: UILabel!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var colorSizeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var hashtagLabel: UILabel!
-    @IBOutlet weak var detailTextView: UITextView!
+    @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var imageCollectionView: UICollectionView!
     @IBOutlet weak var purchaseView: UIView!
     @IBOutlet weak var purchaseTitleLabel: UILabel!
@@ -65,7 +66,28 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     @IBAction func likeTouched() {
-        
+        if self.post!.isLiked {
+            _ = BlossomRequest.request(method: .delete, endPoint: "\(Api.like)/\(self.postId)") { (response, statusCode, json) -> () in
+                if statusCode == 200{
+                    self.post!.isLiked = false
+                    self.post!.likes -= 1
+                    self.likeLabel.text = String(self.post!.likes)
+                } else if statusCode == 404 {
+                    self.post!.isLiked = false
+                    
+                }
+            }
+        } else {
+            _ = BlossomRequest.request(method: .post, endPoint: "\(Api.like)/\(self.postId)") { (response, statusCode, json) -> () in
+                if statusCode == 200{
+                    self.post!.isLiked = true
+                    self.post!.likes += 1
+                    self.likeLabel.text = String(self.post!.likes)
+                } else if statusCode == 409 {
+                    self.post!.isLiked = true
+                }
+            }
+        }
     }
     
     @IBAction func replyTouched() {
@@ -148,13 +170,15 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
                 self.writerProfileImageView?.af_setImage(withURL: URL(string:postDetail.user.profileThumbUrl)!)
                 self.writerProfileNameLabel?.text = postDetail.user.username
                 self.writerProfileDetail?.text = postDetail.user.introduce
+                self.titleLabel?.text = "\(NSLocalizedString("TITLE", comment: "")): \(postDetail.title)"
                 self.brandLabel?.text = "\(NSLocalizedString("BRAND", comment: "")): \(postDetail.brand)"
                 self.productNameLabel?.text = "\(NSLocalizedString("PRODUCT_NAME", comment: "")): \(postDetail.productName)"
                 self.priceLabel?.text = "\(NSLocalizedString("PRICE", comment: "")): \(postDetail.purchasePrice)+\(postDetail.fee)"
                 self.locationLabel?.text = "\(NSLocalizedString("REGION", comment: "")): \(postDetail.region)"
-                self.detailTextView?.text = postDetail.text
+                self.detailLabel?.text = postDetail.text
+                self.detailLabel?.sizeToFit()
                 self.likeLabel?.text = String(postDetail.likes)
-                self.replyLabel?.text = String(postDetail.replys)
+                self.replyLabel?.text = String(postDetail.replies)
                 self.purchaseTitleLabel?.text = postDetail.productName
                 
                 Alamofire.request((self.post?.imgUrl1)!).responseImage {
@@ -213,7 +237,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
                     self.colorSizes.append(tempColorSize)
                     self.colorSizeNames.append(tempColorSize.name)
                     self.colorSizeAmounts.append(String(tempColorSize.available))
-                    colorSizeLabelText = "\(colorSizeLabelText)\n\(tempColorSize.name)  \(tempColorSize.available)"
+                    colorSizeLabelText = "\(colorSizeLabelText)\n  \(tempColorSize.name) - \(tempColorSize.available)"
                 }
                 self.colorSizeLabel.text = colorSizeLabelText
                 self.colorSizeLabel.sizeToFit()
@@ -231,8 +255,10 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
                 
                 for hashtag in hashtags {
                     let tempHashtag = Hashtag(o: hashtag)
-                    self.hashtags.append(tempHashtag)
-                    hashtagLabelText = "\(hashtagLabelText)#\(tempHashtag.name) "
+                    if tempHashtag.hidden == 0 {
+                        self.hashtags.append(tempHashtag)
+                        hashtagLabelText = "\(hashtagLabelText)#\(tempHashtag.name) "
+                    }
                 }
                 self.hashtagLabel.text = hashtagLabelText
                 self.hashtagLabel.sizeToFit()
@@ -275,7 +301,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
             if colorSize.name == selectedValue {
                 print("selectied: \(colorSize.name)")
                 for i in (0..<colorSize.available){
-                    self.colorSizeAmounts.append(String(i))
+                    self.colorSizeAmounts.append(String(i+1))
                 }
                 break
             }

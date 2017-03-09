@@ -72,7 +72,8 @@ extension BlossomRequest {
                 case .success(_):
                     break
                 }
-        }    }
+        }
+    }
     
     static func upload(_ method: Alamofire.HTTPMethod, urlString: String, multipartFormData: @escaping (Alamofire.MultipartFormData)->(), completionHandler: @escaping
         (_ response: Alamofire.DataResponse<Any>, _ statusCode:Int, _ json:JSON) -> ()){

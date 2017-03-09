@@ -49,6 +49,15 @@ class ProfileViewController: UIViewController {
         self.follow()
     }
     
+    @IBAction func purchaseListTouched(){
+        performSegue(withIdentifier: SegueIdentity.profileToPurchaseList, sender: self)
+    }
+    
+    @IBAction func settingTouched(){
+        performSegue(withIdentifier: SegueIdentity.profileToSetting, sender: self)
+        
+    }
+    
     func fetchProfile() {
         _ = BlossomRequest.request(method: .get, endPoint: "\(Api.users)/\(self.userId!)") { (response, statusCode, json) -> () in
             if statusCode == 200{
@@ -110,7 +119,6 @@ class ProfileViewController: UIViewController {
                         self.labelFollowing?.text = "following:\(String(self.followings.count))"
                     }
                 }
-                
             }
         }
     }
@@ -122,6 +130,8 @@ class ProfileViewController: UIViewController {
                     self.isFollowing = false
                     self.buttonFollow?.setTitle("Follow", for: .normal)
                     self.fetchProfile()
+                } else {
+                    print("status \(statusCode)")
                 }
             }
         } else {
@@ -130,6 +140,8 @@ class ProfileViewController: UIViewController {
                     self.isFollowing = true
                     self.buttonFollow?.setTitle("Unfollow", for: .normal)
                     self.fetchProfile()
+                } else {
+                    print("status \(statusCode)")
                 }
             }
         }

@@ -41,9 +41,12 @@ let log: XCGLogger = {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var initStoryboard: UIStoryboard?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        initStoryboard = self.window!.rootViewController!.storyboard
         // Override point for customization after application launch.
         return true
     }
@@ -70,6 +73,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func resetWindowToInitView() {
+        for view in self.window!.subviews{
+            view.removeFromSuperview()
+        }
+        
+        let initViewController = initStoryboard!.instantiateInitialViewController()
+        self.window!.rootViewController = initViewController
+    }
 
 }
 

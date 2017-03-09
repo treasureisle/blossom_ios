@@ -27,7 +27,7 @@ class Post{
     var region: String
     var hashtag: String
     var text: String
-    var replys: Int
+    var replies: Int
     var likes: Int
     var isLiked: Bool
     
@@ -106,10 +106,10 @@ class Post{
         
         self.text = o["text"].string!
         
-        if let replys = o["replys"].int {
-            self.replys = replys
+        if let replies = o["replies"].int {
+            self.replies = replies
         }else{
-            fatalError("\(o["replys"].error)")
+            fatalError("\(o["replies"].error)")
         }
         
         if let likes = o["likes"].int {

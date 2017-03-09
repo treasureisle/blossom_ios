@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -43,6 +43,9 @@
                                                         <navigationItem title="구매목록" id="y2l-u7-3cJ">
                                                             <barButtonItem key="leftBarButtonItem" title="&lt;" id="DxR-I3-4sz">
                                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <connections>
+                                                                    <action selector="cancleTouched" destination="MRS-at-QeE" id="xM3-hq-4iR"/>
+                                                                </connections>
                                                             </barButtonItem>
                                                         </navigationItem>
                                                     </items>
@@ -177,42 +180,21 @@
                                     <constraint firstItem="sgl-9E-O1v" firstAttribute="centerY" secondItem="pG4-H7-Lb2" secondAttribute="centerY" id="zaI-jU-XUp"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8f-VK-bSk">
-                                <rect key="frame" x="0.0" y="609" width="376" height="58"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add a comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0WP-TV-i2x">
-                                        <rect key="frame" x="21" y="0.0" width="334" height="58"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="tintColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" red="0.99607843139999996" green="0.99607843139999996" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="0WP-TV-i2x" firstAttribute="height" secondItem="o8f-VK-bSk" secondAttribute="height" id="1GT-AT-n1H"/>
-                                    <constraint firstItem="0WP-TV-i2x" firstAttribute="centerY" secondItem="o8f-VK-bSk" secondAttribute="centerY" id="5un-0y-oOH"/>
-                                    <constraint firstItem="0WP-TV-i2x" firstAttribute="centerX" secondItem="o8f-VK-bSk" secondAttribute="centerX" id="QIe-bI-knv"/>
-                                    <constraint firstItem="0WP-TV-i2x" firstAttribute="width" secondItem="o8f-VK-bSk" secondAttribute="width" constant="-40" id="fIH-Fe-vNo"/>
-                                    <constraint firstAttribute="height" constant="58" id="jgF-Xl-cJi"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="pG4-H7-Lb2" firstAttribute="width" secondItem="Olm-1e-vKe" secondAttribute="width" id="021-Bc-9X0"/>
                             <constraint firstItem="pG4-H7-Lb2" firstAttribute="centerY" secondItem="Olm-1e-vKe" secondAttribute="centerY" id="1CV-Ib-tIa"/>
                             <constraint firstAttribute="trailing" secondItem="pG4-H7-Lb2" secondAttribute="trailing" id="3aT-Qx-cQK"/>
                             <constraint firstItem="pG4-H7-Lb2" firstAttribute="leading" secondItem="Olm-1e-vKe" secondAttribute="leading" id="6tt-Ab-bKE"/>
-                            <constraint firstItem="o8f-VK-bSk" firstAttribute="width" secondItem="Olm-1e-vKe" secondAttribute="width" constant="1" id="JVK-dN-5uu"/>
                             <constraint firstItem="pG4-H7-Lb2" firstAttribute="top" secondItem="Olm-1e-vKe" secondAttribute="top" id="KWS-9W-REF"/>
-                            <constraint firstItem="o8f-VK-bSk" firstAttribute="centerX" secondItem="Olm-1e-vKe" secondAttribute="centerX" id="adu-Le-87S"/>
                             <constraint firstItem="pG4-H7-Lb2" firstAttribute="centerY" secondItem="Olm-1e-vKe" secondAttribute="centerY" id="rgz-8g-hdO"/>
-                            <constraint firstItem="o8f-VK-bSk" firstAttribute="top" secondItem="0Xx-y5-pz7" secondAttribute="bottom" id="yKk-E3-DDY"/>
                             <constraint firstItem="pG4-H7-Lb2" firstAttribute="centerX" secondItem="Olm-1e-vKe" secondAttribute="centerX" id="zis-Z1-Ejt"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="0Xx-y5-pz7" id="8cK-eO-o4J"/>
+                        <outlet property="topNavigationBar" destination="ohG-ah-Akv" id="IXv-sy-q5O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QY2-Fv-481" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -85,6 +85,9 @@ extension Category {
         let pref = UserDefaults.standard
         
         let myCategoryId = pref.object(forKey: PrefKey.myCategoryId)
+        if myCategoryId == nil {
+            return 0
+        }
         
         return myCategoryId as! Int
     }

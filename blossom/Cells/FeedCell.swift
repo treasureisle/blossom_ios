@@ -18,14 +18,18 @@ class FeedCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionVi
     @IBOutlet weak var imageCollectionView: UICollectionView!
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var replyLabel: UILabel!
-    
+    @IBOutlet weak var cartButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+
     var post: Post?
     var img1: Image?
     var img2: Image?
     var img3: Image?
     var img4: Image?
     var img5: Image?
-    
+
     func initCell(post: Post){
         self.post = post
         
@@ -43,7 +47,7 @@ class FeedCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionVi
         self.profileThumbnailImageView.image = nil
         self.profileThumbnailImageView.af_setImage(withURL: URL(string: self.post!.user.profileThumbUrl)!)
         self.likeLabel.text = String(self.post!.likes)
-        self.replyLabel.text = String(self.post!.replys)
+        self.replyLabel.text = String(self.post!.replies)
         
         Alamofire.request((self.post?.imgUrl1)!).responseImage {
             response in
@@ -108,9 +112,6 @@ class FeedCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.imagePreviewCell, for: indexPath) as! ImagePreviewCell
         
-        print("postId: \(self.post!.id)")
-        print("indexPath: \(indexPath.row)")
-        
         var imageUrl: String!
         
         if indexPath.row == 0 { imageUrl = self.post!.imgUrl1 }
@@ -124,8 +125,7 @@ class FeedCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("postId: \(self.post!.id)")
-        //performSegue(withIdentifier: SegueIdentity.profileLikeToDetail, sender: self)
+
     }
     
     override func prepareForReuse() {

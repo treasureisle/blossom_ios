@@ -7,9 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE0C69EA1E6D078900F21E2A /* SubStore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE0C69E81E6D078900F21E2A /* SubStore.storyboard */; };
+		FE0C69EC1E6D0CC700F21E2A /* SubStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0C69EB1E6D0CC700F21E2A /* SubStoreViewController.swift */; };
+		FE0C69EF1E6E83A800F21E2A /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE0C69ED1E6E83A800F21E2A /* Setting.storyboard */; };
+		FE0C69F11E6E83C300F21E2A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0C69F01E6E83C300F21E2A /* SettingViewController.swift */; };
+		FE0C69F41E6EAD2A00F21E2A /* Webview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE0C69F21E6EAD2A00F21E2A /* Webview.storyboard */; };
+		FE0C69F61E6EB1CE00F21E2A /* WebviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0C69F51E6EB1CE00F21E2A /* WebviewViewController.swift */; };
 		FE1BBFAC1E319BCE00A09ED3 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1BBFAB1E319BCE00A09ED3 /* AddressViewController.swift */; };
 		FE1BBFAF1E319BF300A09ED3 /* Address.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE1BBFAD1E319BF300A09ED3 /* Address.storyboard */; };
 		FE1BBFB11E31EBD800A09ED3 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1BBFB01E31EBD800A09ED3 /* Address.swift */; };
+		FE1D7E661E5EF9850004B85B /* BlossomTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D7E651E5EF9850004B85B /* BlossomTapGestureRecognizer.swift */; };
+		FE1D7E681E5F0FF70004B85B /* UserDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D7E671E5F0FF70004B85B /* UserDetail.swift */; };
 		FE20F3D51DD0DAA400A7BC20 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE20F3D41DD0DAA400A7BC20 /* MainCell.swift */; };
 		FE20F3DD1DD0E17900A7BC20 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE20F3DC1DD0E17900A7BC20 /* Post.swift */; };
 		FE20F3E11DD0E38200A7BC20 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE20F3E01DD0E38200A7BC20 /* User.swift */; };
@@ -70,6 +78,9 @@
 		FE65E0C41E07DC2C009A2C01 /* SearchUsersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE65E0C31E07DC2C009A2C01 /* SearchUsersCell.swift */; };
 		FE67108D1DEBF3010043DEF3 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE67108B1DEBF3010043DEF3 /* Detail.storyboard */; };
 		FE67108F1DEBFB2B0043DEF3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE67108E1DEBFB2B0043DEF3 /* DetailViewController.swift */; };
+		FE6BF0481E6414C7002B4285 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6BF0471E6414C7002B4285 /* Store.swift */; };
+		FE6BF04A1E64649E002B4285 /* StoreBannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6BF0491E64649E002B4285 /* StoreBannerCell.swift */; };
+		FE6BF04C1E647490002B4285 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6BF04B1E647490002B4285 /* Event.swift */; };
 		FE754B501DF9B2CE00158642 /* DownPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FE754B4D1DF9B2CE00158642 /* DownPicker.m */; };
 		FE754B511DF9B2CE00158642 /* UIDownPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FE754B4F1DF9B2CE00158642 /* UIDownPicker.m */; };
 		FE754B541DFA82DD00158642 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE754B521DFA82DD00158642 /* Profile.storyboard */; };
@@ -129,9 +140,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FE0C69E91E6D078900F21E2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SubStore.storyboard; sourceTree = "<group>"; };
+		FE0C69EB1E6D0CC700F21E2A /* SubStoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubStoreViewController.swift; path = blossom/ViewControllers/SubStoreViewController.swift; sourceTree = "<group>"; };
+		FE0C69EE1E6E83A800F21E2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = blossom/Base.lproj/Setting.storyboard; sourceTree = "<group>"; };
+		FE0C69F01E6E83C300F21E2A /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = blossom/ViewControllers/SettingViewController.swift; sourceTree = "<group>"; };
+		FE0C69F31E6EAD2A00F21E2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Webview.storyboard; sourceTree = "<group>"; };
+		FE0C69F51E6EB1CE00F21E2A /* WebviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebviewViewController.swift; path = blossom/ViewControllers/WebviewViewController.swift; sourceTree = "<group>"; };
 		FE1BBFAB1E319BCE00A09ED3 /* AddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddressViewController.swift; path = blossom/ViewControllers/AddressViewController.swift; sourceTree = "<group>"; };
 		FE1BBFAE1E319BF300A09ED3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Address.storyboard; sourceTree = "<group>"; };
 		FE1BBFB01E31EBD800A09ED3 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Address.swift; path = Models/Address.swift; sourceTree = "<group>"; };
+		FE1D7E651E5EF9850004B85B /* BlossomTapGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlossomTapGestureRecognizer.swift; sourceTree = "<group>"; };
+		FE1D7E671E5F0FF70004B85B /* UserDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDetail.swift; path = Models/UserDetail.swift; sourceTree = "<group>"; };
 		FE20F3D41DD0DAA400A7BC20 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainCell.swift; path = Cells/MainCell.swift; sourceTree = "<group>"; };
 		FE20F3DC1DD0E17900A7BC20 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = Models/Post.swift; sourceTree = "<group>"; };
 		FE20F3E01DD0E38200A7BC20 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
@@ -199,6 +218,9 @@
 		FE65E0C31E07DC2C009A2C01 /* SearchUsersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersCell.swift; sourceTree = "<group>"; };
 		FE67108C1DEBF3010043DEF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Detail.storyboard; sourceTree = "<group>"; };
 		FE67108E1DEBFB2B0043DEF3 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = blossom/ViewControllers/DetailViewController.swift; sourceTree = "<group>"; };
+		FE6BF0471E6414C7002B4285 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Store.swift; path = Models/Store.swift; sourceTree = "<group>"; };
+		FE6BF0491E64649E002B4285 /* StoreBannerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoreBannerCell.swift; path = Cells/StoreBannerCell.swift; sourceTree = "<group>"; };
+		FE6BF04B1E647490002B4285 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Models/Event.swift; sourceTree = "<group>"; };
 		FE754B4C1DF9B2CE00158642 /* DownPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownPicker.h; sourceTree = "<group>"; };
 		FE754B4D1DF9B2CE00158642 /* DownPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownPicker.m; sourceTree = "<group>"; };
 		FE754B4E1DF9B2CE00158642 /* UIDownPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDownPicker.h; sourceTree = "<group>"; };
@@ -288,6 +310,7 @@
 				FE4705221E23365400A4E28D /* PurchaseListViewCell.swift */,
 				FE4705241E23366700A4E28D /* BasketViewCell.swift */,
 				FE63115B1E26437D00701F04 /* PurchaseViewCell.swift */,
+				FE6BF0491E64649E002B4285 /* StoreBannerCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -344,6 +367,9 @@
 				FE25CD7A1E16173B0087EC8C /* Message.storyboard */,
 				FE1BBFAD1E319BF300A09ED3 /* Address.storyboard */,
 				FE228A711E4C5934002C1EFB /* Greeting.storyboard */,
+				FE0C69E81E6D078900F21E2A /* SubStore.storyboard */,
+				FE0C69ED1E6E83A800F21E2A /* Setting.storyboard */,
+				FE0C69F21E6EAD2A00F21E2A /* Webview.storyboard */,
 				FE231E331DAFA4E200E79CF0 /* Info.plist */,
 				FE231E581DB0A72600E79CF0 /* SwiftEventBus.swift */,
 				FE231E5A1DB0A75C00E79CF0 /* GlobalFuncs.swift */,
@@ -351,6 +377,7 @@
 				FE4DDEA91DB5A89700A4D11D /* Constants.swift */,
 				FE4DDEAB1DB71CE600A4D11D /* blossom-Bridging-Header.h */,
 				FE7E1C0F1DD4700500B38E3C /* KeyboardObserver.swift */,
+				FE1D7E651E5EF9850004B85B /* BlossomTapGestureRecognizer.swift */,
 			);
 			path = blossom;
 			sourceTree = "<group>";
@@ -403,6 +430,9 @@
 				FE63115D1E2648EF00701F04 /* PurchaseViewController.swift */,
 				FE1BBFAB1E319BCE00A09ED3 /* AddressViewController.swift */,
 				FE228A741E4C984F002C1EFB /* GreetingViewController.swift */,
+				FE0C69EB1E6D0CC700F21E2A /* SubStoreViewController.swift */,
+				FE0C69F01E6E83C300F21E2A /* SettingViewController.swift */,
+				FE0C69F51E6EB1CE00F21E2A /* WebviewViewController.swift */,
 			);
 			name = ViewControllers;
 			path = ..;
@@ -447,6 +477,9 @@
 				FE63115F1E264FC100701F04 /* Order.swift */,
 				FE1BBFB01E31EBD800A09ED3 /* Address.swift */,
 				FEACA9891E4173CD008B6594 /* Category.swift */,
+				FE1D7E671E5F0FF70004B85B /* UserDetail.swift */,
+				FE6BF0471E6414C7002B4285 /* Store.swift */,
+				FE6BF04B1E647490002B4285 /* Event.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -598,12 +631,15 @@
 				FE5AFB7D1DC08628001A5D2E /* Main.storyboard in Resources */,
 				FEF1F7AD1E02355400113D37 /* FeedViewController.storyboard in Resources */,
 				FE754B5C1DFAC98900158642 /* ProfileViewController.storyboard in Resources */,
+				FE0C69EF1E6E83A800F21E2A /* Setting.storyboard in Resources */,
 				FE67108D1DEBF3010043DEF3 /* Detail.storyboard in Resources */,
 				FE63115A1E26424800701F04 /* Purchase.storyboard in Resources */,
 				FE231E321DAFA4E200E79CF0 /* LaunchScreen.storyboard in Resources */,
 				FE9C937B1E09B206003EF188 /* Reply.storyboard in Resources */,
 				FE7E1C221DE566AF00B38E3C /* Upload.storyboard in Resources */,
+				FE0C69EA1E6D078900F21E2A /* SubStore.storyboard in Resources */,
 				FE1BBFAF1E319BF300A09ED3 /* Address.storyboard in Resources */,
+				FE0C69F41E6EAD2A00F21E2A /* Webview.storyboard in Resources */,
 				FE228A731E4C5934002C1EFB /* Greeting.storyboard in Resources */,
 				FE754B571DFA832200158642 /* SignIn.storyboard in Resources */,
 				FE754B541DFA82DD00158642 /* Profile.storyboard in Resources */,
@@ -661,12 +697,16 @@
 				FE754B601DFE4E3400158642 /* ProfileListViewController.swift in Sources */,
 				FE9C937D1E09B878003EF188 /* ReplyViewCell.swift in Sources */,
 				FE58CC511DE5F36100F30547 /* UploadViewController.swift in Sources */,
+				FE6BF04A1E64649E002B4285 /* StoreBannerCell.swift in Sources */,
 				FE754B501DF9B2CE00158642 /* DownPicker.m in Sources */,
 				FE20F3DD1DD0E17900A7BC20 /* Post.swift in Sources */,
 				FE25CD6F1E1615690087EC8C /* CartViewController.swift in Sources */,
+				FE0C69EC1E6D0CC700F21E2A /* SubStoreViewController.swift in Sources */,
 				FECBB03D1DF57812004A91E0 /* Hashtag.swift in Sources */,
 				FE47051F1E232DCC00A4E28D /* Basket.swift in Sources */,
+				FE0C69F11E6E83C300F21E2A /* SettingViewController.swift in Sources */,
 				FE4DDE9F1DB5A18B00A4D11D /* Session.swift in Sources */,
+				FE1D7E661E5EF9850004B85B /* BlossomTapGestureRecognizer.swift in Sources */,
 				FE65E0BA1E07CCA0009A2C01 /* SearchPostsViewController.swift in Sources */,
 				FE4DDEA61DB5A23500A4D11D /* UITextField.swift in Sources */,
 				FE4DDEA81DB5A40100A4D11D /* UIView.swift in Sources */,
@@ -700,6 +740,8 @@
 				FE25CD711E1615BC0087EC8C /* MessageViewController.swift in Sources */,
 				FE63115C1E26437D00701F04 /* PurchaseViewCell.swift in Sources */,
 				FE7E1C1D1DDF677500B38E3C /* UIImageView.swift in Sources */,
+				FE6BF0481E6414C7002B4285 /* Store.swift in Sources */,
+				FE6BF04C1E647490002B4285 /* Event.swift in Sources */,
 				FE754B511DF9B2CE00158642 /* UIDownPicker.m in Sources */,
 				FE4DDEA41DB5A21400A4D11D /* String.swift in Sources */,
 				FE1BBFB11E31EBD800A09ED3 /* Address.swift in Sources */,
@@ -716,9 +758,11 @@
 				FE231E5F1DB0A8E000E79CF0 /* BlossomRequest.swift in Sources */,
 				FE7E1C101DD4700500B38E3C /* KeyboardObserver.swift in Sources */,
 				FE4DDEA21DB5A1F300A4D11D /* UIColor.swift in Sources */,
+				FE1D7E681E5F0FF70004B85B /* UserDetail.swift in Sources */,
 				FE25CD731E1615F30087EC8C /* PurchaseListViewController.swift in Sources */,
 				FE754B5E1DFE4E2100158642 /* ProfileLikeViewController.swift in Sources */,
 				FE2A21A81DC2F6E1000B73AA /* BuyViewController.swift in Sources */,
+				FE0C69F61E6EB1CE00F21E2A /* WebviewViewController.swift in Sources */,
 				FE7E1C121DDB815000B38E3C /* LoginAlertController.swift in Sources */,
 				FE20F3E11DD0E38200A7BC20 /* User.swift in Sources */,
 				FE231E591DB0A72600E79CF0 /* SwiftEventBus.swift in Sources */,
@@ -761,6 +805,31 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		FE0C69E81E6D078900F21E2A /* SubStore.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE0C69E91E6D078900F21E2A /* Base */,
+			);
+			name = SubStore.storyboard;
+			sourceTree = "<group>";
+		};
+		FE0C69ED1E6E83A800F21E2A /* Setting.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE0C69EE1E6E83A800F21E2A /* Base */,
+			);
+			name = Setting.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		FE0C69F21E6EAD2A00F21E2A /* Webview.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE0C69F31E6EAD2A00F21E2A /* Base */,
+			);
+			name = Webview.storyboard;
+			sourceTree = "<group>";
+		};
 		FE1BBFAD1E319BF300A09ED3 /* Address.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1016,7 +1085,7 @@
 		FE231E4D1DAFA4E200E79CF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				API_URL = "http://192.168.35.199:5000";
+				API_URL = "http://www.treasureisle.co:5000";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 659EECCQH7;
 				FRAMEWORK_SEARCH_PATHS = (

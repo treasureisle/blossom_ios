@@ -1,16 +1,16 @@
 //
-//  LaunchViewController.swift
+//  SubStoreViewController.swift
 //  blossom
 //
-//  Created by Seong Phil on 2016. 10. 14..
-//  Copyright © 2016년 treasureisle. All rights reserved.
+//  Created by Seong Phil on 2017. 3. 6..
+//  Copyright © 2017년 treasureisle. All rights reserved.
 //
 
 import UIKit
 import PagingMenuController
 import Mixpanel
 
-class MainViewController: UIViewController {
+class SubStoreViewController: UIViewController {
     
     @IBOutlet weak var viewUploadMenu: UIView!
     @IBOutlet weak var viewSearchMenu: UIView!
@@ -21,13 +21,18 @@ class MainViewController: UIViewController {
     @IBOutlet weak var searchTitleButton: UIButton!
     @IBOutlet weak var searchHashtagButton: UIButton!
     @IBOutlet weak var searchUsernameButton: UIButton!
+    @IBOutlet weak var storeCollectionView: UICollectionView!
+    @IBOutlet weak var storeTitleLabel: UILabel!
     
+    var isHashtagId = true
     var postType: Int = 0
     var me: Session?
+    var hashtagId: Int = 0
+    var storeTitle: String = ""
+    var posts = [Post]()
     
-    @IBAction func retryTouched(sender: UIButton) {
-        sender.isEnabled = false
-        tryLogin()
+    @IBAction func cancleTouched() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func searchTouched() {
@@ -40,7 +45,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func searchTitleTouched() {
-        self.performSegue(withIdentifier: SegueIdentity.mainToSearchPosts, sender: 0)
+        self.performSegue(withIdentifier: SegueIdentity.subStoreToSearchPosts, sender: 0)
         self.viewSearchMenu.isHidden = true
         self.uploadMenuDim.isHidden = true
         self.uploadMenuDim.isEnabled = false
@@ -50,7 +55,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func searchHashtagTouched() {
-        self.performSegue(withIdentifier: SegueIdentity.mainToSearchPosts, sender: 1)
+        self.performSegue(withIdentifier: SegueIdentity.subStoreToSearchPosts, sender: 1)
         self.viewSearchMenu.isHidden = true
         self.uploadMenuDim.isHidden = true
         self.uploadMenuDim.isEnabled = false
@@ -60,7 +65,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func searchUsernameTouched() {
-        self.performSegue(withIdentifier: SegueIdentity.mainToSearchUsers, sender: self)
+        self.performSegue(withIdentifier: SegueIdentity.subStoreToSearchUsers, sender: self)
         self.viewSearchMenu.isHidden = true
         self.uploadMenuDim.isHidden = true
         self.uploadMenuDim.isEnabled = false
@@ -70,30 +75,27 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func homeTouched(sender: UIButton) {
-
+        self.performSegue(withIdentifier: SegueIdentity.subStoreToMain, sender: self)
     }
     
     @IBAction func feedTouched(sender: UIButton) {
         if self.me != nil{
-            self.performSegue(withIdentifier: SegueIdentity.mainToFeed, sender: self)
+            self.performSegue(withIdentifier: SegueIdentity.subStoreToFeed, sender: self)
         } else {
             let alert = LoginAlertController()
             alert.setSigninAction(action: SigninAction(handler: {
                 action in
                 if self.presentedViewController == nil {
-                    self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                    self.performSegue(withIdentifier: SegueIdentity.subStoreToSignIn, sender: self)
                 } else {
                     self.dismiss(animated: false) {
                         () -> Void in
-                        self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                        self.performSegue(withIdentifier: SegueIdentity.subStoreToSignIn, sender: self)
                     }
                 }
             }))
             
-            self.present(alert, animated: true, completion: {
-                
-                self.tryLogin()
-            })
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -156,160 +158,159 @@ class MainViewController: UIViewController {
             alert.setSigninAction(action: SigninAction(handler: {
                 action in
                 if self.presentedViewController == nil {
-                    self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                    self.performSegue(withIdentifier: SegueIdentity.subStoreToSignIn, sender: self)
                 } else {
                     self.dismiss(animated: false) {
                         () -> Void in
-                        self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                        self.performSegue(withIdentifier: SegueIdentity.subStoreToSignIn, sender: self)
                     }
                 }
             }))
             
-            self.present(alert, animated: true, completion: {self.tryLogin()})
+            self.present(alert, animated: true, completion: nil)
         }
         
     }
     
     @IBAction func cartTouched(sender: UIButton) {
         if self.me != nil{
-            performSegue(withIdentifier: SegueIdentity.mainToCart, sender: self)
+            performSegue(withIdentifier: SegueIdentity.subStoreToCart, sender: self)
         } else {
             let alert = LoginAlertController()
             alert.setSigninAction(action: SigninAction(handler: {
                 action in
                 if self.presentedViewController == nil {
-                    self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                    self.performSegue(withIdentifier: SegueIdentity.subStoreToSignIn, sender: self)
                 } else {
                     self.dismiss(animated: false) {
                         () -> Void in
-                        self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                        self.performSegue(withIdentifier: SegueIdentity.subStoreToSignIn, sender: self)
                     }
                 }
             }))
             
-            self.present(alert, animated: true, completion: {self.tryLogin()})
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
     @IBAction func profileTouched(sender: UIButton) {
         if self.me != nil{
-            performSegue(withIdentifier: SegueIdentity.mainToProfile, sender: self)
+            performSegue(withIdentifier: SegueIdentity.subStoreToProfile, sender: self)
         } else {
             let alert = LoginAlertController()
             alert.setSigninAction(action: SigninAction(handler: {
                 action in
                 if self.presentedViewController == nil {
-                    self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                    self.performSegue(withIdentifier: SegueIdentity.subStoreToSignIn, sender: self)
                 } else {
                     self.dismiss(animated: false) {
                         () -> Void in
-                        self.performSegue(withIdentifier: SegueIdentity.jumpToSignin, sender: self)
+                        self.performSegue(withIdentifier: SegueIdentity.subStoreToSignIn, sender: self)
                     }
                 }
             }))
             
-            self.present(alert, animated: true, completion: {self.tryLogin()})
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
     // MARK: lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         me = Session.load()
-        log.info("API Url: \(apiUrl)")
-        
-        let pagingMenuController = self.childViewControllers.first as! PagingMenuController
-        pagingMenuController.delegate = self
-        pagingMenuController.setup(PagingMenuOptions1())
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tryLogin()
+        storeTitleLabel.text = storeTitle
+        storeCollectionView.delegate = self
+        storeCollectionView.dataSource = self
+        print("hashtag: \(hashtagId)")
+        getPosts()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
     
-    // MARK: custom
-    func tryLogin() {
-        if let me = Session.load(){
-            // 로그인 체크
-            let params = [
-                "id": String(me.id),
-                "access_token": me.accessToken
-            ]
-            print("id: \(me.id), access_token: \(me.accessToken)")
-            
-            _ = BlossomRequest.request(method: .post, endPoint: Api.session, params: params as [String : AnyObject]?, completionHandler: {
-                response, statusCode, json in
+    func upload(){
+        performSegue(withIdentifier: SegueIdentity.subStoreToUpload, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentity.subStoreToUpload {
+            let uploadViewController = segue.destination as! UploadViewController
+            uploadViewController.postType = self.postType
+        } else if segue.identifier == SegueIdentity.subStoreToProfile {
+            let profileViewController = segue.destination as! ProfileViewController
+            profileViewController.userId = self.me?.id
+        } else if segue.identifier == SegueIdentity.subStoreToSearchPosts {
+            let searchPostsViewController = segue.destination as! SearchPostsViewController
+            let searchType = sender as! Int
+            searchPostsViewController.searchType = searchType
+        } else if segue.identifier == SegueIdentity.subStoreToDetail {
+            let detailViewController = segue.destination as! DetailViewController
+            detailViewController.postId = sender as! Int
+        }
+    }
+    
+    func getPosts(){
+        if self.isHashtagId {
+            _ = BlossomRequest.request(method: .get, endPoint: "\(Api.storeDetail)/\(self.hashtagId)") { (response, statusCode, json) -> () in
                 if statusCode == 200{
-                    log.debug("login success")
-                    Mixpanel.sharedInstance().identify(String(me.id))
-                    
-                }else{
-                    log.debug("다른기기에서의 로그인이 확인되어 다시 로그인합니다.")
-                    Session.remove()
+                    let posts = json["posts"].arrayValue
+                
+                    for post in posts {
+                        self.posts.append(Post(o: post))
+                    }
+                    self.storeCollectionView.reloadData()
                 }
-            })
-        }else{
-            log.debug("login failed, no session")
-            
-            let myCategory = Category.getMyCategory()
-            if myCategory == 0 {
-                print("category 0")
-                self.performSegue(withIdentifier: SegueIdentity.mainToGreeting, sender: self)
-            } else {
-                print("category id: \(myCategory)")
+            }
+        } else {
+            _ = BlossomRequest.request(method: .get, endPoint: "\(Api.userPosts)/\(self.hashtagId)") { (response, statusCode, json) -> () in
+                if statusCode == 200{
+                    let posts = json["posts"].arrayValue
+                    
+                    for post in posts {
+                        self.posts.append(Post(o: post))
+                    }
+                    self.storeCollectionView.reloadData()
+                }
             }
         }
     }
     
-    func upload(){
-        performSegue(withIdentifier: SegueIdentity.jumpToUpload, sender: self)
+}
+
+extension SubStoreViewController: UICollectionViewDelegate {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == SegueIdentity.jumpToUpload {
-            let uploadViewController = segue.destination as! UploadViewController
-            uploadViewController.postType = self.postType
-        } else if segue.identifier == SegueIdentity.mainToProfile {
-            let profileViewController = segue.destination as! ProfileViewController
-            profileViewController.userId = self.me?.id
-        } else if segue.identifier == SegueIdentity.mainToSearchPosts {
-            let searchPostsViewController = segue.destination as! SearchPostsViewController
-            let searchType = sender as! Int
-            searchPostsViewController.searchType = searchType
-        }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return posts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let post = posts[indexPath.row]
+        performSegue(withIdentifier: SegueIdentity.subStoreToDetail, sender: post.id)
     }
 }
 
-extension MainViewController: PagingMenuControllerDelegate {
-    // MARK: - PagingMenuControllerDelegate
-    func willMove(toMenu menuController: UIViewController, fromMenu previousMenuController: UIViewController) {
-        print(#function)
-        print(previousMenuController)
-        print(menuController)
-    }
-    
-    func didMove(toMenu menuController: UIViewController, fromMenu previousMenuController: UIViewController) {
-        print(#function)
-        print(previousMenuController)
-        print(menuController)
-    }
-    
-    func willMove(toMenuItem menuItemView: MenuItemView, fromMenuItem previousMenuItemView: MenuItemView) {
-        print(#function)
-        print(previousMenuItemView)
-        print(menuItemView)
-    }
-    
-    func didMove(toMenuItem menuItemView: MenuItemView, fromMenuItem previousMenuItemView: MenuItemView) {
-        print(#function)
-        print(previousMenuItemView)
-        print(menuItemView)
+extension SubStoreViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentity.mainCell, for: indexPath) as! MainCell
+        
+        let post = self.posts[indexPath.row]
+        print("postId: \(post.id)")
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        
+        let costInt = post.purchasePrice + post.fee
+        
+        if let cost = formatter.string(for: costInt) {
+            cell.productImageView.af_setImage(withURL: URL(string:post.imgUrl1)!)
+            cell.productDescriptionLabel.text = post.title
+            cell.productPriceLabel.text = "\(NSLocalizedString("MONEYMARK", comment: "MONEYMARK"))\(cost)"
+            cell.roundingUIView(aView: cell, cornerRadiusParam: 5.0)
+        }
+        return cell
     }
 }
