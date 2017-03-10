@@ -81,7 +81,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="flower" translatesAutoresizingMaskIntoConstraints="NO" id="2Pg-w9-bJi">
-                                <rect key="frame" x="67" y="75" width="240" height="199"/>
+                                <rect key="frame" x="87" y="61" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -99,6 +99,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="flower" width="150" height="150"/>
+        <image name="flower" width="200" height="200"/>
     </resources>
 </document>

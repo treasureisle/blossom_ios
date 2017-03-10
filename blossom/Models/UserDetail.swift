@@ -21,6 +21,7 @@ class UserDetail{
     var recent_zipcode: Int
     var recent_add1: String
     var recent_add2: String
+    var recent_phone: String
     var phone: String
     var level: Int
     var point: Int
@@ -116,6 +117,12 @@ class UserDetail{
             self.recent_add2 = recent_add2
         }else{
             self.recent_add2 = ""
+        }
+        
+        if let recent_phone = o["recent_phone"].string {
+            self.recent_phone = recent_phone
+        }else{
+            self.recent_phone = ""
         }
         
         if let phone = o["phone"].string {

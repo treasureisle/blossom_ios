@@ -53,7 +53,7 @@
         <!--Feed View Controller-->
         <scene sceneID="m83-bF-eqj">
             <objects>
-                <viewController storyboardIdentifier="FeedViewController" id="vcn-B6-n0a" customClass="FeedViewController" customModule="blossom" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedViewController" id="vcn-B6-n0a" customClass="FeedViewController" customModule="shobit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dWb-t1-Ryc"/>
                         <viewControllerLayoutGuide type="bottom" id="HTv-Je-hXZ"/>
@@ -67,59 +67,71 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C2c-iJ-Xll">
-                                        <rect key="frame" x="0.0" y="4" width="54" height="54"/>
+                                        <rect key="frame" x="0.0" y="8" width="128" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="alram"/>
+                                        <state key="normal" image="notification_nor"/>
+                                        <state key="highlighted" image="notification_sel"/>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="USf-rw-o8a">
-                                        <rect key="frame" x="157" y="1" width="60" height="60"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="shobit" translatesAutoresizingMaskIntoConstraints="NO" id="USf-rw-o8a">
+                                        <rect key="frame" x="125" y="4" width="125" height="47"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Opi-2S-4mP">
-                                        <rect key="frame" x="321" y="4" width="54" height="54"/>
+                                        <rect key="frame" x="247" y="8" width="128" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="search"/>
+                                        <state key="normal" image="search_nor"/>
+                                        <state key="highlighted" image="search_sel"/>
                                         <connections>
                                             <action selector="searchTouched" destination="vcn-B6-n0a" eventType="touchUpInside" id="Vcc-ES-j8E"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gU6-4k-Iar">
+                                        <rect key="frame" x="0.0" y="50" width="375" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.39607843139999999" green="0.40000000000000002" blue="0.40000000000000002" alpha="0.25" colorSpace="calibratedRGB"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Im4-yQ-nrU">
-                                <rect key="frame" x="0.0" y="621" width="375" height="46"/>
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzS-G4-zFO">
-                                        <rect key="frame" x="0.0" y="0.0" width="75" height="46"/>
-                                        <state key="normal" image="home"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="50"/>
+                                        <state key="normal" image="home_nor"/>
+                                        <state key="highlighted" image="home_sel"/>
                                         <connections>
                                             <action selector="homeTouchedWithSender:" destination="vcn-B6-n0a" eventType="touchUpInside" id="tg8-Nv-Dbl"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivC-XY-rpr">
-                                        <rect key="frame" x="75" y="0.0" width="75" height="46"/>
-                                        <state key="normal" image="feed"/>
+                                        <rect key="frame" x="75" y="0.0" width="75" height="50"/>
+                                        <state key="normal" image="heart_nor"/>
+                                        <state key="highlighted" image="heart_sel"/>
                                         <connections>
                                             <action selector="feedTouchedWithSender:" destination="vcn-B6-n0a" eventType="touchUpInside" id="o7A-2M-qSF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIj-cc-cg4">
-                                        <rect key="frame" x="150" y="0.0" width="75" height="46"/>
-                                        <state key="normal" image="upload"/>
+                                        <rect key="frame" x="150" y="0.0" width="75" height="50"/>
+                                        <state key="normal" image="upload_nor"/>
+                                        <state key="highlighted" image="upload_sel"/>
                                         <connections>
                                             <action selector="uploadTouchedWithSender:" destination="vcn-B6-n0a" eventType="touchUpInside" id="TR5-TX-HOV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UDv-D5-2Se">
-                                        <rect key="frame" x="238" y="0.0" width="75" height="46"/>
-                                        <state key="normal" image="cart"/>
+                                        <rect key="frame" x="225" y="0.0" width="75" height="50"/>
+                                        <state key="normal" image="cart_nor"/>
+                                        <state key="highlighted" image="cart_sel"/>
                                         <connections>
                                             <action selector="cartTouchedWithSender:" destination="vcn-B6-n0a" eventType="touchUpInside" id="WW5-Pb-gvn"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kc0-mV-Kpu">
-                                        <rect key="frame" x="313" y="0.0" width="75" height="46"/>
-                                        <state key="normal" image="profile"/>
+                                        <rect key="frame" x="300" y="0.0" width="75" height="50"/>
+                                        <state key="normal" image="profile_nor"/>
+                                        <state key="highlighted" image="profile_sel"/>
                                         <connections>
                                             <action selector="profileTouchedWithSender:" destination="vcn-B6-n0a" eventType="touchUpInside" id="cm9-VZ-A3R"/>
                                         </connections>
@@ -129,7 +141,7 @@
                                 <constraints>
                                     <constraint firstItem="ivC-XY-rpr" firstAttribute="leading" secondItem="bzS-G4-zFO" secondAttribute="trailing" id="3to-ii-DQI"/>
                                     <constraint firstItem="eIj-cc-cg4" firstAttribute="height" secondItem="Im4-yQ-nrU" secondAttribute="height" id="3v5-Wn-CVY"/>
-                                    <constraint firstAttribute="trailing" secondItem="Kc0-mV-Kpu" secondAttribute="trailing" constant="-13" id="48D-s4-ndW"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kc0-mV-Kpu" secondAttribute="trailing" id="48D-s4-ndW"/>
                                     <constraint firstItem="eIj-cc-cg4" firstAttribute="centerY" secondItem="Im4-yQ-nrU" secondAttribute="centerY" id="8KU-KR-hEU"/>
                                     <constraint firstItem="eIj-cc-cg4" firstAttribute="centerX" secondItem="Im4-yQ-nrU" secondAttribute="centerX" id="9BG-rs-M6L"/>
                                     <constraint firstItem="UDv-D5-2Se" firstAttribute="trailing" secondItem="Kc0-mV-Kpu" secondAttribute="leading" id="Gvl-Ox-hIY"/>
@@ -145,12 +157,16 @@
                                     <constraint firstItem="UDv-D5-2Se" firstAttribute="centerY" secondItem="Im4-yQ-nrU" secondAttribute="centerY" id="oPO-D1-tsm"/>
                                     <constraint firstItem="UDv-D5-2Se" firstAttribute="width" secondItem="Im4-yQ-nrU" secondAttribute="width" multiplier="0.2" id="qFc-yD-VDl"/>
                                     <constraint firstItem="eIj-cc-cg4" firstAttribute="width" secondItem="Im4-yQ-nrU" secondAttribute="width" multiplier="0.2" id="sZB-Ua-DSg"/>
+                                    <constraint firstAttribute="height" constant="50" id="ufz-IT-gfe"/>
                                     <constraint firstItem="bzS-G4-zFO" firstAttribute="leading" secondItem="Im4-yQ-nrU" secondAttribute="leading" id="wbB-n8-88j"/>
                                     <constraint firstItem="ivC-XY-rpr" firstAttribute="width" secondItem="Im4-yQ-nrU" secondAttribute="width" multiplier="0.2" id="xzV-WT-lOp"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8No-Jd-t2c">
-                                <rect key="frame" x="0.0" y="100" width="375" height="522"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8No-Jd-t2c">
+                                <rect key="frame" x="0.0" y="73" width="375" height="544"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="544" id="bDU-YU-oc4"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="TaH-Ph-VT9" kind="embed" id="cn5-Fl-pPT"/>
                                 </connections>
@@ -249,8 +265,6 @@
                             <constraint firstItem="8No-Jd-t2c" firstAttribute="bottom" secondItem="Im4-yQ-nrU" secondAttribute="top" id="3ih-Xa-hNs"/>
                             <constraint firstItem="Im4-yQ-nrU" firstAttribute="centerX" secondItem="dav-Mj-wqW" secondAttribute="centerX" id="B0q-8A-IAs"/>
                             <constraint firstItem="Im4-yQ-nrU" firstAttribute="width" secondItem="dav-Mj-wqW" secondAttribute="width" id="TIN-BC-4KG"/>
-                            <constraint firstItem="Im4-yQ-nrU" firstAttribute="height" secondItem="dav-Mj-wqW" secondAttribute="height" multiplier="0.07" id="jIC-NI-J6b"/>
-                            <constraint firstItem="8No-Jd-t2c" firstAttribute="height" secondItem="dav-Mj-wqW" secondAttribute="height" multiplier="0.8" id="lZy-0q-mpR"/>
                             <constraint firstItem="8No-Jd-t2c" firstAttribute="width" secondItem="dav-Mj-wqW" secondAttribute="width" id="ngZ-S9-rpC"/>
                             <constraint firstItem="HTv-Je-hXZ" firstAttribute="top" secondItem="Im4-yQ-nrU" secondAttribute="bottom" id="sNB-Sh-nCm"/>
                             <constraint firstItem="8No-Jd-t2c" firstAttribute="centerX" secondItem="dav-Mj-wqW" secondAttribute="centerX" id="wzS-vM-qGx"/>
@@ -266,7 +280,7 @@
                         <outlet property="uploadSellButton" destination="ex3-bG-mPF" id="hXv-TZ-Zmb"/>
                         <outlet property="viewSearchMenu" destination="ChH-Ka-TqV" id="TKg-C9-GCy"/>
                         <outlet property="viewUploadMenu" destination="riw-LQ-Wph" id="0mm-5r-aVo"/>
-                        <segue destination="jKx-hb-YXb" kind="presentation" identifier="feedToMain" id="t1g-6w-bez"/>
+                        <segue destination="jKx-hb-YXb" kind="presentation" identifier="feedToMain" animates="NO" id="t1g-6w-bez"/>
                         <segue destination="Ub1-GG-4xD" kind="presentation" identifier="feedToUpload" id="P8T-pp-c2h"/>
                         <segue destination="n4N-4b-hdf" kind="presentation" identifier="feedToProfile" id="LS8-RN-EM6"/>
                         <segue destination="sna-qg-56o" kind="showDetail" identifier="feedToSearchPosts" id="O2h-Ww-0CL"/>
@@ -277,7 +291,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VfP-hS-NSb" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-63" y="122"/>
+            <point key="canvasLocation" x="-63.200000000000003" y="121.88905547226388"/>
         </scene>
         <!--SearchPostsViewController-->
         <scene sceneID="8NH-hX-vnK">
@@ -304,7 +318,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Oil-t5-AMr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="K5F-co-vaU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="522"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="544"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -315,13 +329,20 @@
         </scene>
     </scenes>
     <resources>
-        <image name="alram" width="110" height="106"/>
-        <image name="cart" width="150" height="93"/>
-        <image name="feed" width="150" height="93"/>
-        <image name="home" width="150" height="93"/>
-        <image name="logo" width="107" height="106"/>
-        <image name="profile" width="150" height="93"/>
-        <image name="search" width="99" height="106"/>
-        <image name="upload" width="150" height="93"/>
+        <image name="cart_nor" width="108" height="71"/>
+        <image name="cart_sel" width="108" height="71"/>
+        <image name="heart_nor" width="108" height="71"/>
+        <image name="heart_sel" width="108" height="71"/>
+        <image name="home_nor" width="108" height="71"/>
+        <image name="home_sel" width="108" height="71"/>
+        <image name="notification_nor" width="180" height="65"/>
+        <image name="notification_sel" width="180" height="65"/>
+        <image name="profile_nor" width="108" height="71"/>
+        <image name="profile_sel" width="108" height="71"/>
+        <image name="search_nor" width="180" height="65"/>
+        <image name="search_sel" width="180" height="65"/>
+        <image name="shobit" width="125" height="47"/>
+        <image name="upload_nor" width="108" height="71"/>
+        <image name="upload_sel" width="108" height="71"/>
     </resources>
 </document>

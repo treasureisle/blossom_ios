@@ -16,6 +16,7 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
     var orders = [Order]()
     var isLoading = true
     var me: Session?
+    var userDetail: UserDetail!
     
     @IBOutlet weak var topNavigationBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
@@ -35,33 +36,53 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         tableView.delegate = self
         
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(self.touches(_:))))
+        
         _ = BlossomRequest.request(method: .get, endPoint: "\(Api.userDetail)/\(me!.id)", completionHandler: {
             (response, statusCode, json) -> () in
             if statusCode == 200 {
-                let userDetail = UserDetail(o: json["user_detail"])
-                if userDetail.address1.isEmpty {
-                    if userDetail.recent_add1.isEmpty {
+                self.userDetail = UserDetail(o: json["user_detail"])
+                if self.userDetail.address1.isEmpty {
+                    if self.userDetail.recent_add1.isEmpty {
                         self.savedAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
                         self.recentAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
                         self.newAddressButton.setTitleColor(UIColor.blue, for: .normal)
+                        self.addressTextField.isEnabled = true
+                        self.addressDetailTextField.isEnabled = true
+                        self.recieverTextField.isEnabled = true
+                        self.phoneTextField.isEnabled = true
                     } else {
-                        self.savedAddressButton.setTitleColor(UIColor.blue, for: .normal)
-                        self.recentAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+                        self.savedAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+                        self.recentAddressButton.setTitleColor(UIColor.blue, for: .normal)
                         self.newAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
-                        self.addressTextField.text = userDetail.recent_add1
-                        self.addressDetailTextField.text = userDetail.recent_add2
-                        self.recieverTextField.text = userDetail.recent_name
+                        self.addressTextField.text = self.userDetail.recent_add1
+                        self.addressDetailTextField.text = self.userDetail.recent_add2
+                        self.recieverTextField.text = self.userDetail.recent_name
+                        self.phoneTextField.text = self.userDetail.recent_phone
+                        self.addressTextField.isEnabled = false
+                        self.addressDetailTextField.isEnabled = false
+                        self.recieverTextField.isEnabled = false
+                        self.phoneTextField.isEnabled = false
                     }
                 } else {
                     self.savedAddressButton.setTitleColor(UIColor.blue, for: .normal)
                     self.recentAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
                     self.newAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
-                    self.addressTextField.text = userDetail.address1
-                    self.addressDetailTextField.text = userDetail.address2
-                    self.recieverTextField.text = userDetail.name
+                    self.addressTextField.text = self.userDetail.address1
+                    self.addressDetailTextField.text = self.userDetail.address2
+                    self.recieverTextField.text = self.userDetail.name
+                    self.phoneTextField.text = self.userDetail.phone
+                    self.addressTextField.isEnabled = false
+                    self.addressDetailTextField.isEnabled = false
+                    self.recieverTextField.isEnabled = false
+                    self.phoneTextField.isEnabled = false
                 }
             }
         })
+    }
+    
+    func touches(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     // MARK: UITableViewDelegate
@@ -107,6 +128,13 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func savedAddressTouched(){
+        self.savedAddressButton.setTitleColor(UIColor.blue, for: .normal)
+        self.recentAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+        self.newAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+        self.addressTextField.text = self.userDetail.address1
+        self.addressDetailTextField.text = self.userDetail.address2
+        self.recieverTextField.text = self.userDetail.name
+        self.phoneTextField.text = self.userDetail.phone
         self.addressTextField.isEnabled = false
         self.addressDetailTextField.isEnabled = false
         self.recieverTextField.isEnabled = false
@@ -114,6 +142,13 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func recentAddressTouched(){
+        self.savedAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+        self.recentAddressButton.setTitleColor(UIColor.blue, for: .normal)
+        self.newAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+        self.addressTextField.text = self.userDetail.recent_add1
+        self.addressDetailTextField.text = self.userDetail.recent_add2
+        self.recieverTextField.text = self.userDetail.recent_name
+        self.phoneTextField.text = self.userDetail.recent_phone
         self.addressTextField.isEnabled = false
         self.addressDetailTextField.isEnabled = false
         self.recieverTextField.isEnabled = false
@@ -121,6 +156,9 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func newAddressTouched(){
+        self.savedAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+        self.recentAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+        self.newAddressButton.setTitleColor(UIColor.blue, for: .normal)
         self.addressTextField.isEnabled = true
         self.addressDetailTextField.isEnabled = true
         self.recieverTextField.isEnabled = true

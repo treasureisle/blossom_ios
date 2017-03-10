@@ -31,6 +31,7 @@ class StoreViewController: UIViewController {
     @IBOutlet weak var hashtag1Label: UILabel!
     @IBOutlet weak var hashtag2Label: UILabel!
     @IBOutlet weak var hashtag3Label: UILabel!
+    @IBOutlet weak var eventPageControl: UIPageControl!
     
     var store: Store?
     var lastPageFetched = false
@@ -106,6 +107,8 @@ class StoreViewController: UIViewController {
             if statusCode == 200{
                 let store = Store(o: json["store"])
                 self.store = store
+                
+                self.eventPageControl.numberOfPages = store.numEvents
                     
                 self.events.removeAll()
                 
@@ -291,6 +294,22 @@ extension StoreViewController: UICollectionViewDelegate {
             performSegue(withIdentifier: SegueIdentity.storeToDetail, sender: self.hotHashtag2Posts[indexPath.row].id)
         } else if collectionView == hotHashtag3 {
             performSegue(withIdentifier: SegueIdentity.storeToDetail, sender: self.hotHashtag3Posts[indexPath.row].id)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == self.eventCollectionView {
+            let pageWidth = scrollView.frame.size.width;
+            let currentPage = Float(scrollView.contentOffset.x / pageWidth);
+            
+            if (0.0 != fmodf(currentPage, 1.0))
+            {
+                eventPageControl.currentPage = Int(currentPage) + 1;
+            }
+            else
+            {
+                eventPageControl.currentPage = Int(currentPage);
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ class ProfileViewController: UIViewController {
         fetchProfile()
         
         let pagingMenuController = self.childViewControllers.first as! PagingMenuController
-        pagingMenuController.delegate = self
+
         UserDefaults.standard.set(userId, forKey: PrefKey.profileId)
         pagingMenuController.setup(ProfilePagingMenuOptions1())
     }
@@ -145,32 +145,5 @@ class ProfileViewController: UIViewController {
                 }
             }
         }
-    }
-}
-
-extension ProfileViewController: PagingMenuControllerDelegate {
-    // MARK: - PagingMenuControllerDelegate
-    func willMove(toMenu menuController: UIViewController, fromMenu previousMenuController: UIViewController) {
-        print(#function)
-        print(previousMenuController)
-        print(menuController)
-    }
-    
-    func didMove(toMenu menuController: UIViewController, fromMenu previousMenuController: UIViewController) {
-        print(#function)
-        print(previousMenuController)
-        print(menuController)
-    }
-    
-    func willMove(toMenuItem menuItemView: MenuItemView, fromMenuItem previousMenuItemView: MenuItemView) {
-        print(#function)
-        print(previousMenuItemView)
-        print(menuItemView)
-    }
-    
-    func didMove(toMenuItem menuItemView: MenuItemView, fromMenuItem previousMenuItemView: MenuItemView) {
-        print(#function)
-        print(previousMenuItemView)
-        print(menuItemView)
     }
 }

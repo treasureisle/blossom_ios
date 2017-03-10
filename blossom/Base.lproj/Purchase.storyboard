@@ -167,6 +167,12 @@
                                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <state key="normal" title="카드결제"/>
                                                             </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7F-xb-r5r">
+                                                                <rect key="frame" x="16" y="395" width="344" height="50"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <state key="normal" title="휴대폰결제"/>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.92520621830000005" green="0.92520621830000005" blue="0.92520621830000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </view>
@@ -285,12 +291,6 @@
                                     <constraint firstItem="SVs-Fa-kpo" firstAttribute="width" secondItem="oL7-me-mrN" secondAttribute="width" constant="-224" id="y0p-9M-ldh"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7F-xb-r5r">
-                                <rect key="frame" x="16" y="597" width="344" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="휴대폰결제"/>
-                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="oL7-me-mrN" firstAttribute="centerX" secondItem="FwO-Ab-x0U" secondAttribute="centerX" constant="112.5" id="1o5-eq-lj5"/>

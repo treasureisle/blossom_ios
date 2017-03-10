@@ -72,7 +72,10 @@ struct CellIdentity {
 }
 
 struct Font {
-    static let graun = "Graun"
+    static let regular = "NanumBarunGothicOTF"
+    static let bold = "NanumBarunGothicOTF Bold"
+    static let light = "NanumBarunGothicOTF Light"
+    static let ultraLight = "NanumBarunGothicOTF UltraLight"
 }
 
 struct SegueIdentity {
@@ -187,6 +190,7 @@ struct ImageName {
     static let imgHeart = "img_heart"
     static let check_checked = "check_checked"
     static let check_unchecked = "check_unchecked"
+    
 }
 
 struct Exceptions {

@@ -12,7 +12,7 @@
         <!--Profile View Controller-->
         <scene sceneID="GMQ-3D-F0E">
             <objects>
-                <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cBA-cF-nc6" customClass="ProfileViewController" customModule="blossom" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cBA-cF-nc6" customClass="ProfileViewController" customModule="shobit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ThV-xv-g5W"/>
                         <viewControllerLayoutGuide type="bottom" id="2iV-L6-aWr"/>
@@ -90,6 +90,11 @@
                                     <action selector="followTouched" destination="cBA-cF-nc6" eventType="touchUpInside" id="clM-fu-UDt"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3og-hu-oJ8">
+                                <rect key="frame" x="0.0" y="327" width="375" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.39607843139999999" green="0.40000000000000002" blue="0.40000000000000002" alpha="0.25" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

@@ -12,11 +12,11 @@
         <!--Feed Sell View Controller-->
         <scene sceneID="n91-Va-XRn">
             <objects>
-                <collectionViewController storyboardIdentifier="FeedSellViewController" id="vSb-bS-QQO" customClass="FeedSellViewController" customModule="blossom" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="RWv-qz-vKb">
+                <collectionViewController storyboardIdentifier="FeedSellViewController" id="vSb-bS-QQO" customClass="FeedSellViewController" customModule="shobit" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="RWv-qz-vKb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="m4b-wL-mfY">
                             <size key="itemSize" width="375" height="597"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -24,7 +24,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedCell" id="lU4-J3-lmG" customClass="FeedCell" customModule="blossom" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedCell" id="lU4-J3-lmG" customClass="FeedCell" customModule="shobit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="597"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -53,7 +53,7 @@
                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             </collectionViewFlowLayout>
                                             <cells>
-                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImagePreviewCell" id="jWC-YA-f1e" customClass="ImagePreviewCell" customModule="blossom" customModuleProvider="target">
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImagePreviewCell" id="jWC-YA-f1e" customClass="ImagePreviewCell" customModule="shobit" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="320"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -169,11 +169,11 @@
         <!--Feed Common View Controller-->
         <scene sceneID="dtV-cI-liW">
             <objects>
-                <collectionViewController storyboardIdentifier="FeedCommonViewController" id="KbN-tj-HPX" customClass="FeedCommonViewController" customModule="blossom" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="nh2-Lt-rsA">
+                <collectionViewController storyboardIdentifier="FeedCommonViewController" id="KbN-tj-HPX" customClass="FeedCommonViewController" customModule="shobit" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="nh2-Lt-rsA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rip-ly-btL">
                             <size key="itemSize" width="375" height="597"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -181,7 +181,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedCell" id="d0m-vk-0Z8" customClass="FeedCell" customModule="blossom" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedCell" id="d0m-vk-0Z8" customClass="FeedCell" customModule="shobit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="597"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -210,7 +210,7 @@
                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             </collectionViewFlowLayout>
                                             <cells>
-                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImagePreviewCell" id="kmq-no-JPi" customClass="ImagePreviewCell" customModule="blossom" customModuleProvider="target">
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImagePreviewCell" id="kmq-no-JPi" customClass="ImagePreviewCell" customModule="shobit" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="320"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -355,8 +355,8 @@
         <image name="feed_share" width="111" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oPP-xY-H5t"/>
         <segue reference="FPg-Rf-Sxd"/>
-        <segue reference="rYa-Lq-TE0"/>
+        <segue reference="oPP-xY-H5t"/>
+        <segue reference="Wce-w4-za6"/>
     </inferredMetricsTieBreakers>
 </document>

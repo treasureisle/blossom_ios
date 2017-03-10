@@ -7,10 +7,10 @@
 */
 
 "APP_TITLE" = "Blossom";
-"SELL" = "판매";
-"BUY" = "구해줘";
-"REVIEW" = "후기";
-"STORE" = "스토어";
+"SELL" = "판 매";
+"BUY" = "구 해 줘";
+"REVIEW" = "후 기";
+"STORE" = "스 토 어";
 "MONEYMARK" = "₩";
 "LOGIN_REQUIRED" = "로그인이 필요한 기능입니다.";
 "SIGNIN" = "회원가입";

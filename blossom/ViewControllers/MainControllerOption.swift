@@ -31,21 +31,14 @@ struct PagingMenuOptions1: PagingMenuControllerCustomizable {
     }
     
     struct MenuOptions: MenuViewCustomizable {
-//        var backgroundColor: UIColor {
-//            return UIColor.init(red: 220, green: 150, blue: 150)
-//        }
-//        var selectedBackgroundColor: UIColor {
-//            return UIColor.init(red: 220, green: 150, blue: 150)
-//        }
         var displayMode: MenuDisplayMode {
-//            return .standard(widthMode: .fixed(width: 80.0), centerItem: false, scrollingMode: .pagingEnabled)
             return .segmentedControl
         }
         var focusMode: MenuFocusMode {
-            return .underline(height: 8, color: UIColor.init(red: 220, green: 150, blue: 150), horizontalPadding: 20, verticalPadding: 0)
+            return .underline(height: 4, color: UIColor.init(red: 197, green: 78, blue: 76), horizontalPadding: 20, verticalPadding: 0)
         }
         var height: CGFloat {
-            return 50
+            return 40
         }
         var itemsOptions: [MenuItemViewCustomizable] {
             return [MenuItemSell(), MenuItemBuy(), MenuItemReview(), MenuItemStore()]
@@ -54,26 +47,30 @@ struct PagingMenuOptions1: PagingMenuControllerCustomizable {
     
     struct MenuItemSell: MenuItemViewCustomizable {
         var displayMode: MenuItemDisplayMode {
-            let title = MenuItemText(text: NSLocalizedString("SELL", comment: "SELL"))
+            let title = MenuItemText(text: NSLocalizedString("SELL", comment: "SELL"), color: UIColor.init(red: 3, green: 0, blue: 0), selectedColor: UIColor.init(red: 197, green: 78, blue: 76), font: UIFont(name: Font.regular, size: 15)!, selectedFont: UIFont(name: Font.regular, size: 15)!)
             return .text(title: title)
+//            return .image(image: #imageLiteral(resourceName: "btn_sell_nor"), selectedImage: #imageLiteral(resourceName: "btn_sell_sel"))
         }
     }
     struct MenuItemBuy: MenuItemViewCustomizable {
         var displayMode: MenuItemDisplayMode {
-            let title = MenuItemText(text: NSLocalizedString("BUY", comment: "BUY"))
+            let title = MenuItemText(text: NSLocalizedString("BUY", comment: "BUY"), color: UIColor.init(red: 3, green: 0, blue: 0), selectedColor: UIColor.init(red: 197, green: 78, blue: 76), font: UIFont(name: Font.regular, size: 15)!, selectedFont: UIFont(name: Font.regular, size: 15)!)
             return .text(title: title)
+//            return .image(image: #imageLiteral(resourceName: "btn_getit_nor"), selectedImage: #imageLiteral(resourceName: "btn_getit_sel"))
         }
     }
     struct MenuItemReview: MenuItemViewCustomizable {
         var displayMode: MenuItemDisplayMode {
-            let title = MenuItemText(text: NSLocalizedString("REVIEW", comment: "REVIEW"))
+            let title = MenuItemText(text: NSLocalizedString("REVIEW", comment: "REVIEW"), color: UIColor.init(red: 3, green: 0, blue: 0), selectedColor: UIColor.init(red: 197, green: 78, blue: 76), font: UIFont(name: Font.regular, size: 15)!, selectedFont: UIFont(name: Font.regular, size: 15)!)
             return .text(title: title)
+//            return .image(image: #imageLiteral(resourceName: "btn_review_nor"), selectedImage: #imageLiteral(resourceName: "btn_review_sel"))
         }
     }
     struct MenuItemStore: MenuItemViewCustomizable {
         var displayMode: MenuItemDisplayMode {
-            let title = MenuItemText(text: NSLocalizedString("STORE", comment: "STORE"))
+            let title = MenuItemText(text: NSLocalizedString("STORE", comment: "STORE"), color: UIColor.init(red: 3, green: 0, blue: 0), selectedColor: UIColor.init(red: 197, green: 78, blue: 76), font: UIFont(name: Font.regular, size: 15)!, selectedFont: UIFont(name: Font.regular, size: 15)!)
             return .text(title: title)
+//            return .image(image: #imageLiteral(resourceName: "btn_store_nor"), selectedImage: #imageLiteral(resourceName: "btn_store_sel"))
         }
     }
 }
