@@ -84,10 +84,10 @@ class ProfileViewController: UIViewController {
                         _ = BlossomRequest.request(method: .get, endPoint: "\(Api.isFollowing)/\(self.userId!)") { (response, statusCode, json) -> () in
                             if statusCode == 200{
                                 self.isFollowing = true
-                                self.buttonFollow?.setTitle("Unfollow", for: .normal)
+                                self.buttonFollow?.setTitle("언팔로우", for: .normal)
                             } else {
                                 self.isFollowing = false
-                                self.buttonFollow?.setTitle("Follow", for: .normal)
+                                self.buttonFollow?.setTitle("팔로우", for: .normal)
                             }
                         }
                     }
@@ -115,8 +115,8 @@ class ProfileViewController: UIViewController {
                             self.followings.append(Follow(o: following))
                         }
                         
-                        self.labelFollower?.text = "follower:\(String(self.followers.count))"
-                        self.labelFollowing?.text = "following:\(String(self.followings.count))"
+                        self.labelFollower?.text = String(self.followers.count)
+                        self.labelFollowing?.text = String(self.followings.count)
                     }
                 }
             }
@@ -128,7 +128,7 @@ class ProfileViewController: UIViewController {
             _ = BlossomRequest.request(method: .delete, endPoint: "\(Api.follow)/\(self.userId!)") { (response, statusCode, json) -> () in
                 if statusCode == 200{
                     self.isFollowing = false
-                    self.buttonFollow?.setTitle("Follow", for: .normal)
+                    self.buttonFollow?.setTitle("팔로우", for: .normal)
                     self.fetchProfile()
                 } else {
                     print("status \(statusCode)")
@@ -138,7 +138,7 @@ class ProfileViewController: UIViewController {
             _ = BlossomRequest.request(method: .post, endPoint: "\(Api.follow)/\(self.userId!)") { (response, statusCode, json) -> () in
                 if statusCode == 200{
                     self.isFollowing = true
-                    self.buttonFollow?.setTitle("Unfollow", for: .normal)
+                    self.buttonFollow?.setTitle("언팔로우", for: .normal)
                     self.fetchProfile()
                 } else {
                     print("status \(statusCode)")

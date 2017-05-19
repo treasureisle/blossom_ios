@@ -343,6 +343,9 @@ extension StoreViewController: UICollectionViewDataSource {
             if let cost = formatter.string(for: costInt) {
                 cell.productImageView.af_setImage(withURL: URL(string:post.imgUrl1)!)
                 cell.productDescriptionLabel.text = post.title
+                cell.regionFlagImage.image = ImageName.flags[Int(post.region)!]
+                let ratio = 100 - (post.purchasePrice * 100 / post.originPrice)
+                cell.discountRatioLabel.text = "\(ratio)%"
                 cell.productPriceLabel.text = "\(NSLocalizedString("MONEYMARK", comment: "MONEYMARK"))\(cost)"
                 cell.roundingUIView(aView: cell, cornerRadiusParam: 5.0)
             }
@@ -359,6 +362,9 @@ extension StoreViewController: UICollectionViewDataSource {
             if let cost = formatter.string(for: costInt) {
                 cell.productImageView.af_setImage(withURL: URL(string:post.imgUrl1)!)
                 cell.productDescriptionLabel.text = post.title
+                cell.regionFlagImage.image = ImageName.flags[Int(post.region)!]
+                let ratio = 100 - (post.purchasePrice * 100 / post.originPrice)
+                cell.discountRatioLabel.text = "\(ratio)%"
                 cell.productPriceLabel.text = "\(NSLocalizedString("MONEYMARK", comment: "MONEYMARK"))\(cost)"
                 cell.roundingUIView(aView: cell, cornerRadiusParam: 5.0)
             }
@@ -375,6 +381,9 @@ extension StoreViewController: UICollectionViewDataSource {
             if let cost = formatter.string(for: costInt) {
                 cell.productImageView.af_setImage(withURL: URL(string:post.imgUrl1)!)
                 cell.productDescriptionLabel.text = post.title
+                cell.regionFlagImage.image = ImageName.flags[Int(post.region)!]
+                let ratio = 100 - (post.purchasePrice * 100 / post.originPrice)
+                cell.discountRatioLabel.text = "\(ratio)%"
                 cell.productPriceLabel.text = "\(NSLocalizedString("MONEYMARK", comment: "MONEYMARK"))\(cost)"
                 cell.roundingUIView(aView: cell, cornerRadiusParam: 5.0)
             }
@@ -391,6 +400,9 @@ extension StoreViewController: UICollectionViewDataSource {
             if let cost = formatter.string(for: costInt) {
                 cell.productImageView.af_setImage(withURL: URL(string:post.imgUrl1)!)
                 cell.productDescriptionLabel.text = post.title
+                cell.regionFlagImage.image = ImageName.flags[Int(post.region)!]
+                let ratio = 100 - (post.purchasePrice * 100 / post.originPrice)
+                cell.discountRatioLabel.text = "\(ratio)%"
                 cell.productPriceLabel.text = "\(NSLocalizedString("MONEYMARK", comment: "MONEYMARK"))\(cost)"
                 cell.roundingUIView(aView: cell, cornerRadiusParam: 5.0)
             }
@@ -407,6 +419,10 @@ extension StoreViewController: UICollectionViewDataSource {
             if let cost = formatter.string(for: costInt) {
                 cell.productImageView.af_setImage(withURL: URL(string:post.imgUrl1)!)
                 cell.productDescriptionLabel.text = post.title
+                cell.regionFlagImage.image = ImageName.flags[Int(post.region)!]
+                let ratio = 100 - (post.purchasePrice * 100 / post.originPrice)
+                cell.discountRatioLabel.text = "\(ratio)%"
+                
                 cell.productPriceLabel.text = "\(NSLocalizedString("MONEYMARK", comment: "MONEYMARK"))\(cost)"
                 cell.roundingUIView(aView: cell, cornerRadiusParam: 5.0)
             }

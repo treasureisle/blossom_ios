@@ -16,4 +16,7 @@ class ReplyViewCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var heartImageView: UIImageView!
+    @IBOutlet weak var reReplyLabel: UILabel!
+    @IBOutlet weak var reReplyImageView: UIImageView!
+    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
 }

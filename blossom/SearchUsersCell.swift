@@ -10,9 +10,9 @@ import Foundation
 
 import UIKit
 
-class SearchUserCell: UICollectionViewCell {
+class SearchUsersCell: UICollectionViewCell {
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var introduceLabel: UILabel!
-    @IBOutlet weak var followButton: UIButton!
+    
 }

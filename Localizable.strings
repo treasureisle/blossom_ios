@@ -12,9 +12,9 @@
 "REVIEW" = "후 기";
 "STORE" = "스 토 어";
 "MONEYMARK" = "₩";
-"LOGIN_REQUIRED" = "로그인이 필요한 기능입니다.";
+"LOGIN_REQUIRED" = "로그인";
 "SIGNIN" = "회원가입";
-"LOGIN" = "로그인";
+"LOGIN" = "완료";
 "CANCLE" = "취소";
 "EMAIL" = "이메일";
 "PASSWORD" = "비밀번호";

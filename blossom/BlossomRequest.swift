@@ -17,7 +17,7 @@ struct BlossomRequest {
 extension BlossomRequest {
     static func makeHeaders() -> [String:String]? {
         if let me = Session.load(){
-            Mixpanel.sharedInstance().identify(String(me.id))
+            Mixpanel.sharedInstance()?.identify(String(me.id))
             return ["Authorization": String(me.id) + ":" + me.accessToken]
         }
         

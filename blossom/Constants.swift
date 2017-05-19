@@ -116,6 +116,7 @@ struct SegueIdentity {
     static let searchPostsToSignIn = "searchPostsToSignIn"
     static let searchPostsToDetail = "searchPostsToDetail"
     static let replyToProfile = "replyToProfile"
+    static let replyToReply = "replyToReply"
     static let detailToReply = "detailToReply"
     static let feedSellToReply = "feedSellToReply"
     static let feedSellToDetail = "feedSellToDetail"
@@ -183,14 +184,19 @@ struct EventName {
     static let topicPageChanged = "topicPageChanged"
 }
 
+struct Colors {
+    static let shobit_pink = 0xc84e4c
+}
+
 struct ImageName {
     static let btnCancel = "btn_cancel"
     static let unhappy = "unhappy"
-    static let imgHeartN = "img_heart_n"
-    static let imgHeart = "img_heart"
-    static let check_checked = "check_checked"
-    static let check_unchecked = "check_unchecked"
-    
+    static let imgHeartN = "btn_detail_preview_like_nor"
+    static let imgHeart = "btn_detail_preview_like_sel"
+    static let check_checked = "btn_productcheck_sel"
+    static let check_unchecked = "btn_productcheck_nor"
+    static let regions = ["대한민국","미국", "영국", "독일", "호주", "프랑스", "이탈리아", "일본", "스페인"]
+    static let flags = [#imageLiteral(resourceName: "kr"), #imageLiteral(resourceName: "us"), #imageLiteral(resourceName: "uk"), #imageLiteral(resourceName: "de"), #imageLiteral(resourceName: "au"), #imageLiteral(resourceName: "fr"), #imageLiteral(resourceName: "it"), #imageLiteral(resourceName: "jp"), #imageLiteral(resourceName: "es")]
 }
 
 struct Exceptions {

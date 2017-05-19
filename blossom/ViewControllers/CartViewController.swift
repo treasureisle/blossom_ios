@@ -16,19 +16,107 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     var basket = [Basket]()
     
     var isChecked = [Bool]()
+    var numChecked = 0
+    var totalPrice = 0
     var isLoading = true
     var me: Session?
     
-    @IBOutlet weak var topNavigationBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var labelNumChecked: UILabel!
+    @IBOutlet weak var labelTotalPrice: UILabel!
     
     
     @IBAction func purchaseTouched() {
+        for i in 0 ..< basket.count {
+            if isChecked[i] == false {
+                let cellIndexPath = IndexPath(row: i, section: 0)
+                let cell = tableView.cellForRow(at: cellIndexPath) as! BasketViewCell
+                let post = basket[i].post
+                let price = (post.purchasePrice + post.fee) * cell.selectedAmount
+                totalPrice += price
+                numChecked += 1
+                isChecked[i] = true
+                cell.checkButton.setImage(UIImage(named: ImageName.check_checked), for: .normal)
+            }
+        }
+        
+        labelNumChecked.text = "\(numChecked) 아이템"
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        labelTotalPrice.text = "\(formatter.string(for: totalPrice) ?? "0") 원"
+        
         purchaseItems()
     }
     
     @IBAction func cancelTouched() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func checkAll() {
+        var checkedAll = true
+        for i in 0 ..< basket.count {
+            if isChecked[i] == false {
+                checkedAll = false
+                break
+            }
+        }
+        
+        if checkedAll {
+            for i in 0 ..< basket.count {
+                let cellIndexPath = IndexPath(row: i, section: 0)
+                let cell = tableView.cellForRow(at: cellIndexPath) as! BasketViewCell
+                isChecked[i] = false
+                cell.checkButton.setImage(UIImage(named: ImageName.check_unchecked), for: .normal)
+            }
+            totalPrice = 0
+            numChecked = 0
+        } else {
+            for i in 0 ..< basket.count {
+                if isChecked[i] == false {
+                    let cellIndexPath = IndexPath(row: i, section: 0)
+                    let cell = tableView.cellForRow(at: cellIndexPath) as! BasketViewCell
+                    let post = basket[i].post
+                    let price = (post.purchasePrice + post.fee) * cell.selectedAmount
+                    totalPrice += price
+                    numChecked += 1
+                    isChecked[i] = true
+                    cell.checkButton.setImage(UIImage(named: ImageName.check_checked), for: .normal)
+                }
+            }
+        }
+        
+        labelNumChecked.text = "\(numChecked) 아이템"
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        labelTotalPrice.text = "\(formatter.string(for: totalPrice) ?? "0") 원"
+        
+    }
+    
+    @IBAction func delete() {
+        // 삭제확인
+        let alert = BlossomAlertController(message: "Do you want to delete your reply?")
+        alert.addAction(action: BlossomAlertAction(title: "Cancel", style: .Positive, handler: nil))
+        alert.addAction(action: BlossomAlertAction(title: "Yes", style: .Negative, handler: {
+            action in
+            for i in 0 ..< self.basket.count {
+                if self.isChecked[i] {
+                    _ = BlossomRequest.request(method:.delete, endPoint: "\(Api.basket)/\(self.basket[i].id)") {    (response,     statusCode, json) -> () in
+                        if statusCode == 200{
+                            self.refreshBasket()
+                        } else {
+                            self.view.makeSomethingWrongToast()
+                        }
+                        self.hideIndicator()
+                    }
+                }
+            }
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func purchase() {
+        purchaseItems()
     }
     
     // MARK: lifecycle
@@ -63,7 +151,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             (response, statusCode, json) -> () in
             if statusCode == 200{
                 
-                let colorsizes: Array<JSON>= json["color_sizes"].arrayValue
+                let colorsizes: Array<JSON> = json["color_sizes"].arrayValue
                 
                 for colorsize in colorsizes{
                     let temp = ColorSize(o:colorsize)
@@ -89,6 +177,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
                 
                 cell.colorSizeAmountDownPicker = DownPicker(textField: cell.colorSizeAmountTextField, withData: colorSizeAvailable)
+                cell.setAmountSelectedFunc()
                 
                 cell.colorSizeAmountDownPicker.text = "\(basket.amount)"
                 cell.selectedAmount = basket.amount
@@ -115,13 +204,28 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: custom
     func checkItem(sender: UIButton) {
+        let cellIndexPath = IndexPath(row: sender.tag, section: 0)
+        let cell = tableView.cellForRow(at: cellIndexPath) as! BasketViewCell
         if self.isChecked[sender.tag] {
             self.isChecked[sender.tag] = false
             sender.setImage(UIImage(named: ImageName.check_unchecked), for: .normal)
+            let post = basket[sender.tag].post
+            let price = (post.purchasePrice + post.fee) * cell.selectedAmount
+            totalPrice -= price
+            numChecked -= 1
         } else {
             self.isChecked[sender.tag] = true
             sender.setImage(UIImage(named: ImageName.check_checked), for: .normal)
+            let post = basket[sender.tag].post
+            let price = (post.purchasePrice + post.fee) * cell.selectedAmount
+            totalPrice += price
+            numChecked += 1
         }
+        
+        labelNumChecked.text = "\(numChecked) 아이템"
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        labelTotalPrice.text = "\(formatter.string(for: totalPrice) ?? "0") 원"
     }
     
     func purchaseItems(){
@@ -144,27 +248,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tableView.reloadData()
         return
         }
-    }
-    
-    func deleteBasket(indexPath: IndexPath) {
-        let basket = self.basket[indexPath.row]
-        
-        // 삭제확인
-        let alert = BlossomAlertController(message: "Do you want to delete your reply?")
-        alert.addAction(action: BlossomAlertAction(title: "Cancel", style: .Positive, handler: nil))
-        alert.addAction(action: BlossomAlertAction(title: "Yes", style: .Negative, handler: {
-            action in
-            _ = BlossomRequest.request(method:.delete, endPoint: "\(Api.basket)/\(basket.id)") { (response, statusCode, json) -> () in
-                if statusCode == 200{
-                    self.refreshBasket()
-                } else {
-                    self.view.makeSomethingWrongToast()
-                }
-                self.hideIndicator()
-            }
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
     }
     
     func imageTouched(sender: UITapGestureRecognizer) {

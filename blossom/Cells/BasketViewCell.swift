@@ -28,6 +28,10 @@ class BasketViewCell: UITableViewCell {
         self.colorSizeNamesDownPicker.addTarget(self, action: #selector(self.colorSizeNameSelected(dp:)), for: .valueChanged)
     }
     
+    func setAmountSelectedFunc(){
+        self.colorSizeAmountDownPicker.addTarget(self, action: #selector(self.amountSelected(dp:)), for: .valueChanged)
+    }
+    
     func colorSizeNameSelected(dp: Any?) {
         self.colorSizeAmountTextField.isUserInteractionEnabled = true
         let selectedValue = self.colorSizeNamesDownPicker.text
@@ -46,9 +50,11 @@ class BasketViewCell: UITableViewCell {
         
         self.colorSizeAmountDownPicker = DownPicker(textField: self.colorSizeAmountTextField, withData: self.colorSizeAvailable)
         self.colorSizeAmountDownPicker.addTarget(self, action: #selector(self.amountSelected(dp:)), for: .valueChanged)
+        print("selected colorsize: \(self.selectedColorSize.name)")
     }
     
     func amountSelected(dp: Any?) {
         self.selectedAmount = Int(self.colorSizeAmountDownPicker.text)!
+        print("selected amount: \(self.selectedAmount)")
     }
 }

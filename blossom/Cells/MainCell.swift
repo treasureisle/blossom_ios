@@ -9,7 +9,9 @@
 import UIKit
 
 class MainCell: UICollectionViewCell {
+    @IBOutlet weak var regionFlagImage: UIImageView!
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productDescriptionLabel: UILabel!
+    @IBOutlet weak var discountRatioLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
 }

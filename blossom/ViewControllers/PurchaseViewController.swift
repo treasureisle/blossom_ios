@@ -13,12 +13,14 @@ import Mixpanel
 
 class PurchaseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
     
+    var addressDownPicker: DownPicker!
+    var addresses = [Address]()
+    var addressStrings = [String]()
     var orders = [Order]()
     var isLoading = true
     var me: Session?
     var userDetail: UserDetail!
     
-    @IBOutlet weak var topNavigationBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var savedAddressButton: UIButton!
     @IBOutlet weak var recentAddressButton: UIButton!
@@ -28,6 +30,8 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var recieverTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var searchButton: UIButton!
     
     // MARK: lifecycle
     override func viewDidLoad() {
@@ -44,17 +48,25 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
                 self.userDetail = UserDetail(o: json["user_detail"])
                 if self.userDetail.address1.isEmpty {
                     if self.userDetail.recent_add1.isEmpty {
-                        self.savedAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
-                        self.recentAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
-                        self.newAddressButton.setTitleColor(UIColor.blue, for: .normal)
+                        self.savedAddressButton.setTitleColor(UIColor.darkGray, for: .normal)
+                        self.recentAddressButton.setTitleColor(UIColor.darkGray, for: .normal)
+                        self.newAddressButton.setTitleColor(UIColor.white, for: .normal)
+                        self.savedAddressButton.backgroundColor = UIColor.white
+                        self.recentAddressButton.backgroundColor = UIColor.white
+                        self.newAddressButton.backgroundColor = UIColor(htmlColor: Colors.shobit_pink)
                         self.addressTextField.isEnabled = true
                         self.addressDetailTextField.isEnabled = true
                         self.recieverTextField.isEnabled = true
                         self.phoneTextField.isEnabled = true
+                        self.searchTextField.isEnabled = true
+                        self.searchButton.isEnabled = true
                     } else {
-                        self.savedAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
-                        self.recentAddressButton.setTitleColor(UIColor.blue, for: .normal)
-                        self.newAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+                        self.savedAddressButton.setTitleColor(UIColor.darkGray, for: .normal)
+                        self.recentAddressButton.setTitleColor(UIColor.white, for: .normal)
+                        self.newAddressButton.setTitleColor(UIColor.darkGray, for: .normal)
+                        self.savedAddressButton.backgroundColor = UIColor.white
+                        self.recentAddressButton.backgroundColor = UIColor(htmlColor: Colors.shobit_pink)
+                        self.newAddressButton.backgroundColor = UIColor.white
                         self.addressTextField.text = self.userDetail.recent_add1
                         self.addressDetailTextField.text = self.userDetail.recent_add2
                         self.recieverTextField.text = self.userDetail.recent_name
@@ -63,11 +75,16 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
                         self.addressDetailTextField.isEnabled = false
                         self.recieverTextField.isEnabled = false
                         self.phoneTextField.isEnabled = false
+                        self.searchTextField.isEnabled = false
+                        self.searchButton.isEnabled = false
                     }
                 } else {
-                    self.savedAddressButton.setTitleColor(UIColor.blue, for: .normal)
-                    self.recentAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
-                    self.newAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+                    self.savedAddressButton.setTitleColor(UIColor.white, for: .normal)
+                    self.recentAddressButton.setTitleColor(UIColor.darkGray, for: .normal)
+                    self.newAddressButton.setTitleColor(UIColor.darkGray, for: .normal)
+                    self.savedAddressButton.backgroundColor = UIColor(htmlColor: Colors.shobit_pink)
+                    self.recentAddressButton.backgroundColor = UIColor.white
+                    self.newAddressButton.backgroundColor = UIColor.white
                     self.addressTextField.text = self.userDetail.address1
                     self.addressDetailTextField.text = self.userDetail.address2
                     self.recieverTextField.text = self.userDetail.name
@@ -76,6 +93,8 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
                     self.addressDetailTextField.isEnabled = false
                     self.recieverTextField.isEnabled = false
                     self.phoneTextField.isEnabled = false
+                    self.searchTextField.isEnabled = false
+                    self.searchButton.isEnabled = false
                 }
             }
         })
@@ -103,8 +122,12 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
         cell.sellerLabel.addGestureRecognizer(profileGestureRecognizer)
         cell.productNameLabel.text = order.post.title
         cell.colorSizeLabel.text = order.colorSize.name
-        cell.amountLabel.text = String(order.amount)
+        cell.amountLabel.text = "\(order.amount) 개"
         cell.sellerLabel.text = order.post.user.username
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        cell.priceLabel.text = "\(formatter.string(for: order.post.purchasePrice * order.amount) ?? "0") 원"
         
         return cell
     }
@@ -128,9 +151,12 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func savedAddressTouched(){
-        self.savedAddressButton.setTitleColor(UIColor.blue, for: .normal)
-        self.recentAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
-        self.newAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+        self.savedAddressButton.setTitleColor(UIColor.white, for: .normal)
+        self.recentAddressButton.setTitleColor(UIColor.darkGray, for: .normal)
+        self.newAddressButton.setTitleColor(UIColor.darkGray, for: .normal)
+        self.savedAddressButton.backgroundColor = UIColor(htmlColor: Colors.shobit_pink)
+        self.recentAddressButton.backgroundColor = UIColor.white
+        self.newAddressButton.backgroundColor = UIColor.white
         self.addressTextField.text = self.userDetail.address1
         self.addressDetailTextField.text = self.userDetail.address2
         self.recieverTextField.text = self.userDetail.name
@@ -139,12 +165,17 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
         self.addressDetailTextField.isEnabled = false
         self.recieverTextField.isEnabled = false
         self.phoneTextField.isEnabled = false
+        self.searchTextField.isEnabled = false
+        self.searchButton.isEnabled = false
     }
     
     @IBAction func recentAddressTouched(){
-        self.savedAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
-        self.recentAddressButton.setTitleColor(UIColor.blue, for: .normal)
-        self.newAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
+        self.savedAddressButton.setTitleColor(UIColor.darkGray, for: .normal)
+        self.recentAddressButton.setTitleColor(UIColor.white, for: .normal)
+        self.newAddressButton.setTitleColor(UIColor.darkGray, for: .normal)
+        self.savedAddressButton.backgroundColor = UIColor.white
+        self.recentAddressButton.backgroundColor = UIColor(htmlColor: Colors.shobit_pink)
+        self.newAddressButton.backgroundColor = UIColor.white
         self.addressTextField.text = self.userDetail.recent_add1
         self.addressDetailTextField.text = self.userDetail.recent_add2
         self.recieverTextField.text = self.userDetail.recent_name
@@ -153,20 +184,64 @@ class PurchaseViewController: UIViewController, UITableViewDelegate, UITableView
         self.addressDetailTextField.isEnabled = false
         self.recieverTextField.isEnabled = false
         self.phoneTextField.isEnabled = false
+        self.searchTextField.isEnabled = false
+        self.searchButton.isEnabled = false
     }
     
     @IBAction func newAddressTouched(){
-        self.savedAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
-        self.recentAddressButton.setTitleColor(UIColor.lightGray, for: .normal)
-        self.newAddressButton.setTitleColor(UIColor.blue, for: .normal)
+        self.savedAddressButton.setTitleColor(UIColor.darkGray, for: .normal)
+        self.recentAddressButton.setTitleColor(UIColor.darkGray, for: .normal)
+        self.newAddressButton.setTitleColor(UIColor.white, for: .normal)
+        self.savedAddressButton.backgroundColor = UIColor.white
+        self.recentAddressButton.backgroundColor = UIColor.white
+        self.newAddressButton.backgroundColor = UIColor(htmlColor: Colors.shobit_pink)
         self.addressTextField.isEnabled = true
         self.addressDetailTextField.isEnabled = true
         self.recieverTextField.isEnabled = true
         self.phoneTextField.isEnabled = true
+        self.searchTextField.isEnabled = true
+        self.searchButton.isEnabled = true
         self.addressTextField.text = ""
         self.addressDetailTextField.text = ""
         self.recieverTextField.text = ""
         self.phoneTextField.text = ""
+    }
+    
+    @IBAction func searchAddress(){
+        let keyword = self.searchTextField.text!
+        
+        let params = [
+            "confmKey":Config.postalApiKey,
+            "currentPage":"1",
+            "countPerPage":"50",
+            "keyword":keyword,
+            "resultType":"json"
+        ]
+        
+        _ = BlossomRequest.requestStringToJSON(method: .get, endPoint: Api.postalSearch, params: params as [String : String]?) {
+            
+            response, statusCode, json in
+            
+            if statusCode == 200{
+                print(json.rawString() ?? "")
+                self.addresses.removeAll()
+                self.addressStrings.removeAll()
+                let addresses = json["results"]["juso"].arrayValue
+                
+                for addressObject in addresses{
+                    let address = Address(o: addressObject)
+                    self.addresses.append(address)
+                    self.addressStrings.append(address.jibunAddr)
+                    print(address.zipNo)
+                }
+                
+                self.addressDownPicker = DownPicker(textField: self.addressTextField, withData: self.addressStrings)
+
+            }else{
+                self.view.makeSomethingWrongToast()
+            }
+        }
+
     }
     
     // MARK: custom

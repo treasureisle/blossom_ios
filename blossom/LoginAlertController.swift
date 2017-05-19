@@ -80,10 +80,10 @@ class SigninAction: NSObject {
 
 // MARK: LoginAlertController
 class LoginAlertController: UIViewController, UIViewControllerTransitioningDelegate, KeyboardObserverDelegate {
-    final let alertWidth = 300
-    final let buttonHeight = 60
-    final let textHeight = 40
-    var messageTextSize: CGFloat = 16
+    final let alertWidth = 247
+    final let buttonHeight = 38
+    final let textHeight = 38
+    var messageTextSize: CGFloat = 20
     final let buttonTextSize: CGFloat = 24
     
     var signinAction: SigninAction?
@@ -91,14 +91,13 @@ class LoginAlertController: UIViewController, UIViewControllerTransitioningDeleg
     var message: String?
     
     var overlayView = UIView() // 가장바깥 overlay
-    var containerView = UIView() // 전체 영역 container
+    var containerView = UIButton() // 전체 영역 container
     var wrapperView = UIView() // 팝업 wrapper
     var messageLabel = UILabel() // 팝업 제목
     var emailField = UITextField() // 이메일 입력
     var passwordField = UITextField() // 비밀번호 입력
     var loginButton = UIButton()
     var signinButton = UIButton()
-    var cancleButton = UIButton()
     
     var keyboardObserver: KeyboardObserver!
     var containerBottomConst: Constraint!
@@ -127,6 +126,9 @@ class LoginAlertController: UIViewController, UIViewControllerTransitioningDeleg
             make.top.bottom.left.right.equalTo(self.view)
         }
         
+        containerView.addTarget(self, action: #selector(buttonTouched), for: .touchUpInside)
+        containerView.addTarget(self, action: #selector(buttonTouchDown), for: .touchDown)
+        
         containerView.snp.makeConstraints { (make) -> Void in
             make.top.left.right.equalTo(self.view)
             containerBottomConst = make.bottom.equalTo(self.view).constraint
@@ -145,40 +147,24 @@ class LoginAlertController: UIViewController, UIViewControllerTransitioningDeleg
         }
         
         emailField.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(wrapperView).offset(70)
+            make.top.equalTo(messageLabel.snp.bottom).offset(10)
             make.left.equalTo(wrapperView)
             make.width.equalTo(wrapperView)
             make.height.equalTo(textHeight)
         }
         
         passwordField.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(wrapperView).offset(111)
+            make.top.equalTo(emailField.snp.bottom).offset(10)
             make.left.equalTo(wrapperView)
             make.width.equalTo(wrapperView)
             make.height.equalTo(textHeight)
 
         }
         
-        cancleButton.layer.masksToBounds = true
-        cancleButton.tag = 0
-        cancleButton.backgroundColor = UIColor.darkGray
-        cancleButton.setTitle("X", for: .normal)
-        cancleButton.setTitleColor(UIColor.white, for: .normal)
-        cancleButton.addTarget(self, action: #selector(buttonTouched), for: .touchUpInside)
-        cancleButton.addTarget(self, action: #selector(buttonTouchDown), for: .touchDown)
-        
-        self.wrapperView.addSubview(cancleButton)
-        
-        cancleButton.snp.remakeConstraints({ (make) -> Void in
-            make.right.equalTo(wrapperView).offset(-5)
-            make.top.equalTo(wrapperView).offset(5)
-            make.width.equalTo(20)
-            make.height.equalTo(20)
-        })
-        
         loginButton.layer.masksToBounds = true
         loginButton.tag = 1
-        loginButton.backgroundColor = UIColor.gray
+        loginButton.setBackgroundImage(#imageLiteral(resourceName: "btn_login_nor"), for: .normal)
+        loginButton.setBackgroundImage(#imageLiteral(resourceName: "btn_login_sel"), for: .highlighted)
         loginButton.setTitle(NSLocalizedString("LOGIN", comment: ""), for: .normal)
         loginButton.setTitleColor(UIColor.white, for: .normal)
         loginButton.addTarget(self, action: #selector(buttonTouched), for: .touchUpInside)
@@ -188,7 +174,8 @@ class LoginAlertController: UIViewController, UIViewControllerTransitioningDeleg
         
         signinButton.layer.masksToBounds = true
         signinButton.tag = 2
-        signinButton.backgroundColor = UIColor.gray
+        signinButton.setBackgroundImage(#imageLiteral(resourceName: "btn_login_nor"), for: .normal)
+        signinButton.setBackgroundImage(#imageLiteral(resourceName: "btn_login_sel"), for: .highlighted)
         signinButton.setTitle(NSLocalizedString("SIGNIN", comment: ""), for: .normal)
         signinButton.setTitleColor(UIColor.white, for: .normal)
         signinButton.addTarget(self, action: #selector(buttonTouched), for: .touchUpInside)
@@ -206,14 +193,14 @@ class LoginAlertController: UIViewController, UIViewControllerTransitioningDeleg
             make.left.equalTo(wrapperView)
             make.width.equalTo(wrapperView)
             make.height.equalTo(buttonHeight)
-            make.top.equalTo(passwordField.snp.bottom)
+            make.top.equalTo(passwordField.snp.bottom).offset(10)
         })
         
         signinButton.snp.remakeConstraints({ (make) -> Void in
             make.left.equalTo(wrapperView)
             make.width.equalTo(wrapperView)
             make.height.equalTo(buttonHeight)
-            make.top.equalTo(loginButton.snp.bottom).offset(1)
+            make.top.equalTo(loginButton.snp.bottom).offset(10)
         })
         
         keyboardObserver = KeyboardObserver()
@@ -291,29 +278,31 @@ class LoginAlertController: UIViewController, UIViewControllerTransitioningDeleg
     }
     
     func buttonTouchDown(sender: UIButton){
-        sender.backgroundColor = UIColor.gray
     }
     
     func layoutViews(){
         self.overlayView.backgroundColor = UIColor(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.5)
         
-        self.wrapperView.backgroundColor = UIColor.darkGray
+//        self.wrapperView.backgroundColor = UIColor.darkGray
         
-        self.messageLabel.textColor = UIColor.black
+        self.messageLabel.textColor = UIColor.white
         self.messageLabel.text = NSLocalizedString("LOGIN_REQUIRED", comment: "")
         self.messageLabel.textAlignment = .center
+        self.messageLabel.font = UIFont.systemFont(ofSize: messageTextSize)
         self.messageLabel.numberOfLines = 0
         self.messageLabel.lineBreakMode = .byWordWrapping
         
         self.emailField.placeholder = NSLocalizedString("EMAIL", comment: "")
-        self.emailField.backgroundColor = UIColor.white
+        self.emailField.background = #imageLiteral(resourceName: "img_login_idpw")
         self.emailField.textColor = UIColor.black
+        self.emailField.textAlignment = .center
         self.emailField.text = ""
         
         self.passwordField.placeholder = NSLocalizedString("PASSWORD", comment: "")
-        self.passwordField.backgroundColor = UIColor.white
+        self.passwordField.background = #imageLiteral(resourceName: "img_login_idpw")
         self.passwordField.textColor = UIColor.black
         self.passwordField.isSecureTextEntry = true
+        self.passwordField.textAlignment = .center
         self.passwordField.text = ""
         
         

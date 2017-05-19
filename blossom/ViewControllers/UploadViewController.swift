@@ -10,36 +10,39 @@ import Foundation
 import UIKit
 
 class UploadViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    @IBOutlet weak var buttonImage1: UIButton?
-    @IBOutlet weak var buttonImage2: UIButton?
-    @IBOutlet weak var buttonImage3: UIButton?
-    @IBOutlet weak var buttonImage4: UIButton?
-    @IBOutlet weak var buttonImage5: UIButton?
-    @IBOutlet weak var pictureDimButton: UIButton?
-    @IBOutlet weak var pictureView: UIView?
-    @IBOutlet weak var cameraButton: UIButton?
-    @IBOutlet weak var albumButtom: UIButton?
+    @IBOutlet weak var buttonImage1: UIButton!
+    @IBOutlet weak var buttonImage2: UIButton!
+    @IBOutlet weak var buttonImage3: UIButton!
+    @IBOutlet weak var buttonImage4: UIButton!
+    @IBOutlet weak var buttonImage5: UIButton!
+    @IBOutlet weak var pictureDimButton: UIButton!
+    @IBOutlet weak var pictureView: UIView!
+    @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var albumButtom: UIButton!
     @IBOutlet weak var pictureLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var uploadButton: UIButton?
+    @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var uploadButtonBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var titleTextField: UITextField?
-    @IBOutlet weak var brandTextField: UITextField?
-    @IBOutlet weak var productNameTextField: UITextField?
-    @IBOutlet weak var originPriceTextField: UITextField?
-    @IBOutlet weak var purchasePriceTextField: UITextField?
-    @IBOutlet weak var feeTextField: UITextField?
-    @IBOutlet weak var deliveryFeeTextField: UITextField?
-    @IBOutlet weak var colorSizeTextField: UITextField?
-    @IBOutlet weak var availableTextField: UITextField?
-    @IBOutlet weak var nationTextField: UITextField?
-    @IBOutlet weak var hashtagTextField: UITextField?
-    @IBOutlet weak var detailTextView: UITextView?
-    @IBOutlet weak var scrollView: UIScrollView?
-    @IBOutlet weak var contentsView: UIView?
-    @IBOutlet weak var colorSizeLabel: UILabel?
-    @IBOutlet weak var hashtagLabel: UILabel?
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var brandTextField: UITextField!
+    @IBOutlet weak var productNameTextField: UITextField!
+    @IBOutlet weak var originPriceTextField: UITextField!
+    @IBOutlet weak var purchasePriceTextField: UITextField!
+    @IBOutlet weak var feeTextField: UITextField!
+    @IBOutlet weak var deliveryFeeTextField: UITextField!
+    @IBOutlet weak var colorSizeTextField: UITextField!
+    @IBOutlet weak var availableTextField: UITextField!
+    @IBOutlet weak var regionTextField: UITextField!
+    @IBOutlet weak var hashtagTextField: UITextField!
+    @IBOutlet weak var detailTextView: UITextView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var colorSizeLabel: UILabel!
+    @IBOutlet weak var hashtagLabel: UILabel!
+    
+    @IBOutlet weak var hashtagHeightConstraints:NSLayoutConstraint!
+    @IBOutlet weak var colorSizeHeightConstraints:NSLayoutConstraint!
     
     let imagePicker = UIImagePickerController()
+    var regionDownPicker: DownPicker?
     var keyboardObserver: KeyboardObserver?
     var postType: Int = 0 //0:판매 1:구매 2:리뷰
     var imageNumber: Int = 0
@@ -57,9 +60,8 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
-        self.detailTextView?.layer.borderColor = UIColor.black.cgColor
-        self.detailTextView?.layer.borderWidth = 1.0
         self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(self.touches(_:))))
+        regionDownPicker = DownPicker(textField: regionTextField, withData: ImageName.regions)
         keyboardObserver = KeyboardObserver(bottomConstraint: uploadButtonBottomConstraint, rootView: self.view)
         keyboardObserver!.startObserving()
         print("postType:\(self.postType)")
@@ -106,7 +108,7 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate, UI
             self.availableTextField?.text = ""
             
             self.colorSizeLabel?.text = colorsizeString
-            self.colorSizeLabel?.sizeToFit()
+            updateColorsizeConstraints()
         }
     }
     
@@ -132,7 +134,8 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate, UI
             self.hashtagTextField?.text = ""
             
             self.hashtagLabel?.text = hashtagString
-            self.hashtagLabel?.sizeToFit()
+            updateHashtagConstraints()
+
         }
     }
     
@@ -161,7 +164,8 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate, UI
             multipartFormData.append((self.originPriceTextField?.text?.data(using: String.Encoding.utf8))!, withName: "origin_price")
             multipartFormData.append((self.purchasePriceTextField?.text?.data(using: String.Encoding.utf8))!, withName: "purchase_price")
             multipartFormData.append((self.feeTextField?.text?.data(using: String.Encoding.utf8))!, withName: "fee")
-            multipartFormData.append((self.nationTextField?.text?.data(using: String.Encoding.utf8))!, withName: "region")
+            let region = ImageName.regions.index(of: self.regionTextField.text!)
+            multipartFormData.append((String(region!).data(using: String.Encoding.utf8))!, withName: "region")
             multipartFormData.append((self.hashtagTextField?.text?.data(using: String.Encoding.utf8))!, withName: "hashtag")
             multipartFormData.append((self.detailTextView?.text?.data(using: String.Encoding.utf8))!, withName: "text")
 
@@ -338,6 +342,27 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate, UI
         
         imagePicker.dismiss(animated: true, completion: nil)
         
+    }
+    
+    func updateColorsizeConstraints() {
+        colorSizeHeightConstraints.constant = CGFloat(18 * colorSizes.count)
+        
+        UIView.animate(withDuration: 0.5, delay: TimeInterval(0), options: UIViewAnimationOptions.curveEaseOut, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        }, completion: { (finished) -> Void in
+            // do nothing..
+        })
+    }
+    
+    func updateHashtagConstraints() {
+        
+        hashtagHeightConstraints.constant = CGFloat(18 * hashtags.count)
+        
+        UIView.animate(withDuration: 0.5, delay: TimeInterval(0), options: UIViewAnimationOptions.curveEaseOut, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        }, completion: { (finished) -> Void in
+            // do nothing..
+        })
     }
     
     // MARK: Custom

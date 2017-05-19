@@ -15,10 +15,13 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
     @IBOutlet weak var writerProfileImageView: UIImageView!
     @IBOutlet weak var writerProfileNameLabel: UILabel!
     @IBOutlet weak var writerProfileDetail: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var brandLabel: UILabel!
     @IBOutlet weak var productNameLabel: UILabel!
+    @IBOutlet weak var discountRatioLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var originPriceLabel: UILabel!
+    @IBOutlet weak var feeLabel: UILabel!
+    @IBOutlet weak var deliveryPrice: UILabel!
     @IBOutlet weak var colorSizeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var hashtagLabel: UILabel!
@@ -32,6 +35,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var replyLabel: UILabel!
     @IBOutlet weak var putCartButton: UIButton!
+    @IBOutlet weak var btnLike: UIButton!
     
     var me: Session?
     var colorSizes: [ColorSize] = []
@@ -57,6 +61,11 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
         
     }
     
+    @IBAction func closeTouched() {
+        self.purchaseView.isHidden = true
+    }
+    
+    
     @IBAction func cartTouched() {
         if self.purchaseView.isHidden {
             self.purchaseView.isHidden = false
@@ -71,10 +80,11 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
                 if statusCode == 200{
                     self.post!.isLiked = false
                     self.post!.likes -= 1
-                    self.likeLabel.text = String(self.post!.likes)
+                    self.btnLike.setImage(#imageLiteral(resourceName: "btn_detail_like_nor"), for: .normal)
+                    self.likeLabel.text = "좋아요 \(self.post!.likes)개"
                 } else if statusCode == 404 {
                     self.post!.isLiked = false
-                    
+                    self.btnLike.setImage(#imageLiteral(resourceName: "btn_detail_like_nor"), for: .normal)
                 }
             }
         } else {
@@ -82,9 +92,11 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
                 if statusCode == 200{
                     self.post!.isLiked = true
                     self.post!.likes += 1
-                    self.likeLabel.text = String(self.post!.likes)
+                    self.btnLike.setImage(#imageLiteral(resourceName: "btn_detail_like_sel"), for: .normal)
+                    self.likeLabel.text = "좋아요 \(self.post!.likes)개"
                 } else if statusCode == 409 {
                     self.post!.isLiked = true
+                    self.btnLike.setImage(#imageLiteral(resourceName: "btn_detail_like_sel"), for: .normal)
                 }
             }
         }
@@ -158,7 +170,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
         super.viewDidLoad()
         
         self.me = Session.load()
-        self.writerProfileImageView?.makeCircularImageView()
+        self.writerProfileImageView.makeCircularImageView()
         self.putCartButton.isEnabled = false
         
         _ = BlossomRequest.request(method: .get, endPoint: "\(Api.post)/\(self.postId)") { (response, statusCode, json) -> () in
@@ -167,19 +179,40 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
                 let postDetail = Post(o: post)
                 self.post = postDetail
                 
-                self.writerProfileImageView?.af_setImage(withURL: URL(string:postDetail.user.profileThumbUrl)!)
-                self.writerProfileNameLabel?.text = postDetail.user.username
-                self.writerProfileDetail?.text = postDetail.user.introduce
-                self.titleLabel?.text = "\(NSLocalizedString("TITLE", comment: "")): \(postDetail.title)"
-                self.brandLabel?.text = "\(NSLocalizedString("BRAND", comment: "")): \(postDetail.brand)"
-                self.productNameLabel?.text = "\(NSLocalizedString("PRODUCT_NAME", comment: "")): \(postDetail.productName)"
-                self.priceLabel?.text = "\(NSLocalizedString("PRICE", comment: "")): \(postDetail.purchasePrice)+\(postDetail.fee)"
-                self.locationLabel?.text = "\(NSLocalizedString("REGION", comment: "")): \(postDetail.region)"
-                self.detailLabel?.text = postDetail.text
-                self.detailLabel?.sizeToFit()
-                self.likeLabel?.text = String(postDetail.likes)
-                self.replyLabel?.text = String(postDetail.replies)
+                let ratio = 100 - (postDetail.purchasePrice * 100 / postDetail.originPrice)
+                
+                let formatter = NumberFormatter()
+                formatter.numberStyle = .decimal
+                
+                self.writerProfileImageView.af_setImage(withURL: URL(string:postDetail.user.profileThumbUrl)!)
+                self.writerProfileNameLabel.text = postDetail.user.username
+                self.writerProfileDetail.text = postDetail.user.introduce
+                self.brandLabel.text = postDetail.brand
+                self.productNameLabel.text = postDetail.productName
+                self.discountRatioLabel.text = "\(ratio)%"
+                self.discountRatioLabel.sizeToFit()
+                self.priceLabel.text = formatter.string(for: postDetail.purchasePrice)
+                self.priceLabel.sizeToFit()
+                
+                
+                let attributedString = NSMutableAttributedString(string: formatter.string(for: postDetail.originPrice)!)
+                attributedString.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSRange(location: 0, length: attributedString.length))
+                self.originPriceLabel.attributedText = attributedString
+                self.feeLabel.text = formatter.string(for: postDetail.fee)
+                self.deliveryPrice.text = formatter.string(for: 5000)
+                self.hashtagLabel.text = postDetail.hashtag
+                self.locationLabel.text = "\(ImageName.regions[Int(postDetail.region)!])"
+                self.detailLabel.text = postDetail.text
+                self.detailLabel.sizeToFit()
+                self.likeLabel.text = "좋아요 \(postDetail.likes)개"
+                self.replyLabel.text = "댓글 \(postDetail.replies)개"
                 self.purchaseTitleLabel?.text = postDetail.productName
+                
+                if postDetail.isLiked {
+                    self.btnLike.setImage(#imageLiteral(resourceName: "btn_detail_like_sel"), for: .normal)
+                } else {
+                    self.btnLike.setImage(#imageLiteral(resourceName: "btn_detail_like_nor"), for: .normal)
+                }
                 
                 Alamofire.request((self.post?.imgUrl1)!).responseImage {
                     response in
@@ -247,24 +280,24 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
             }
         }
         
-        _ = BlossomRequest.request(method: .get, endPoint: "\(Api.hashtag)/\(self.postId)") { (response, statusCode, json) -> () in
-            if statusCode == 200{
-                let hashtags = json["hashtag"].arrayValue
-                
-                var hashtagLabelText = ""
-                
-                for hashtag in hashtags {
-                    let tempHashtag = Hashtag(o: hashtag)
-                    if tempHashtag.hidden == 0 {
-                        self.hashtags.append(tempHashtag)
-                        hashtagLabelText = "\(hashtagLabelText)#\(tempHashtag.name) "
-                    }
-                }
-                self.hashtagLabel.text = hashtagLabelText
-                self.hashtagLabel.sizeToFit()
-
-            }
-        }
+//        _ = BlossomRequest.request(method: .get, endPoint: "\(Api.hashtag)/\(self.postId)") { (response, statusCode, json) -> () in
+//            if statusCode == 200{
+//                let hashtags = json["hashtag"].arrayValue
+//                
+//                var hashtagLabelText = ""
+//                
+//                for hashtag in hashtags {
+//                    let tempHashtag = Hashtag(o: hashtag)
+//                    if tempHashtag.hidden == 0 {
+//                        self.hashtags.append(tempHashtag)
+//                        hashtagLabelText = "\(hashtagLabelText)#\(tempHashtag.name) "
+//                    }
+//                }
+//                self.hashtagLabel.text = hashtagLabelText
+//                self.hashtagLabel.sizeToFit()
+//
+//            }
+//        }
         
         self.writerProfileImageView.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(self.profileTouched(_:))))
         self.writerProfileImageView.isUserInteractionEnabled = true

@@ -11,11 +11,6 @@ import Foundation
 class SearchPostsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var viewUploadMenu: UIView!
-    @IBOutlet weak var uploadSellButton: UIButton!
-    @IBOutlet weak var uploadBuyButton: UIButton!
-    @IBOutlet weak var uploadReviewButton: UIButton!
-    @IBOutlet weak var uploadMenuDim: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     
     var searchType = 0 //0:title 1:hashtag
@@ -28,125 +23,6 @@ class SearchPostsViewController: UIViewController, UICollectionViewDelegate, UIC
     var postType = 0
     var me: Session?
     
-    
-    @IBAction func homeTouched(sender: UIButton) {
-        self.performSegue(withIdentifier: SegueIdentity.searchPostsToMain, sender: self)
-    }
-    
-    @IBAction func feedTouched(sender: UIButton) {
-        if self.me != nil{
-            self.performSegue(withIdentifier: SegueIdentity.searchPostsToFeed, sender: self)
-        } else {
-            let alert = LoginAlertController()
-            alert.setSigninAction(action: SigninAction(handler: {
-                action in
-                if self.presentedViewController == nil {
-                    self.performSegue(withIdentifier: SegueIdentity.searchPostsToSignIn, sender: self)
-                } else {
-                    self.dismiss(animated: false) {
-                        () -> Void in
-                        self.performSegue(withIdentifier: SegueIdentity.searchPostsToSignIn, sender: self)
-                    }
-                }
-            }))
-            
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    @IBAction func sellUploadTouched(sender: UIButton) {
-        self.postType = 0
-        self.upload()
-        self.uploadMenuDim.isHidden = true
-        self.uploadMenuDim.isEnabled = false
-        self.viewUploadMenu.isHidden = true
-        self.uploadSellButton.isEnabled = false
-        self.uploadBuyButton.isEnabled = false
-        self.uploadReviewButton.isEnabled = false
-    }
-    
-    @IBAction func buyUploadTouched(sender: UIButton) {
-        self.postType = 1
-        self.upload()
-        self.uploadMenuDim.isHidden = true
-        self.uploadMenuDim.isEnabled = false
-        self.viewUploadMenu.isHidden = true
-        self.uploadSellButton.isEnabled = false
-        self.uploadBuyButton.isEnabled = false
-        self.uploadReviewButton.isEnabled = false
-    }
-    
-    @IBAction func reviewUploadTouched(sender: UIButton) {
-        self.postType = 2
-        self.upload()
-        self.uploadMenuDim.isHidden = true
-        self.uploadMenuDim.isEnabled = false
-        self.viewUploadMenu.isHidden = true
-        self.uploadSellButton.isEnabled = false
-        self.uploadBuyButton.isEnabled = false
-        self.uploadReviewButton.isEnabled = false
-    }
-    
-    @IBAction func dimTouched(sender: UIButton) {
-        self.uploadMenuDim.isHidden = true
-        self.uploadMenuDim.isEnabled = false
-        self.viewUploadMenu.isHidden = true
-        self.uploadSellButton.isEnabled = false
-        self.uploadBuyButton.isEnabled = false
-        self.uploadReviewButton.isEnabled = false
-    }
-    
-    @IBAction func uploadTouched(sender: UIButton) {
-        if self.me != nil{
-            self.uploadMenuDim.isHidden = false
-            self.uploadMenuDim.isEnabled = true
-            self.viewUploadMenu.isHidden = false
-            self.uploadSellButton.isEnabled = true
-            self.uploadBuyButton.isEnabled = true
-            self.uploadReviewButton.isEnabled = true
-        } else {
-            let alert = LoginAlertController()
-            alert.setSigninAction(action: SigninAction(handler: {
-                action in
-                if self.presentedViewController == nil {
-                    self.performSegue(withIdentifier: SegueIdentity.searchPostsToSignIn, sender: self)
-                } else {
-                    self.dismiss(animated: false) {
-                        () -> Void in
-                        self.performSegue(withIdentifier: SegueIdentity.searchPostsToSignIn, sender: self)
-                    }
-                }
-            }))
-            
-            self.present(alert, animated: true, completion: nil)
-        }
-        
-    }
-    
-    @IBAction func cartTouched(sender: UIButton) {
-        
-    }
-    
-    @IBAction func profileTouched(sender: UIButton) {
-        if self.me != nil{
-            performSegue(withIdentifier: SegueIdentity.searchPostsToProfile, sender: me!.id)
-        } else {
-            let alert = LoginAlertController()
-            alert.setSigninAction(action: SigninAction(handler: {
-                action in
-                if self.presentedViewController == nil {
-                    self.performSegue(withIdentifier: SegueIdentity.searchPostsToSignIn, sender: self)
-                } else {
-                    self.dismiss(animated: false) {
-                        () -> Void in
-                        self.performSegue(withIdentifier: SegueIdentity.searchPostsToSignIn, sender: self)
-                    }
-                }
-            }))
-            
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
     
     // MARK: - Lifecycle
     
@@ -161,6 +37,11 @@ class SearchPostsViewController: UIViewController, UICollectionViewDelegate, UIC
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
+    @IBAction func cancleTouched() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     func search(){
         if !lastPageFetched {
@@ -199,9 +80,6 @@ class SearchPostsViewController: UIViewController, UICollectionViewDelegate, UIC
         }
     }
     
-    func upload(){
-        performSegue(withIdentifier: SegueIdentity.searchPostsToUpload, sender: self)
-    }
 }
 
 extension SearchPostsViewController {
@@ -244,8 +122,12 @@ extension SearchPostsViewController {
         let costInt = post.purchasePrice + post.fee
         
         if let cost = formatter.string(for: costInt) {
+            
             cell.productImageView.af_setImage(withURL: URL(string:post.imgUrl1)!)
             cell.productDescriptionLabel.text = post.title
+            cell.regionFlagImage.image = ImageName.flags[Int(post.region)!]
+            let ratio = 100 - (post.purchasePrice * 100 / post.originPrice)
+            cell.discountRatioLabel.text = "\(ratio)%"
             cell.productPriceLabel.text = "\(NSLocalizedString("MONEYMARK", comment: "MONEYMARK"))\(cost)"
             cell.roundingUIView(aView: cell, cornerRadiusParam: 5.0)
         }

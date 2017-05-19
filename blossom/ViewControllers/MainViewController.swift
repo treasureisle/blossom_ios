@@ -220,7 +220,27 @@ class MainViewController: UIViewController {
         log.info("API Url: \(apiUrl)")
         
         let pagingMenuController = self.childViewControllers.first as! PagingMenuController
-        pagingMenuController.delegate = self
+        pagingMenuController.onMove = { state in
+            switch state {
+            case let .willMoveController(menuController, previousMenuController):
+                print(previousMenuController)
+                print(menuController)
+            case let .didMoveController(menuController, previousMenuController):
+                print(previousMenuController)
+                print(menuController)
+            case let .willMoveItem(menuItemView, previousMenuItemView):
+                print(previousMenuItemView)
+                print(menuItemView)
+            case let .didMoveItem(menuItemView, previousMenuItemView):
+                print(previousMenuItemView)
+                print(menuItemView)
+            case .didScrollStart:
+                print("Scroll start")
+            case .didScrollEnd:
+                print("Scroll end")
+            }
+        }
+        
         pagingMenuController.setup(PagingMenuOptions1())
         
     }
@@ -248,7 +268,7 @@ class MainViewController: UIViewController {
                 response, statusCode, json in
                 if statusCode == 200{
                     log.debug("login success")
-                    Mixpanel.sharedInstance().identify(String(me.id))
+                    Mixpanel.sharedInstance()?.identify(String(me.id))
                     
                 }else{
                     log.debug("다른기기에서의 로그인이 확인되어 다시 로그인합니다.")
@@ -287,29 +307,4 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: PagingMenuControllerDelegate {
-    // MARK: - PagingMenuControllerDelegate
-    func willMove(toMenu menuController: UIViewController, fromMenu previousMenuController: UIViewController) {
-        print(#function)
-        print(previousMenuController)
-        print(menuController)
-    }
-    
-    func didMove(toMenu menuController: UIViewController, fromMenu previousMenuController: UIViewController) {
-        print(#function)
-        print(previousMenuController)
-        print(menuController)
-    }
-    
-    func willMove(toMenuItem menuItemView: MenuItemView, fromMenuItem previousMenuItemView: MenuItemView) {
-        print(#function)
-        print(previousMenuItemView)
-        print(menuItemView)
-    }
-    
-    func didMove(toMenuItem menuItemView: MenuItemView, fromMenuItem previousMenuItemView: MenuItemView) {
-        print(#function)
-        print(previousMenuItemView)
-        print(menuItemView)
-    }
-}
+

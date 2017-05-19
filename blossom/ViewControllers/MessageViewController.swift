@@ -114,7 +114,7 @@ class MessageViewController: UIViewController, UITableViewDelegate, UITableViewD
         _ = BlossomRequest.request(method: .get, endPoint: "\(Api.messages)/\(sender?.id)") {
             (response, statusCode, json) -> () in
             if statusCode == 200{
-                let messages: Array<JSON>= json["messages"].arrayValue
+                let messages: Array<JSON> = json["messages"].arrayValue
                 
                 for messageObject in messages{
                     let message = Message(o: messageObject)

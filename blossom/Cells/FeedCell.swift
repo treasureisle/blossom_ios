@@ -46,8 +46,14 @@ class FeedCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionVi
         self.profileThumbnailImageView.makeCircularImageView()
         self.profileThumbnailImageView.image = nil
         self.profileThumbnailImageView.af_setImage(withURL: URL(string: self.post!.user.profileThumbUrl)!)
-        self.likeLabel.text = String(self.post!.likes)
-        self.replyLabel.text = String(self.post!.replies)
+        self.likeLabel.text = "좋아요 \(self.post!.likes)개"
+        self.replyLabel.text = "댓글 \(self.post!.replies)개"
+        
+        if post.isLiked {
+            likeButton.setImage(#imageLiteral(resourceName: "btn_feed_like_sel"), for: .normal)
+        } else {
+            likeButton.setImage(#imageLiteral(resourceName: "btn_feed_like_nor"), for: .normal)
+        }
         
         Alamofire.request((self.post?.imgUrl1)!).responseImage {
             response in

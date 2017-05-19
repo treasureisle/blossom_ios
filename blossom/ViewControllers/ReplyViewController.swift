@@ -28,6 +28,9 @@ class ReplyUITapGestureRecognizer : UITapGestureRecognizer {
 
 class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UITextFieldDelegate{
     
+    var replyUrl: String!
+    var replyPostUrl: String!
+    var parentId = 0
     var replies = [Reply]()
     var page = 1
     var isLoading = true
@@ -37,7 +40,6 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var keyboardObserver: KeyboardObserver?
     var exitDelegate: ReplyViewControllerOnExitListener?
     
-    @IBOutlet weak var topNavigationBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var textFieldBottomConstraint: NSLayoutConstraint!
@@ -59,6 +61,14 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.dataSource = self
         textField.delegate = self
         tableView.delegate = self
+        
+        replyPostUrl = "\(apiUrl)/reply/\(postId)"
+        
+        if parentId == 0 {
+            replyUrl = "\(apiUrl)/reply/\(postId)"
+        } else {
+            replyUrl = "\(apiUrl)/reply_detail/\(postId)/\(parentId)"
+        }
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(self.touches(_:))))
         
@@ -83,6 +93,8 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let reply = getReplyWithIndexPath(indexPath: indexPath)
         let profileGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(ReplyViewController.profileTouched(sender:)))
         
+        cell.leadingConstraint.constant = CGFloat(12 + reply.depth * 20)
+        
         cell.profileImageView.isUserInteractionEnabled = true
         cell.profileImageView.addGestureRecognizer(profileGestureRecognizer)
         cell.profileImageView.af_setImage(withURL: URL(string: reply.user.profileThumbUrl)!)
@@ -92,7 +104,8 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.replyLabel.text = reply.text
         let imageName = reply.isLiked ? ImageName.imgHeart : ImageName.imgHeartN
         cell.heartImageView.image = UIImage(named: imageName)
-        cell.likesLabel.text = "\(reply.likes)"
+        cell.likesLabel.text = "좋아요 \(reply.likes)개"
+        cell.reReplyLabel.text = "댓글 \(reply.replies)개"
         
         let recognizer = ReplyUILongPressGestureRecognizer(target: self, action: #selector(ReplyViewController.longTouched(recognizer:)))
         recognizer.minimumPressDuration = 0.5
@@ -103,7 +116,19 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
         likeGuestureRecognizer.indexPath = indexPath
         likeGuestureRecognizer.replyCell = cell
         
-        cell.addGestureRecognizer(likeGuestureRecognizer)
+        cell.likesLabel.addGestureRecognizer(likeGuestureRecognizer)
+        cell.heartImageView.addGestureRecognizer(likeGuestureRecognizer)
+        cell.likesLabel.isUserInteractionEnabled = true
+        cell.heartImageView.isUserInteractionEnabled = true
+        
+        let replyGuestureRecognizer = ReplyUITapGestureRecognizer(target: self, action: #selector(ReplyViewController.moveToReReply(sender:)))
+        replyGuestureRecognizer.indexPath = indexPath
+        replyGuestureRecognizer.replyCell = cell
+        
+        cell.reReplyLabel.addGestureRecognizer(replyGuestureRecognizer)
+        cell.reReplyImageView.addGestureRecognizer(replyGuestureRecognizer)
+        cell.reReplyLabel.isUserInteractionEnabled = true
+        cell.reReplyImageView.isUserInteractionEnabled = true
         
         return cell
     }
@@ -111,7 +136,7 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let text = getReplyWithIndexPath(indexPath: indexPath).text
         let bottomMargin: CGFloat = 30.0
-        let profileHeight: CGFloat = 72.0
+        let profileHeight: CGFloat = 80.0
         let usernameMargin: CGFloat = 34
         
         let replyLabelSize = CGSize.init(width: self.view.frame.width - 166, height: CGFloat.greatestFiniteMagnitude)
@@ -148,6 +173,10 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if segue.identifier == SegueIdentity.replyToProfile {
             let profileViewController = segue.destination as! ProfileViewController
             profileViewController.userId = sender as? Int
+        } else if segue.identifier == SegueIdentity.replyToReply {
+            let replyViewController = segue.destination as! ReplyViewController
+            replyViewController.postId = postId
+            replyViewController.parentId = sender as! Int
         }
     }
     
@@ -181,27 +210,64 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
         isLoading = true
         
         self.showIndicator()
-        _ = BlossomRequest.request(method: .get, endPoint: "\(Api.reply)/\(postId)?page=\(page)") {
+        _ = BlossomRequest.request(method: .get, endPoint: "\(replyUrl!)?page=\(page)") {
             (response, statusCode, json) -> () in
             if statusCode == 200{
                 if self.page == 1{
                     self.replies.removeAll(keepingCapacity: false)
                     self.refreshTable()
                 }
-                let replies: Array<JSON>= json["replies"].arrayValue
+                let replies: Array<JSON> = json["replies"].arrayValue
                 if replies.count == 0{
                     self.isEndOfData = true
                 }
+                
+                var minDepth = 9999
+                
                 for replyObject in replies{
                     let reply = Reply(o: replyObject)
-                    self.replies.append(reply)
+                    if reply.depth < minDepth {
+                        minDepth = reply.depth
+                    }
                 }
-                self.refreshTable()
+                
+                for replyObject in replies{
+                    let reply = Reply(o: replyObject)
+                    if reply.depth == minDepth {
+                        self.replies.append(reply)
+                    }
+                }
+                
+                self.replies.reverse()
+                
+                for i in stride(from: replies.count - 1, to: 0, by: -1) {
+                    let tempReply = Reply(o: replies[i])
+                    if tempReply.parentId != 0 {
+                        for j in 0..<self.replies.count {
+                            let parentReply = self.replies[j]
+                            if tempReply.parentId == parentReply.id {
+                                if j == replies.count {
+                                    self.replies.append(tempReply)
+                                } else {
+                                    self.replies.insert(tempReply, at: j+1)
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+                
+//                self.refreshTable()
+                self.tableView.reloadData()
                 
                 self.isLoading = false
             }
             self.hideIndicator()
         }
+    }
+    
+    func fetchReReplies() {
+        
     }
     
     func refreshReplies(){
@@ -232,7 +298,8 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func writeReply(){
         self.showIndicator()
-        _ = BlossomRequest.upload(.post, urlString: "\(Api.reply)/\(self.postId)", multipartFormData: { multipartFormData in
+        _ = BlossomRequest.upload(.post, urlString: replyPostUrl, multipartFormData: { multipartFormData in
+            multipartFormData.append(("\(self.parentId)".data(using: String.Encoding.utf8))!, withName:"parent_id")
             multipartFormData.append(("\(self.textField.text!)".data(using: String.Encoding.utf8))!, withName: "text")
         }, completionHandler:  {
             response, statusCode, json in
@@ -317,6 +384,11 @@ class ReplyViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
         }
         
+    }
+    
+    func moveToReReply(sender: ReplyUITapGestureRecognizer) {
+        let reply = getReplyWithIndexPath(indexPath: sender.indexPath!)
+        self.performSegue(withIdentifier: SegueIdentity.replyToReply, sender: reply.id)
     }
     
     func getReplyWithIndexPath(indexPath: IndexPath) -> Reply{
